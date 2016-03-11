@@ -1,0 +1,184 @@
+===========================================================================
+===MIDS UC Berkeley, Machine Learning at Scale DATSCI W261 ASSIGNMENT #9===
+-----------------------
+V1.3 Final 03/10/2016  HW9
+-----------------------
+=========================
+SPECIAL INSTURCTIONS
+ This weeks homework is a group exercise. Your team assignments for completing this HW are located at:
+
+https://docs.google.com/spreadsheets/d/1ncFQl5Tovn-16slD8mYjP_nzMTPSfiGeLLzW8v_sMjg/edit?usp=sharing
+
+See column Team assignment for Homeworks in tab "Teams for HW Assignments"
+
+Please submit your homeworks (one per team) going forward via this form (and not thru the ISVC):
+
+https://docs.google.com/forms/d/1ZOr9RnIe_A06AcZDB6K1mJN4vrLeSmS2PD6Xm3eOiis/viewform?usp=send_form
+
+Please follow the instructions for submissions carefully.
+
+Note that all referenced files life in the enclosing directory. Checkout the Data subdirectory on Dropbox:  
+   Dropbox https://www.dropbox.com/sh/2c0k5adwz36lkcw/AAAAKsjQfF9uHfv-X9mCqr9wa?dl=0
+
+====================================
+===HW 9.0: Short answer questions===
+
+What is PageRank and what is it used for in the context of web search?
+What modifications have to be made to the webgraph in order to leverage the machinery of Markov Chains to 
+compute the steady stade distibuton?
+OPTIONAL: In topic-specific pagerank, how can we insure that the irreducible property is satified? (HINT: see HW9.4)
+
+
+====================================================
+===HW 9.1: MRJob implementation of basic PageRank===
+
+Write a basic MRJob implementation of the iterative PageRank algorithm
+that takes sparse adjacency lists as input (as explored in HW 7).
+Make sure that you implementation utilizes teleportation (1-damping/the number of nodes in the network), 
+and further, distributes the mass of dangling nodes with each iteration
+so that the output of each iteration is correctly normalized (sums to 1).
+[NOTE: The PageRank algorithm assumes that a random surfer (walker), starting from a random web page,
+chooses the next page to which it will move by clicking at random, with probability d,
+one of the hyperlinks in the current page. This probability is represented by a so-called
+‘damping factor’ d, where d ∈ (0, 1). Otherwise, with probability (1 − d), the surfer
+jumps to any web page in the network. If a page is a dangling end, meaning it has no
+outgoing hyperlinks, the random surfer selects an arbitrary web page from a uniform
+distribution and “teleports” to that page]
+
+
+As you build your code, use the test data
+
+s3://ucb-mids-mls-networks/PageRank-test.txt
+Or under the Data Subfolder for HW7 on Dropbox with the same file name. 
+(On Dropbox https://www.dropbox.com/sh/2c0k5adwz36lkcw/AAAAKsjQfF9uHfv-X9mCqr9wa?dl=0)
+
+with teleportation parameter set to 0.15 (1-d, where d, the damping factor is set to 0.85), and crosscheck
+your work with the true result, displayed in the first image
+in the Wikipedia article:
+
+https://en.wikipedia.org/wiki/PageRank
+
+and here for reference are the corresponding PageRank probabilities:
+
+A,0.033
+B,0.384
+C,0.343
+D,0.039
+E,0.081
+F,0.039
+G,0.016
+H,0.016
+I,0.016
+J,0.016
+K,0.016
+
+================================================================
+===HW 9.2: Exploring PageRank teleportation and network plots===
+In order to overcome  problems such as disconnected components, the damping factor (a typical value for d is 0.85) can be varied. 
+Using the graph in HW1, plot the test graph (using networkx, https://networkx.github.io/) for several values of the damping parameter alpha,
+so that each nodes radius is proportional to its PageRank score. In particular you should
+do this for the following damping factors: [0,0.25,0.5,0.75, 0.85, 1]. Note your plots should look like the following:
+
+https://en.wikipedia.org/wiki/PageRank#/media/File:PageRanks-Example.svg
+
+
+===================================================================
+===HW 9.3: Applying PageRank to the Wikipedia hyperlinks network===
+
+Run your PageRank implementation on the Wikipedia dataset for 10 iterations,
+and display the top 100 ranked nodes (with alpha = 0.85).
+
+Run your PageRank implementation on the Wikipedia dataset for 50 iterations,
+and display the top 100 ranked nodes (with teleportation factor of 0.15). 
+Have the top 100 ranked pages changed? Comment on your findings. Plot the pagerank values for the top 100 pages resulting from the 50 iterations run. Then plot the pagerank values for the same 100 pages that resulted from the 10 iterations run.  
+
+
+================================================================
+===HW 9.4: Topic-specific PageRank implementation using MRJob===
+
+Modify your PageRank implementation to produce a topic specific PageRank implementation,
+as described in:
+
+http://www-cs-students.stanford.edu/~taherh/papers/topic-sensitive-pagerank.pdf
+
+Note in this article that there is a special caveat to ensure that the transition matrix is irreducible.
+This caveat lies in footnote 3 on page 3:
+
+	A minor caveat: to ensure that M is irreducible when p
+	contains any 0 entries, nodes not reachable from nonzero
+	nodes in p should be removed. In practice this is not problematic.
+
+and must be adhered to for convergence to be guaranteed.
+
+Run topic specific PageRank on the following randomly generated network of 100 nodes:
+
+s3://ucb-mids-mls-networks/randNet.txt (also available on Dropbox)
+
+which are organized into ten topics, as described in the file:
+
+s3://ucb-mids-mls-networks/randNet_topics.txt  (also available on Dropbox)
+
+Since there are 10 topics, your result should be 11 PageRank vectors
+(one for the vanilla PageRank implementation in 9.1, and one for each topic
+with the topic specific implementation). Print out the top ten ranking nodes 
+and their topics for each of the 11 versions, and comment on your result. 
+Assume a teleportation factor of 0.15 in all your analyses.
+
+One final and important comment here:  please consider the 
+requirements for irreducibility with topic-specific PageRank.
+In particular, the literature ensures irreducibility by requiring that
+nodes not reachable from in-topic nodes be removed from the network.
+
+This is not a small task, especially as it it must be performed
+separately for each of the (10) topics.
+
+So, instead of using this method for irreducibility, 
+please comment on why the literature's method is difficult to implement,
+and what what extra computation it will require.
+Then for your code, please use the alternative, 
+non-uniform damping vector:
+
+vji = beta*(1/|Tj|); if node i lies in topic Tj
+
+vji = (1-beta)*(1/(N - |Tj|)); if node i lies outside of topic Tj
+
+for beta in (0,1) close to 1. 
+
+With this approach, you will not have to delete any nodes.
+If beta > 0.5, PageRank is topic-sensitive, 
+and if beta < 0.5, the PageRank is anti-topic-sensitive. 
+For any value of beta irreducibility should hold,
+so please try beta=0.99, and perhaps some other values locally,
+on the smaller networks.
+
+
+
+===========================================================
+===HW 9.5: Applying topic-specific PageRank to Wikipedia===
+
+Here you will apply your topic-specific PageRank implementation to Wikipedia,
+defining topics (very arbitrarily) for each page by the length (number of characters) of the name of the article mod 10,
+so that there are 10 topics. Once again, print out the top ten ranking nodes 
+and their topics for each of the 11 versions, and comment on your result.
+Assume a teleportation factor of 0.15 in all your analyses.
+
+HW 9.6: TextRank (OPTIONAL)
+
+What is TextRank. Describe the main steps in the algorithm. Why does TextRank work?
+Implement TextRank in MrJob for keyword phrases (not just unigrams) extraction using co-occurrence based similarity measure with with sizes of N = 2 and 3. And evaluate your code using the following example using precision, recall, and FBeta (Beta=1):
+
+"Compatibility of systems of linear constraints over the set of natural numbers
+Criteria of compatibility of a system of linear Diophantine equations, strict 
+inequations, and nonstrict inequations are considered. Upper bounds for
+components of a minimal set of solutions and algorithms of construction of 
+minimal generating sets of solutions for all types of systems are given. 
+These criteria and the corresponding algorithms for constructing a minimal 
+supporting set of solutions can be used in solving all the considered types of 
+systems and systems of mixed types." 
+
+The extracted keywords should in the following set:
+
+linear constraints, linear diophantine equations, natural numbers, non-strict inequations, strict inequations, upper bounds
+
+==================END HW 9==================
+============================================
