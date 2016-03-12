@@ -7,7 +7,7 @@ class PageRankIter(MRJob):
     def configure_options(self):
         super(PageRankIter, self).configure_options()        
         self.add_passthrough_option(
-            '--i', dest='init', default=0, type='int',
+            '--i', dest='init', default='0', type='string',
             help='i: run initialization iteration (default 0)')    
 
     def mapper_job_init(self, _, line):        
@@ -34,7 +34,7 @@ class PageRankIter(MRJob):
         # distribute rank mass  
         n_adj = len(node['a'])
         if n_adj > 0:
-            rankMass = node['p'] / n_adj
+            rankMass = 1.0*node['p'] / n_adj
             # emit pageRank mass        
             for m in node['a']:
                 yield m, rankMass
@@ -76,19 +76,17 @@ class PageRankIter(MRJob):
                 rankMass += v         
             else:
                 node = v
-        # handle dangling node, create node struct and emit
+        # handle dangling node, create node struct and add missing mass
         if not node:            
             node = {'a':[], 'p':rankMass}            
-            self.increment_counter('wiki_dangling_mass', 'mass', int(1*1e10))
+            self.increment_counter('wiki_dangling_mass', 'mass', int(1e10))
         else:
             node['p'] += rankMass            
         # emit for next iteration
         yield nid, node
         
     # reducer for regular pass --> all nodes has structure available
-    def reducer_job_iter(self, nid, value):      
-        # increase counter for node count
-        self.increment_counter('wiki_node_count', 'nodes', 1)
+    def reducer_job_iter(self, nid, value):              
         rankMass, node = 0.0, None
         # loop through all arrivals
         for v in value:            
@@ -106,11 +104,11 @@ class PageRankIter(MRJob):
             'mapreduce.job.maps': '2',
             'mapreduce.job.reduces': '2',
         }
-        return [MRStep(mapper=self.mapper_job_init if self.options.init else self.mapper_job_iter                       
+        return [MRStep(mapper=self.mapper_job_init if self.options.init=='1' else self.mapper_job_iter                       
                        , combiner=self.combiner
                        , reducer_init=self.debug
-                       , reducer=self.reducer_job_init if self.options.init else self.reducer_job_iter
-                       #, jobconf = jc
+                       , reducer=self.reducer_job_init if self.options.init=='1' else self.reducer_job_iter
+                       , jobconf = jc
                       )
                ]
 

@@ -20,10 +20,8 @@ class PageRankRedist(MRJob):
             help='m: rank mass from dangling nodes (default 0)') 
     
     def mapper_init(self):
-        self.damping = 1 - self.options.alpha
-        p_jump = self.options.alpha / self.options.size        
-        p_dangling = self.damping * self.options.m / self.options.size
-        self.p_partial = p_jump + p_dangling
+        self.damping = 1 - self.options.alpha        
+        self.p_dangling = self.options.m / self.options.size        
     
     # needed after initialization, after node number becomes available
     def mapper_norm(self, _, line):        
@@ -33,7 +31,7 @@ class PageRankRedist(MRJob):
         cmd = 'node = %s' %node
         exec cmd
         # get final pageRank      
-        node['p'] = self.p_partial + self.damping*node['p']/self.options.size
+        node['p'] = ((self.p_dangling + node['p'])*self.damping+self.options.alpha) / self.options.size
         yield nid, node
             
     def mapper(self, _, line):             
@@ -43,7 +41,7 @@ class PageRankRedist(MRJob):
         cmd = 'node = %s' %node
         exec cmd
         # get final pageRank      
-        node['p'] = self.p_partial + self.damping*node['p']
+        node['p'] = (self.p_dangling + node['p']) * self.damping + self.options.alpha
         yield nid, node
 
     def steps(self):
