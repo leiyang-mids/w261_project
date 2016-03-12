@@ -18,10 +18,11 @@
  - rm all-pages-indexed-out.txt
  - rm indices.txt
 10. run 10 iteration job under ~/hadoop/lei/
- - python RunPageRank.py -g 'hdfs:///user/leiyang/all-pages-indexed-out.txt' -j 0.15 -i 10 -d 'hdfs:///user/leiyang/indices.txt'
+ - python RunPageRank.py -g 'hdfs:///user/leiyang/all-pages-indexed-out.txt' -j 0.15 -i 10 -d 'hdfs:///user/leiyang/indices.txt' -c '0'
  - hdfs dfs -cat /user/leiyang/join/p* > wiki_10
 11. run 50 iteration job under ~/hadoop/lei/
- - hdfs dfs -mv /user/leiyang/out/p* /user/leiyang/wiki10
+ - python RunPageRank.py -g 'hdfs:///user/leiyang/all-pages-indexed-out.txt' -j 0.15 -i 100 -d 'hdfs:///user/leiyang/indices.txt' -c 'xxxxxxxx'
+ - hdfs dfs -cat /user/leiyang/join/p* > wiki_100
 
 ================== mrjob.conf content ==================
 runners:
