@@ -33,17 +33,17 @@ runners:
 
 
 ================== copy local file ==================
-scp -i ~/w205.pem PageRankIter.py hadoop@ec2-54-86-36-78.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem PageRankDist.py hadoop@ec2-54-86-36-78.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem PageRankSort.py hadoop@ec2-54-86-36-78.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem PageRankJoin.py hadoop@ec2-54-86-36-78.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem RunPageRank.py hadoop@ec2-54-86-36-78.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem helper.py hadoop@ec2-54-86-36-78.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem .mrjob.conf hadoop@ec2-54-86-36-78.compute-1.amazonaws.com:~/
+scp -i ~/w205.pem PageRankIter.py hadoop@ec2-52-87-184-124.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRankDist.py hadoop@ec2-52-87-184-124.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRankSort.py hadoop@ec2-52-87-184-124.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRankJoin.py hadoop@ec2-52-87-184-124.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem RunPageRank.py hadoop@ec2-52-87-184-124.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem helper.py hadoop@ec2-52-87-184-124.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem .mrjob.conf hadoop@ec2-52-87-184-124.compute-1.amazonaws.com:~/
 ================== copy local file ==================
 
 
-- to kill a mapreduce job from yarn: yarn application -kill application_1457227450341_0017
+- to kill a mapreduce job from yarn: yarn application -kill application_1457820597586_0001
 
 =================== location of hdfs-site.xml ========================
 

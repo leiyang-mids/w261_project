@@ -58,8 +58,7 @@ if doInit:
     with init_job.make_runner() as runner:    
         runner.run()
 
-    # checking counter 
-    #print str(datetime.datetime.now()) + ': checking counter ...'
+    # checking counters
     n_node = getCounter('wiki_node_count', 'nodes')
     n_dangling = getCounter('wiki_dangling_mass', 'mass')/1e10
     print '%s: initialization complete: %d nodes, %d are dangling!' %(str(datetime.datetime.now()), n_node, n_dangling)
@@ -73,7 +72,6 @@ if doInit:
         runner.run()
 
 # move results for next iteration
-#print str(datetime.datetime.now()) + ': moving results for next iteration ...'
 call(['hdfs', 'dfs', '-rm', '-r', '/user/leiyang/in'], stdout=FNULL)
 call(['hdfs', 'dfs', '-mv', '/user/leiyang/out', '/user/leiyang/in'])
 
@@ -88,13 +86,10 @@ while(1):
     with iter_job.make_runner() as runner:        
         runner.run()
     
-    # check counter 
-    #print str(datetime.datetime.now()) + ': checking counter for mass loss ...'    
+    # check counter for loss mass
     mass_loss = getCounter('wiki_dangling_mass', 'mass')/1e10
-    #print str(datetime.datetime.now()) + ': total mass loss: %.4f' %(mass_loss)
     
     # move results for next iteration
-    #print str(datetime.datetime.now()) + ': moving results for mass redistribution ...'
     call(['hdfs', 'dfs', '-rm', '-r', '/user/leiyang/in'], stdout=FNULL)
     call(['hdfs', 'dfs', '-mv', '/user/leiyang/out', '/user/leiyang/in'])
         
@@ -110,7 +105,6 @@ while(1):
     
     # if more iteration needed
     i += 1    
-    #print str(datetime.datetime.now()) + ': moving results for next iteration ...'
     call(['hdfs', 'dfs', '-rm', '-r', '/user/leiyang/in'], stdout=FNULL)
     call(['hdfs', 'dfs', '-mv', '/user/leiyang/out', '/user/leiyang/in'], stdout=FNULL)
 
