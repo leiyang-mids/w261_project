@@ -1,21 +1,27 @@
 1. install mrjob: sudo pip install mrjob
 2. install emacs: sudo yum install emacs
-3. set mrjob.conf: emacs ~/.mrjob.conf
-3.1 change replication number to 1 for HDFS in hdfs-site.xml
-4. add script
-5. check yarn-site.xml
-6. open channel
-7. open port 19888 for job historyserver: add to 205 group
+3. NO NEED - copy later: set mrjob.conf: emacs ~/.mrjob.conf
+3.1 TODO LATER: change replication number to 1 for HDFS in hdfs-site.xml
+4. copy local script
+5. NO NEED - check yarn-site.xml
+6. NO NEED - open channel
+7. NO NEED - open port 19888 for job historyserver: add to 205 group
 8. make dir:
  - hdfs dfs -mkdir /user/leiyang
  - mkdir lei
  - cd lei
-9. copy data:
+9. move wiki data to hdfs:
  - aws s3 cp s3://ucb-mids-mls-networks/wikipedia/all-pages-indexed-out.txt ./
  - aws s3 cp s3://ucb-mids-mls-networks/wikipedia/indices.txt ./wiki_index.txt
  - hdfs dfs -put all-pages-indexed-out.txt /user/leiyang/
+ - hdfs dfs -put indices.txt /user/leiyang/
  - rm all-pages-indexed-out.txt
-10. run job
+ - rm indices.txt
+10. run 10 iteration job under ~/hadoop/lei/
+ - python RunPageRank.py -g 'hdfs:///user/leiyang/all-pages-indexed-out.txt' -j 0.15 -i 10 -d 'hdfs:///user/leiyang/indices.txt'
+ - hdfs dfs -cat /user/leiyang/join/p* > wiki_10
+11. run 50 iteration job under ~/hadoop/lei/
+ - hdfs dfs -mv /user/leiyang/out/p* /user/leiyang/wiki10
 
 ================== mrjob.conf content ==================
 runners:
@@ -30,6 +36,7 @@ runners:
 scp -i ~/w205.pem PageRankIter.py hadoop@ec2-54-86-43-85.compute-1.amazonaws.com:~/lei/
 scp -i ~/w205.pem PageRankDist.py hadoop@ec2-54-86-43-85.compute-1.amazonaws.com:~/lei/
 scp -i ~/w205.pem PageRankSort.py hadoop@ec2-54-86-43-85.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRankJoin.py hadoop@ec2-54-86-43-85.compute-1.amazonaws.com:~/lei/
 scp -i ~/w205.pem RunPageRank.py hadoop@ec2-54-86-43-85.compute-1.amazonaws.com:~/lei/
 scp -i ~/w205.pem helper.py hadoop@ec2-54-86-43-85.compute-1.amazonaws.com:~/lei/
 scp -i ~/w205.pem .mrjob.conf hadoop@ec2-54-86-43-85.compute-1.amazonaws.com:~/
