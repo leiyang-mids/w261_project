@@ -13,15 +13,15 @@ class PageRankRedist(MRJob):
             '--j', dest='alpha', default=0.15, type='float',
             help='jump: random jump factor (default 0.15)') 
         self.add_passthrough_option(
-            '--n', dest='norm', default=False, type='boolean',
-            help='norm: normalize page rank with graph size (default False)') 
+            '--n', dest='norm', default=0, type='int',
+            help='norm: normalize pageRank with graph size (default 0)') 
         self.add_passthrough_option(
             '--m', dest='m', default=0, type='float',
             help='m: rank mass from dangling nodes (default 0)') 
     
     def mapper_init(self):
-        self.damping = 1 - self.alpha
-        p_jump = self.alpha / self.options.size        
+        self.damping = 1 - self.options.alpha
+        p_jump = self.options.alpha / self.options.size        
         p_dangling = self.damping * self.options.m / self.options.size
         self.p_partial = p_jump + p_dangling
     
@@ -52,7 +52,7 @@ class PageRankRedist(MRJob):
         }
         return [MRStep(mapper_init=self.mapper_init
                        , mapper=self.mapper_norm if self.options.norm else self.mapper                       
-                       , jobconf = jc
+                       #, jobconf = jc
                       )
                ]
 
