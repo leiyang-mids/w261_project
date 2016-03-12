@@ -1,11 +1,11 @@
 from mrjob.job import MRJob
 from mrjob.step import MRStep
 
-class PageRankRedist(MRJob):
+class PageRankDist(MRJob):
     DEFAULT_PROTOCOL = 'json'
 
     def configure_options(self):
-        super(PageRankRedist, self).configure_options()        
+        super(PageRankDist, self).configure_options()        
         self.add_passthrough_option(
             '--s', dest='size', default=0, type='int',
             help='size: node number (default 0)')    
@@ -55,4 +55,4 @@ class PageRankRedist(MRJob):
                ]
 
 if __name__ == '__main__':
-    PageRankRedist.run()
+    PageRankDist.run()

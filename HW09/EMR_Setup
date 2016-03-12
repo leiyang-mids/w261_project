@@ -1,0 +1,83 @@
+1. install mrjob: sudo pip install mrjob
+2. install emacs: sudo yum install emacs
+3. set mrjob.conf: emacs ~/.mrjob.conf
+3.1 change replication number to 1 for HDFS in hdfs-site.xml
+4. add script
+5. check yarn-site.xml
+6. open channel
+7. open port 19888 for job historyserver: add to 205 group
+8. make dir:
+ - hdfs dfs -mkdir /user/leiyang
+ - mkdir lei
+ - cd lei
+9. copy data:
+ - aws s3 cp s3://ucb-mids-mls-networks/wikipedia/all-pages-indexed-out.txt ./
+ - aws s3 cp s3://ucb-mids-mls-networks/wikipedia/indices.txt ./wiki_index.txt
+ - hdfs dfs -put all-pages-indexed-out.txt /user/leiyang/
+ - rm all-pages-indexed-out.txt
+10. run job
+
+================== mrjob.conf content ==================
+runners:
+  hadoop:
+    hadoop_home: /usr/lib/hadoop/
+    strict_protocols: True
+    no_output: True
+================== mrjob.conf content ==================
+
+
+================== copy local file ==================
+scp -i ~/w205.pem PageRankIter.py hadoop@ec2-54-86-43-85.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRankDist.py hadoop@ec2-54-86-43-85.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRankSort.py hadoop@ec2-54-86-43-85.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem RunPageRank.py hadoop@ec2-54-86-43-85.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem helper.py hadoop@ec2-54-86-43-85.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem .mrjob.conf hadoop@ec2-54-86-43-85.compute-1.amazonaws.com:~/
+================== copy local file ==================
+
+
+- to kill a mapreduce job from yarn: yarn application -kill application_1457227450341_0017
+
+=================== location of hdfs-site.xml ========================
+
+./etc/hadoop/conf.empty/hdfs-site.xml
+
+=================== location of hdfs-site.xml ========================
+
+=================== open channel ========================
+ssh -i w205.pem -N -L 50070:ec2-54-152-233-112.compute-1.amazonaws.com:50070 hadoop@ec2-54-152-233-112.compute-1.amazonaws.com
+ssh -i w205.pem -N -L 8890:ec2-54-152-233-112.compute-1.amazonaws.com:8890 hadoop@ec2-54-152-233-112.compute-1.amazonaws.com
+=================== open channel ========================
+
+=================== start job history server - not necessary ========================
+NOTE: job history server is already started with EMR, just log on is ok, no need to manually start
+
+sudo find / -name "mr-jobhistory-daemon.sh" --> /usr/lib/hadoop-mapreduce/sbin/mr-jobhistory-daemon.sh
+sudo find / -name "mapred-site.xml" -->
+/etc/hadoop/conf.empty/mapred-site.xml
+/var/aws/emr/bigtop-deploy/puppet/modules/hadoop/templates/mapred-site.xml
+/var/aws/emr/bigtop-deploy/puppet/modules/ignite_hadoop/templates/mapred-site.xml
+
+/usr/lib/hadoop-mapreduce/sbin/mr-jobhistory-daemon.sh --config /etc/hadoop/conf.empty/ start historyserver
+
+
+NOTE: local real one - /usr/local/Cellar/hadoop/2.7.1/libexec/sbin/mr-jobhistory-daemon.sh
+
+/etc/hadoop/conf.empty/mapred-site.xml
+     /usr/local/Cellar/hadoop/2*/sbin/mr-jobhistory-daemon.sh --config /usr/local/Cellar/hadoop/2*/libexec/etc/hadoop/ start historyserver
+sudo /usr/lib/hadoop-mapreduce/sbin/mr-jobhistory-daemon.sh --config /etc/hadoop/conf.empty/ start historyserver
+=================== start job history server - not necessary ========================
+
+================== misc notes ==================
+Note:
+Bid cheaper price!
+Wait for startup to finish
+Use 205 security group to open ports
+Set port tunnel
+Install mrjob with sudo pip install mrjob
+Install emacs with sudo yum install emacs
+Set .mrjob.conf for Hadoop home --> may copy from s3
+Copy s3 data to local to avoid traffic, using AWS s3 cp command.
+possible to mount my own EBS data drive
+Move over py files to local --> may also copy from s3
+================== misc notes ==================
