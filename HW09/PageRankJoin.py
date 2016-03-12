@@ -7,9 +7,8 @@ class PageRankJoin(MRJob):
     
     def mapper_init(self):
         self.topRanks = {}
-        # read rand list, prepare for mapper in-memory join
-        #cat = Popen(["hdfs", "dfs", "-cat", "rank"], stdout=PIPE)
-        cat = Popen(["cat", "rank"], stdout=PIPE)
+        # read rand list, prepare for mapper in-memory join        
+        cat = Popen(['cat', 'rank'], stdout=PIPE)
         for line in cat.stdout:
             nid, rank = line.strip().split('\t')
             self.topRanks[nid.strip('"')] = rank
@@ -17,14 +16,9 @@ class PageRankJoin(MRJob):
     def mapper(self, _, line):        
         # parse line
         name, nid, d_in, d_out = line.strip().split('\t')
-        if nid in self.topRanks:            
-            #yield '%s\t%.9f' %(nid, float(self.topRanks[nid])), name
-            yield self.topRanks[nid], '%s - %s' %(nid, name)
+        if nid in self.topRanks:                        
+            yield float(self.topRanks[nid]), '%s - %s' %(nid, name)
     
-    def mapper_final(self):        
-        for k in self.topRanks:
-            yield k, '%.9f' %(float(self.topRanks[k]))
-            
     def reducer(self, key, value):
         for v in value:
             yield key, v
@@ -39,7 +33,6 @@ class PageRankJoin(MRJob):
         }
         return [MRStep(mapper_init=self.mapper_init
                        , mapper=self.mapper
-                       #, mapper_final=self.mapper_final
                        , reducer=self.reducer
                        , jobconf = jc
                       )
