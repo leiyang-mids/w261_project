@@ -8,7 +8,7 @@ class PageRankJoin(MRJob):
     def mapper_init(self):
         self.topRanks = {}
         # read rand list, prepare for mapper in-memory join        
-        cat = Popen(['cat', 'rank'], stdout=PIPE)
+        cat = Popen(['cat', 'part-00000'], stdout=PIPE)
         for line in cat.stdout:
             nid, rank = line.strip().split('\t')
             self.topRanks[nid.strip('"')] = rank

@@ -1,8 +1,9 @@
 #!/usr/bin/python
 
 from PageRankIter import PageRankIter
-from PageRankRedist import PageRankRedist
+from PageRankDist import PageRankDist
 from PageRankSort import PageRankSort
+from PageRankJoin import PageRankJoin
 from helper import getCounter
 from subprocess import call, check_output
 from time import time
@@ -12,11 +13,11 @@ import sys, getopt, datetime, os
 if __name__ == "__main__":
 
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hg:j:i:")
+        opts, args = getopt.getopt(sys.argv[1:], "hg:j:i:d:")
     except getopt.GetoptError:
-        print 'RunBFS.py -g <graph> -j <jump> -i <iteration> -m <mode> -w <weighted>'
+        print 'RunBFS.py -g <graph> -j <jump> -i <iteration> -d <index> -w <weighted>'
         sys.exit(2)
-    if len(opts) != 3:
+    if len(opts) != 4:
         print 'RunBFS.py -g <graph> -j <jump> -i <iteration>'
         sys.exit(2)
     for opt, arg in opts:
@@ -27,21 +28,25 @@ if __name__ == "__main__":
             graph = arg
         elif opt == '-j':
             jump = arg
-        elif opt == '-i':
+        elif opt == '-i':            
             n_iter = arg
+        elif opt == '-d':
+            index = arg
         
 start = time()
 FNULL = open(os.devnull, 'w')
 n_iter = int(n_iter)
+doJoin = index!='NULL'
 
 # clearn direcotry
 call(['hdfs', 'dfs', '-rm', '-r', '/user/leiyang/in'], stdout=FNULL)
 call(['hdfs', 'dfs', '-rm', '-r', '/user/leiyang/out'], stdout=FNULL)
 call(['hdfs', 'dfs', '-rm', '-r', '/user/leiyang/rank'], stdout=FNULL)
+call(['hdfs', 'dfs', '-rm', '-r', '/user/leiyang/join'], stdout=FNULL)
 
 # creat initialization job
-print '%s: evaluating PageRank on \'%s\' for %d iterations ...' %(str(datetime.datetime.now()),
-          graph[graph.rfind('/')+1:], n_iter)
+print '%s: PageRanking on \'%s\' for %d iterations with damping factor %.2f...' %(str(datetime.datetime.now()),
+          graph[graph.rfind('/')+1:], n_iter, 1-float(jump))
 init_job = PageRankIter(args=[graph, '--i', '1', '-r', 'hadoop', '--output-dir', 'hdfs:///user/leiyang/out'])
 
 # run initialization job
@@ -57,7 +62,7 @@ print '%s: initialization complete: %d nodes, %d are dangling!' %(str(datetime.d
 
 # run redistribution job
 call(['hdfs', 'dfs', '-mv', '/user/leiyang/out', '/user/leiyang/in'])
-dist_job = PageRankRedist(args=['hdfs:///user/leiyang/in/part*', '--s', str(n_node), '--j', str(jump), '--n', '0', 
+dist_job = PageRankDist(args=['hdfs:///user/leiyang/in/part*', '--s', str(n_node), '--j', str(jump), '--n', '0', 
                                 '--m', str(n_dangling), '-r', 'hadoop', '--output-dir', 'hdfs:///user/leiyang/out'])
 print str(datetime.datetime.now()) + ': redistributing loss mass ...'
 with dist_job.make_runner() as runner:    
@@ -90,7 +95,7 @@ while(1):
     call(['hdfs', 'dfs', '-mv', '/user/leiyang/out', '/user/leiyang/in'])
         
     # run redistribution job
-    dist_job = PageRankRedist(args=['hdfs:///user/leiyang/in/part*', '--s', str(n_node), '--j', str(jump), '--n', '0', 
+    dist_job = PageRankDist(args=['hdfs:///user/leiyang/in/part*', '--s', str(n_node), '--j', str(jump), '--n', '0', 
                                 '--m', str(mass_loss), '-r', 'hadoop', '--output-dir', 'hdfs:///user/leiyang/out'])
     print str(datetime.datetime.now()) + ': redistributing loss mass %.4f ...' %mass_loss
     with dist_job.make_runner() as runner:    
@@ -111,6 +116,14 @@ sort_job = PageRankSort(args=['hdfs:///user/leiyang/out/part*', '--s', str(n_nod
                               '-r', 'hadoop', '--output-dir', 'hdfs:///user/leiyang/rank'])
 with sort_job.make_runner() as runner:    
     runner.run()
+    
+# run join job
+if doJoin:
+    print str(datetime.datetime.now()) + ': joining PageRank with index ...'
+    join_job = PageRankJoin(args=[index, '-r', 'hadoop', '--file', 
+                             'hdfs:///user/leiyang/rank/part-00000', '--output-dir', 'hdfs:///user/leiyang/join'])
+    with join_job.make_runner() as runner:
+        runner.run()
 
 # clear results
 #print str(datetime.datetime.now()) + ': clearing files ...'
@@ -119,4 +132,4 @@ with sort_job.make_runner() as runner:
 
 
 print str(datetime.datetime.now()) + ": PageRank job completes in %.1f minutes!\n" %((time()-start)/60.0)
-call(['hdfs', 'dfs', '-cat', '/user/leiyang/rank/part*'])
+call(['hdfs', 'dfs', '-cat', '/user/leiyang/join/part*' if doJoin else 'user/leiyang/rank/part*'])
