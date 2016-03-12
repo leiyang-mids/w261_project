@@ -33,7 +33,7 @@ class PageRankSort(MRJob):
                 yield n, pageRank/self.options.size
             
     def reducer_final(self):
-        yield 'total mass: ', self.total
+        yield 'total mass: ', self.total/self.options.size
 
     def steps(self):
         jc = {

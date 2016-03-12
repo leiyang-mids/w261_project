@@ -7,7 +7,7 @@ class PageRankIter(MRJob):
     def configure_options(self):
         super(PageRankIter, self).configure_options()        
         self.add_passthrough_option(
-            '--i', dest='init', default='0', type='string',
+            '--i', dest='init', default='0', type='int',
             help='i: run initialization iteration (default 0)')    
 
     def mapper_job_init(self, _, line):        
@@ -104,10 +104,10 @@ class PageRankIter(MRJob):
             'mapreduce.job.maps': '2',
             'mapreduce.job.reduces': '2',
         }
-        return [MRStep(mapper=self.mapper_job_init if self.options.init=='1' else self.mapper_job_iter                       
+        return [MRStep(mapper=self.mapper_job_init if self.options.init else self.mapper_job_iter                       
                        , combiner=self.combiner
                        , reducer_init=self.debug
-                       , reducer=self.reducer_job_init if self.options.init=='1' else self.reducer_job_iter
+                       , reducer=self.reducer_job_init if self.options.init else self.reducer_job_iter
                        , jobconf = jc
                       )
                ]

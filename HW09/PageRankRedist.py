@@ -50,7 +50,7 @@ class PageRankRedist(MRJob):
         }
         return [MRStep(mapper_init=self.mapper_init
                        , mapper=self.mapper_norm if self.options.norm else self.mapper                       
-                       #, jobconf = jc
+                       , jobconf = jc
                       )
                ]
 

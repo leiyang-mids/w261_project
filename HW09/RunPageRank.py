@@ -1,10 +1,8 @@
 #!/usr/bin/python
 
-
-
 from PageRankIter import PageRankIter
 from PageRankRedist import PageRankRedist
-from PageRankSort2 import PageRankSort
+from PageRankSort import PageRankSort
 from helper import getCounter
 from subprocess import call, check_output
 from time import time
