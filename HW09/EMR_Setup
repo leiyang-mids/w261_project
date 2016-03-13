@@ -15,16 +15,23 @@
  - aws s3 cp s3://ucb-mids-mls-networks/wikipedia/indices.txt ./
  - hdfs dfs -put all-pages-indexed-out.txt /user/leiyang/
  - hdfs dfs -put indices.txt /user/leiyang/
+ - hdfs dfs -put PageRankIndex /user/leiyang/
+ - hdfs dfs -put PageRank-test.txt /user/leiyang/
  - rm all-pages-indexed-out.txt
  - rm indices.txt
 11. run unit test:
  - python RunPageRank.py -g 'hdfs:///user/leiyang/PageRank-test.txt' -j 0.15 -i 2 -d 'hdfs:///user/leiyang/PageRankIndex' -s '0'
 12. run 10 iteration job under ~/hadoop/lei/
  - python RunPageRank.py -g 'hdfs:///user/leiyang/all-pages-indexed-out.txt' -j 0.15 -i 10 -d 'hdfs:///user/leiyang/indices.txt' -s '0'
- - hdfs dfs -cat /user/leiyang/join/p* > wiki_10
+ - python RunPageRank.py -g 'hdfs:///user/leiyang/all-pages-indexed-out.txt' -j 0.15 -i 50 -d 'hdfs:///user/leiyang/indices.txt' -s '0'
+ - hdfs dfs -cat /user/leiyang/join/p* > results_wiki_10
+ - aws s3 cp results_wiki_10 s3://w261.data/HW9/results_wiki_10 --region 'us-west-2'
 13. run 50 iteration job under ~/hadoop/lei/
  - python RunPageRank.py -g 'hdfs:///user/leiyang/all-pages-indexed-out.txt' -j 0.15 -i 40 -d 'hdfs:///user/leiyang/indices.txt' -s '15192277'
- - hdfs dfs -cat /user/leiyang/join/p* > wiki_50
+ - hdfs dfs -cat /user/leiyang/join/p* > results_wiki_50
+ - aws s3 cp results_wiki_50 s3://w261.data/HW9/results_wiki_50 --region 'us-west-2'
+14. TODO: add to driver - terminate cluster
+ - aws emr terminate-clusters --cluster-ids j-CT2NH23KIIBL
 
 ================== screen notes ==================
 ctrl+a --> send command to screen
@@ -45,15 +52,15 @@ runners:
 
 
 ================== copy local file ==================
-scp -i ~/w205.pem PageRankIter.py hadoop@ec2-54-175-34-13.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem PageRankDist.py hadoop@ec2-54-175-34-13.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem PageRankSort.py hadoop@ec2-54-175-34-13.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem PageRankJoin.py hadoop@ec2-54-175-34-13.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem RunPageRank.py hadoop@ec2-54-175-34-13.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem helper.py hadoop@ec2-54-175-34-13.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem ./data/PageRank-test.txt hadoop@ec2-54-175-34-13.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem ./data/PageRankIndex hadoop@ec2-54-175-34-13.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem .mrjob.conf hadoop@ec2-54-175-34-13.compute-1.amazonaws.com:~/
+scp -i ~/w205.pem PageRankIter.py hadoop@ec2-54-172-84-241.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRankDist.py hadoop@ec2-54-172-84-241.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRankSort.py hadoop@ec2-54-172-84-241.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRankJoin.py hadoop@ec2-54-172-84-241.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem RunPageRank.py hadoop@ec2-54-172-84-241.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem helper.py hadoop@ec2-54-172-84-241.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem ./data/PageRank-test.txt hadoop@ec2-54-172-84-241.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem ./data/PageRankIndex hadoop@ec2-54-172-84-241.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem .mrjob.conf hadoop@ec2-54-172-84-241.compute-1.amazonaws.com:~/
 ================== copy local file ==================
 
 
@@ -102,3 +109,7 @@ Copy s3 data to local to avoid traffic, using AWS s3 cp command.
 possible to mount my own EBS data drive
 Move over py files to local --> may also copy from s3
 ================== misc notes ==================
+
+================== S3 notes ==================
+hdfs dfs -cat /user/leiyang/join/p* > results_wiki_10
+aws s3 cp results_wiki_10 s3://w261.data/HW9/results_wiki_10 --region 'us-west-2'

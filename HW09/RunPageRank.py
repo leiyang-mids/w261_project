@@ -28,19 +28,19 @@ if __name__ == "__main__":
             graph = arg
         elif opt == '-j':
             jump = arg
-        elif opt == '-i':            
+        elif opt == '-i':
             n_iter = arg
         elif opt == '-d':
             index = arg
         elif opt == '-s':
             n_node = arg
-        
+
 start = time()
 FNULL = open(os.devnull, 'w')
 n_iter = int(n_iter)
 doJoin = index!='NULL'
 doInit = n_node=='0'
-host = 'localhost'
+host = 'ec2-54-172-84-241.compute-1.amazonaws.com'
 
 print '%s: %s PageRanking on \'%s\' for %d iterations with damping factor %.2f ...' %(str(datetime.datetime.now()),
           'start' if doInit else 'continue', graph[graph.rfind('/')+1:], n_iter, 1-float(jump))
@@ -50,13 +50,13 @@ if doInit:
     print str(datetime.datetime.now()) + ': clearing directory ...'
     call(['hdfs', 'dfs', '-rm', '-r', '/user/leiyang/in'], stdout=FNULL)
     call(['hdfs', 'dfs', '-rm', '-r', '/user/leiyang/out'], stdout=FNULL)
-    
-    # creat initialization job    
+
+    # creat initialization job
     init_job = PageRankIter(args=[graph, '--i', '1', '-r', 'hadoop', '--output-dir', 'hdfs:///user/leiyang/out'])
 
     # run initialization job
     print str(datetime.datetime.now()) + ': running iteration 1 ...'
-    with init_job.make_runner() as runner:    
+    with init_job.make_runner() as runner:
         runner.run()
 
     # checking counters
@@ -66,10 +66,10 @@ if doInit:
 
     # run redistribution job
     call(['hdfs', 'dfs', '-mv', '/user/leiyang/out', '/user/leiyang/in'])
-    dist_job = PageRankDist(args=['hdfs:///user/leiyang/in/part*', '--s', str(n_node), '--j', jump, '--n', '0', 
+    dist_job = PageRankDist(args=['hdfs:///user/leiyang/in/part*', '--s', str(n_node), '--j', jump, '--n', '0',
                                 '--m', str(n_dangling), '-r', 'hadoop', '--output-dir', 'hdfs:///user/leiyang/out'])
     print str(datetime.datetime.now()) + ': distributing loss mass ...'
-    with dist_job.make_runner() as runner:    
+    with dist_job.make_runner() as runner:
         runner.run()
 
 # move results for next iteration
@@ -77,35 +77,35 @@ call(['hdfs', 'dfs', '-rm', '-r', '/user/leiyang/in'], stdout=FNULL)
 call(['hdfs', 'dfs', '-mv', '/user/leiyang/out', '/user/leiyang/in'])
 
 # create iteration job
-iter_job = PageRankIter(args=['hdfs:///user/leiyang/in/part*', '--i', '0', 
+iter_job = PageRankIter(args=['hdfs:///user/leiyang/in/part*', '--i', '0',
                               '-r', 'hadoop', '--output-dir', 'hdfs:///user/leiyang/out'])
 
 # run pageRank iteratively
 i = 2 if doInit else 1
 while(1):
     print str(datetime.datetime.now()) + ': running iteration %d ...' %i
-    with iter_job.make_runner() as runner:        
+    with iter_job.make_runner() as runner:
         runner.run()
-    
+
     # check counter for loss mass
     mass_loss = getCounter('wiki_dangling_mass', 'mass', host)/1e10
-    
+
     # move results for next iteration
     call(['hdfs', 'dfs', '-rm', '-r', '/user/leiyang/in'], stdout=FNULL)
     call(['hdfs', 'dfs', '-mv', '/user/leiyang/out', '/user/leiyang/in'])
-        
+
     # run redistribution job
-    dist_job = PageRankDist(args=['hdfs:///user/leiyang/in/part*', '--s', str(n_node), '--j', jump, '--n', '0', 
+    dist_job = PageRankDist(args=['hdfs:///user/leiyang/in/part*', '--s', str(n_node), '--j', jump, '--n', '0',
                                 '--m', str(mass_loss), '-r', 'hadoop', '--output-dir', 'hdfs:///user/leiyang/out'])
     print str(datetime.datetime.now()) + ': distributing loss mass %.4f ...' %mass_loss
-    with dist_job.make_runner() as runner:    
+    with dist_job.make_runner() as runner:
         runner.run()
-    
+
     if i == n_iter:
         break
-    
+
     # if more iteration needed
-    i += 1    
+    i += 1
     call(['hdfs', 'dfs', '-rm', '-r', '/user/leiyang/in'], stdout=FNULL)
     call(['hdfs', 'dfs', '-mv', '/user/leiyang/out', '/user/leiyang/in'], stdout=FNULL)
 
@@ -114,14 +114,14 @@ print str(datetime.datetime.now()) + ': sorting PageRank ...'
 call(['hdfs', 'dfs', '-rm', '-r', '/user/leiyang/rank'], stdout=FNULL)
 sort_job = PageRankSort(args=['hdfs:///user/leiyang/out/part*', '--s', str(n_node), '--n', '100',
                               '-r', 'hadoop', '--output-dir', 'hdfs:///user/leiyang/rank'])
-with sort_job.make_runner() as runner:    
+with sort_job.make_runner() as runner:
     runner.run()
-    
+
 # run join job
 if doJoin:
     print str(datetime.datetime.now()) + ': joining PageRank with index ...'
     call(['hdfs', 'dfs', '-rm', '-r', '/user/leiyang/join'], stdout=FNULL)
-    join_job = PageRankJoin(args=[index, '-r', 'hadoop', '--file', 'hdfs:///user/leiyang/rank/part-00000', 
+    join_job = PageRankJoin(args=[index, '-r', 'hadoop', '--file', 'hdfs:///user/leiyang/rank/part-00000',
                                   '--output-dir', 'hdfs:///user/leiyang/join'])
     with join_job.make_runner() as runner:
         runner.run()
