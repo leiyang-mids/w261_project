@@ -9,19 +9,31 @@
  - hdfs dfs -mkdir /user/leiyang
  - mkdir lei
  - cd lei
-9. move wiki data to hdfs:
+9. set aws server name in RunPageRank.py, and copy local files to EMR
+10. move wiki data to hdfs:
  - aws s3 cp s3://ucb-mids-mls-networks/wikipedia/all-pages-indexed-out.txt ./
  - aws s3 cp s3://ucb-mids-mls-networks/wikipedia/indices.txt ./
  - hdfs dfs -put all-pages-indexed-out.txt /user/leiyang/
  - hdfs dfs -put indices.txt /user/leiyang/
  - rm all-pages-indexed-out.txt
  - rm indices.txt
-10. run 10 iteration job under ~/hadoop/lei/
+11. run unit test:
+ - python RunPageRank.py -g 'hdfs:///user/leiyang/PageRank-test.txt' -j 0.15 -i 2 -d 'hdfs:///user/leiyang/PageRankIndex' -s '0'
+12. run 10 iteration job under ~/hadoop/lei/
  - python RunPageRank.py -g 'hdfs:///user/leiyang/all-pages-indexed-out.txt' -j 0.15 -i 10 -d 'hdfs:///user/leiyang/indices.txt' -s '0'
  - hdfs dfs -cat /user/leiyang/join/p* > wiki_10
-11. run 50 iteration job under ~/hadoop/lei/
- - python RunPageRank.py -g 'hdfs:///user/leiyang/all-pages-indexed-out.txt' -j 0.15 -i 40 -d 'hdfs:///user/leiyang/indices.txt' -s 'xxxxxxxx'
+13. run 50 iteration job under ~/hadoop/lei/
+ - python RunPageRank.py -g 'hdfs:///user/leiyang/all-pages-indexed-out.txt' -j 0.15 -i 40 -d 'hdfs:///user/leiyang/indices.txt' -s '15192277'
  - hdfs dfs -cat /user/leiyang/join/p* > wiki_50
+
+================== screen notes ==================
+ctrl+a --> send command to screen
+ctrl+a+n --> switch between screens
+ctrl+a+c --> add new screen
+ctrl+a+d --> detach to screen
+screen -r --> reattach to screen
+ctrl+a+H --> terminate screen session
+================== screen notes ==================
 
 ================== mrjob.conf content ==================
 runners:
@@ -33,13 +45,15 @@ runners:
 
 
 ================== copy local file ==================
-scp -i ~/w205.pem PageRankIter.py hadoop@ec2-52-87-184-124.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem PageRankDist.py hadoop@ec2-52-87-184-124.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem PageRankSort.py hadoop@ec2-52-87-184-124.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem PageRankJoin.py hadoop@ec2-52-87-184-124.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem RunPageRank.py hadoop@ec2-52-87-184-124.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem helper.py hadoop@ec2-52-87-184-124.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem .mrjob.conf hadoop@ec2-52-87-184-124.compute-1.amazonaws.com:~/
+scp -i ~/w205.pem PageRankIter.py hadoop@ec2-54-175-34-13.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRankDist.py hadoop@ec2-54-175-34-13.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRankSort.py hadoop@ec2-54-175-34-13.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRankJoin.py hadoop@ec2-54-175-34-13.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem RunPageRank.py hadoop@ec2-54-175-34-13.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem helper.py hadoop@ec2-54-175-34-13.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem ./data/PageRank-test.txt hadoop@ec2-54-175-34-13.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem ./data/PageRankIndex hadoop@ec2-54-175-34-13.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem .mrjob.conf hadoop@ec2-54-175-34-13.compute-1.amazonaws.com:~/
 ================== copy local file ==================
 
 

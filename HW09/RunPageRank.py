@@ -40,6 +40,7 @@ FNULL = open(os.devnull, 'w')
 n_iter = int(n_iter)
 doJoin = index!='NULL'
 doInit = n_node=='0'
+host = 'localhost'
 
 print '%s: %s PageRanking on \'%s\' for %d iterations with damping factor %.2f ...' %(str(datetime.datetime.now()),
           'start' if doInit else 'continue', graph[graph.rfind('/')+1:], n_iter, 1-float(jump))
@@ -59,8 +60,8 @@ if doInit:
         runner.run()
 
     # checking counters
-    n_node = getCounter('wiki_node_count', 'nodes')
-    n_dangling = getCounter('wiki_dangling_mass', 'mass')/1e10
+    n_node = getCounter('wiki_node_count', 'nodes', host)
+    n_dangling = getCounter('wiki_dangling_mass', 'mass', host)/1e10
     print '%s: initialization complete: %d nodes, %d are dangling!' %(str(datetime.datetime.now()), n_node, n_dangling)
 
     # run redistribution job
@@ -87,7 +88,7 @@ while(1):
         runner.run()
     
     # check counter for loss mass
-    mass_loss = getCounter('wiki_dangling_mass', 'mass')/1e10
+    mass_loss = getCounter('wiki_dangling_mass', 'mass', host)/1e10
     
     # move results for next iteration
     call(['hdfs', 'dfs', '-rm', '-r', '/user/leiyang/in'], stdout=FNULL)
