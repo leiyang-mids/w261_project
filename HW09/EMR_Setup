@@ -69,6 +69,7 @@ scp -i ~/w205.pem .mrjob.conf hadoop@ec2-54-172-84-241.compute-1.amazonaws.com:~
 =================== location of hdfs-site.xml ========================
 
 ./etc/hadoop/conf.empty/hdfs-site.xml
+NOTE: python PageRankIter.py PageRank-test.txt -r 'hadoop' --i 1 --output-dir 's3://w261.data/HW9/test'
 
 =================== location of hdfs-site.xml ========================
 

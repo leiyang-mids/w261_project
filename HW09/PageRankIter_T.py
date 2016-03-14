@@ -10,8 +10,8 @@ class PageRankIter_T(MRJob):
             '--i', dest='init', default='0', type='int',
             help='i: run initialization iteration (default 0)') 
         self.add_passthrough_option(
-            '--n', dest='n_topic', default='1', type='int',
-            help='n: number of topics (default 1)') 
+            '--n', dest='n_topic', default='0', type='int',
+            help='n: number of topics (default 0)') 
 
     def mapper_job_init(self, _, line):        
         # parse line
@@ -43,9 +43,9 @@ class PageRankIter_T(MRJob):
             for m in node['a']:
                 yield m, rankMass
         else:
-            # track dangling mass with counters
+            # track dangling mass for each topic with counters
             for i in range(self.options.n_topic+1):
-                self.increment_counter('wiki_dangling_mass', 'mass_%d' %i, int(node['p'][i]*1e10))
+                self.increment_counter('wiki_dangling_mass', 'topic_%d' %i, int(node['p'][i]*1e10))
         # reset pageRank and emit node
         node['p'] = [0]*(self.options.n_topic+1)
         yield nid, node
@@ -113,7 +113,7 @@ class PageRankIter_T(MRJob):
         return [MRStep(mapper=self.mapper_job_init if self.options.init else self.mapper_job_iter                       
                        , combiner=self.combiner                       
                        , reducer=self.reducer_job_init if self.options.init else self.reducer_job_iter
-                       #, jobconf = jc
+                       , jobconf = jc
                       )
                ]
 
