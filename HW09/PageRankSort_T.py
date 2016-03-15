@@ -24,18 +24,27 @@ class PageRankSort_T(MRJob):
         for i in range(len(node['p'])):
             yield (i, node['p'][i]), self.T_index[nid]
         
-    
+    def reducer_init(self):
+        self.current_v = None
+        self.i = 0
+        self.top = 10
     
     def reducer(self, key, value):
-        for v in value:
-            yield key, v
+        if self.current_v != key[0]:
+            self.current_v = key[0]
+            self.i = 0
+            yield '====== Top 10 for topic %d ======' %self.current_v, ''
+        if self.i < self.top:
+            self.i += 1
+            for v in value:
+                yield key, v
         
     
     def steps(self):
         jc = {
             'mapreduce.job.maps': '3',
             'mapreduce.job.reduces': '3',
-            #'partitioner': 'org.apache.hadoop.mapred.lib.KeyFieldBasedPartitioner',
+            #'partitioner': 'org.apache.hadoop.mapred.lib.KeyFieldBasedPartitioner', # doesn't work here, must be set at top
             'mapreduce.partition.keypartitioner.options': '-k1,1',             
             'mapreduce.job.output.key.comparator.class': 'org.apache.hadoop.mapreduce.lib.partition.KeyFieldBasedComparator',
             'mapreduce.partition.keycomparator.options': '-k1,1 -k2,2nr',            
@@ -44,7 +53,8 @@ class PageRankSort_T(MRJob):
             'stream.map.output.field.separator': ' ',   
         }
         return [MRStep(mapper_init=self.mapper_init
-                       , mapper=self.mapper       
+                       , mapper=self.mapper     
+                       , reducer_init=self.reducer_init
                        , reducer=self.reducer
                        , jobconf = jc
                       )

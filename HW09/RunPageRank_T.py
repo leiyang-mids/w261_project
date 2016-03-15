@@ -2,7 +2,7 @@
 
 from PageRankIter_T import PageRankIter_T
 from PageRankDist_T import PageRankDist_T
-from PageRankSort import PageRankSort
+from PageRankSort_2 import PageRankSort_T
 from PageRankJoin import PageRankJoin
 from helper import getCounter, getCounters
 from subprocess import call, check_output
@@ -125,12 +125,13 @@ while(1):
     call(['hdfs', 'dfs', '-mv', '/user/leiyang/out', '/user/leiyang/in'], stdout=FNULL)
 
 # run sort job
-#print str(datetime.datetime.now()) + ': sorting PageRank ...'
-#call(['hdfs', 'dfs', '-rm', '-r', '/user/leiyang/rank'], stdout=FNULL)
-#sort_job = PageRankSort(args=['hdfs:///user/leiyang/out/part*', '--s', str(n_node), '--n', '100',
-#                              '-r', 'hadoop', '--output-dir', 'hdfs:///user/leiyang/rank'])
-#with sort_job.make_runner() as runner:    
-#    runner.run()
+print str(datetime.datetime.now()) + ': sorting PageRank ...'
+call(['hdfs', 'dfs', '-rm', '-r', '/user/leiyang/rank'], stdout=FNULL)
+sort_job = PageRankSort_T(args=['hdfs:///user/leiyang/out/part*', '--file', 'hdfs:///user/leiyang/randNet_topics.txt',
+                              '-r', 'hadoop', '--output-dir', 'hdfs:///user/leiyang/rank'])
+
+with sort_job.make_runner() as runner:    
+    runner.run()
     
 # run join job
 if doJoin:
@@ -143,10 +144,5 @@ if doJoin:
 
 print "%s: PageRank job completes in %.1f minutes!\n" %(str(datetime.datetime.now()), (time()-start)/60.0)
 
-# TODO
-# copy results to S3: 
-#call(['hdfs', 'dfs', '-cat', '/user/leiyang/join/p*' if doJoin else '/user/leiyang/rank/p*', '>', 'results_wiki_50'])
-#call(['aws', 's3', 'cp', 'results_wiki_50', 's3://w261.data/HW9/results_wiki_50', '--region', 'us-west-2'])
-# terminate cluster: - aws emr terminate-clusters --cluster-ids j-CT2NH23KIIBL
-#print "%s: results copied to S3, shutting down cluster ..." %(str(datetime.datetime.now()))
-#call(['aws', 'emr', 'terminate-clusters', '--cluster-ids', 'j-CT2NH23KIIBL'])
+
+call(['hdfs', 'dfs', '-cat', '/user/leiyang/join/p*' if doJoin else '/user/leiyang/rank/p*', '>'])
