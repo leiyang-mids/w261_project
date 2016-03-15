@@ -30,26 +30,20 @@ class PageRankDist_T(MRJob):
         for line in cat.stdout:
             nid, topic = line.strip().split('\t')
             self.T_index[nid] = topic
-            if topic not in T_j:
-                T_j[topic] = 1
-            else:
-                T_j[topic] += 1
+            T_j[topic] = 1 if topic not in T_j else (T_j[topic]+1)
+            
         # prepare adjustment factors
         self.damping = 1 - self.options.alpha        
         cmd = 'm = %s' %self.options.m
         exec cmd
+        # assuming here -m is specified with a list syntax string
         self.p_dangling = [1.0*x / self.options.size for x in m]
         # for each topic, get topic bias
         self.v_ij = [[1, 1]]*(len(T_j)+1)
-        N = self.options.size
+        N, b = self.options.size, self.options.beta
         for t in T_j:
-            self.v_ij[int(t)] = [(1-self.options.beta)*N/(N-T_j[t]), self.options.beta*N/T_j[t]]
-            
-        #yield T_j, (sum(T_j.values()), len(T_j))
-        #yield self.T_index, len(self.T_index)
-        #yield self.p_dangling, None
-        #yield self.v_ij, None
-        
+            self.v_ij[int(t)] = [(1-b)*N/(N-T_j[t]), b*N/T_j[t]]
+                
             
     def mapper(self, _, line):             
         # parse line
@@ -57,10 +51,10 @@ class PageRankDist_T(MRJob):
         nid = nid.strip('"')
         cmd = 'node = %s' %node
         exec cmd
-        # get final pageRank
+        # get final pageRank        
         for i in range(len(self.v_ij)):
-            isTopic = i==int(self.T_index[nid])
-            node['p'][i] = (self.p_dangling[i]+node['p'][i])*self.damping+self.options.alpha*self.v_ij[i][isTopic]
+            vij = self.v_ij[i][i==int(self.T_index[nid])]
+            node['p'][i] = (self.p_dangling[i]+node['p'][i])*self.damping + self.options.alpha*vij
         yield nid, node
 
     def steps(self):
@@ -69,7 +63,7 @@ class PageRankDist_T(MRJob):
         }
         return [MRStep(mapper_init=self.mapper_init
                        , mapper=self.mapper                    
-                       #, jobconf = jc
+                       , jobconf = jc
                       )
                ]
 
