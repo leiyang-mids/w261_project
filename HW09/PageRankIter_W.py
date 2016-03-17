@@ -1,11 +1,11 @@
 from mrjob.job import MRJob
 from mrjob.step import MRStep
 
-class PageRankIter_T(MRJob):
+class PageRankIter_W(MRJob):
     DEFAULT_PROTOCOL = 'json'
 
     def configure_options(self):
-        super(PageRankIter_T, self).configure_options()                
+        super(PageRankIter_W, self).configure_options()                
         self.add_passthrough_option(
             '--n', dest='n_topic', default='0', type='int',
             help='n: number of topics (default 0)') 
@@ -76,4 +76,4 @@ class PageRankIter_T(MRJob):
                ]
 
 if __name__ == '__main__':
-    PageRankIter_T.run()
+    PageRankIter_W.run()

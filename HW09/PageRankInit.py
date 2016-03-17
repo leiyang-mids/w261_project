@@ -53,10 +53,10 @@ class PageRankInit(MRJob):
             elif 'a' in v:
                 node = v
         # handle dangling node, create node struct and add missing mass
-        if not node and topic:
-            node = {'a':[], 'p':[1.0]*(self.options.n_topic+1), 't':topic}               
-        elif node and topic:
-            node['t'] = topic
+        if not node: # and topic:
+            node = {'a':[], 'p':[1.0]*(self.options.n_topic+1), 't':topic if topic else 0}               
+        else: #if node and topic:
+            node['t'] = topic if topic else 0
         # emit for next iteration
         yield nid, node
     
@@ -67,7 +67,7 @@ class PageRankInit(MRJob):
             'mapreduce.job.reduces': '2',
         }
         return [MRStep(mapper=self.mapper
-                       , combiner=self.combiner                       
+                       #, combiner=self.combiner                       
                        , reducer=self.reducer
                        , jobconf = jc
                       )
