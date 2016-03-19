@@ -52,15 +52,17 @@ runners:
 
 
 ================== copy local file ==================
-scp -i ~/w205.pem PageRankIter.py hadoop@ec2-54-172-84-241.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem PageRankDist.py hadoop@ec2-54-172-84-241.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem PageRankSort.py hadoop@ec2-54-172-84-241.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem PageRankJoin.py hadoop@ec2-54-172-84-241.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem RunPageRank.py hadoop@ec2-54-172-84-241.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem helper.py hadoop@ec2-54-172-84-241.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem ./data/PageRank-test.txt hadoop@ec2-54-172-84-241.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem ./data/PageRankIndex hadoop@ec2-54-172-84-241.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem .mrjob.conf hadoop@ec2-54-172-84-241.compute-1.amazonaws.com:~/
+scp -i ~/w205.pem PageRankInit.py hadoop@ec2-54-174-116-49.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRankIter_W.py hadoop@ec2-54-174-116-49.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRankDist_W.py hadoop@ec2-54-174-116-49.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRankSort_W.py hadoop@ec2-54-174-116-49.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRankJoin.py hadoop@ec2-54-174-116-49.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem RunPageRank_W.py hadoop@ec2-54-174-116-49.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem RunPageRank.py hadoop@ec2-54-174-116-49.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem helper.py hadoop@ec2-54-174-116-49.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem ./data/PageRank-test.txt hadoop@ec2-54-174-116-49.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem ./data/PageRankIndex hadoop@ec2-54-174-116-49.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem .mrjob.conf hadoop@ec2-54-174-116-49.compute-1.amazonaws.com:~/
 ================== copy local file ==================
 
 
