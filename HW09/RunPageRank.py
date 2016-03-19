@@ -79,10 +79,9 @@ call(['hdfs', 'dfs', '-mv', '/user/leiyang/out', '/user/leiyang/in'])
 # create iteration job
 iter_job = PageRankIter(args=['hdfs:///user/leiyang/in/part*', '--i', '0', 
                               '-r', 'hadoop', '--output-dir', 'hdfs:///user/leiyang/out'])
-
 # run pageRank iteratively
 i = 2 if doInit else 1
-while(1):
+while(1):    
     print str(datetime.datetime.now()) + ': running iteration %d ...' %i
     with iter_job.make_runner() as runner:        
         runner.run()
@@ -127,4 +126,4 @@ if doJoin:
         runner.run()
 
 print "%s: PageRank job completes in %.1f minutes!\n" %(str(datetime.datetime.now()), (time()-start)/60.0)
-call(['hdfs', 'dfs', '-cat', '/user/leiyang/join/p*' if doJoin else '/user/leiyang/rank/p*', '>', 'results_wiki_50'])
+call(['hdfs', 'dfs', '-cat', '/user/leiyang/join/p*' if doJoin else '/user/leiyang/rank/p*'])
