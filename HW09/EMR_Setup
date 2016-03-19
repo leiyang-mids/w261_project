@@ -66,7 +66,7 @@ scp -i ~/w205.pem .mrjob.conf hadoop@ec2-54-174-116-49.compute-1.amazonaws.com:~
 ================== copy local file ==================
 
 
-- to kill a mapreduce job from yarn: yarn application -kill application_1457820597586_0001
+- to kill a mapreduce job from yarn: yarn application -kill application_1458336673382_0011
 
 =================== location of hdfs-site.xml ========================
 
