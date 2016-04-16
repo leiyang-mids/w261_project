@@ -1,0 +1,1023 @@
+Leis-MacBook-Pro:HW13-Questions leiyang$ ~/Downloads/spark*/bin/spark-submit \
+> --master yarn \
+> --deploy-mode 'client' \
+> --name 'LeiPageRank' \
+> --py-files PageRank.py \
+> PageRankDriver.py
+16/04/16 02:00:15 INFO SparkContext: Running Spark version 1.6.1
+16/04/16 02:00:16 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+16/04/16 02:00:16 INFO SecurityManager: Changing view acls to: leiyang
+16/04/16 02:00:16 INFO SecurityManager: Changing modify acls to: leiyang
+16/04/16 02:00:16 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: Set(leiyang); users with modify permissions: Set(leiyang)
+16/04/16 02:00:16 INFO Utils: Successfully started service 'sparkDriver' on port 55156.
+16/04/16 02:00:17 INFO Slf4jLogger: Slf4jLogger started
+16/04/16 02:00:17 INFO Remoting: Starting remoting
+16/04/16 02:00:17 INFO Remoting: Remoting started; listening on addresses :[akka.tcp://sparkDriverActorSystem@192.168.0.14:55157]
+16/04/16 02:00:17 INFO Utils: Successfully started service 'sparkDriverActorSystem' on port 55157.
+16/04/16 02:00:17 INFO SparkEnv: Registering MapOutputTracker
+16/04/16 02:00:17 INFO SparkEnv: Registering BlockManagerMaster
+16/04/16 02:00:17 INFO DiskBlockManager: Created local directory at /private/var/folders/tx/5ldq67q511q8wqwqkvptnxd00000gn/T/blockmgr-40b79ccc-4a44-4832-b1db-a5d53f29f1b5
+16/04/16 02:00:17 INFO MemoryStore: MemoryStore started with capacity 511.5 MB
+16/04/16 02:00:17 INFO SparkEnv: Registering OutputCommitCoordinator
+16/04/16 02:00:17 INFO Utils: Successfully started service 'SparkUI' on port 4040.
+16/04/16 02:00:17 INFO SparkUI: Started SparkUI at http://192.168.0.14:4040
+16/04/16 02:00:17 INFO RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+16/04/16 02:00:18 INFO Client: Requesting a new application from cluster with 1 NodeManagers
+16/04/16 02:00:18 INFO Client: Verifying our application has not requested more than the maximum memory capability of the cluster (8192 MB per container)
+16/04/16 02:00:18 INFO Client: Will allocate AM container, with 896 MB memory including 384 MB overhead
+16/04/16 02:00:18 INFO Client: Setting up container launch context for our AM
+16/04/16 02:00:18 INFO Client: Setting up the launch environment for our AM container
+16/04/16 02:00:18 INFO Client: Preparing resources for our AM container
+16/04/16 02:00:18 INFO Client: Source and destination file systems are the same. Not copying file:/Users/leiyang/Downloads/spark-1.6.1-bin-hadoop2.6/lib/spark-assembly-1.6.1-hadoop2.6.0.jar
+16/04/16 02:00:18 INFO Client: Source and destination file systems are the same. Not copying file:/Users/leiyang/Downloads/spark-1.6.1-bin-hadoop2.6/python/lib/pyspark.zip
+16/04/16 02:00:18 INFO Client: Source and destination file systems are the same. Not copying file:/Users/leiyang/Downloads/spark-1.6.1-bin-hadoop2.6/python/lib/py4j-0.9-src.zip
+16/04/16 02:00:18 INFO Client: Source and destination file systems are the same. Not copying file:/Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRank.py
+16/04/16 02:00:18 INFO Client: Source and destination file systems are the same. Not copying file:/private/var/folders/tx/5ldq67q511q8wqwqkvptnxd00000gn/T/spark-2929f794-ce8b-4450-8641-75d288649cc8/__spark_conf__4643428329089353322.zip
+16/04/16 02:00:18 INFO SecurityManager: Changing view acls to: leiyang
+16/04/16 02:00:18 INFO SecurityManager: Changing modify acls to: leiyang
+16/04/16 02:00:18 INFO SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: Set(leiyang); users with modify permissions: Set(leiyang)
+16/04/16 02:00:18 INFO Client: Submitting application 1 to ResourceManager
+16/04/16 02:00:18 INFO YarnClientImpl: Submitted application application_1460785974648_0001
+16/04/16 02:00:19 INFO Client: Application report for application_1460785974648_0001 (state: ACCEPTED)
+16/04/16 02:00:19 INFO Client:
+	 client token: N/A
+	 diagnostics: N/A
+	 ApplicationMaster host: N/A
+	 ApplicationMaster RPC port: -1
+	 queue: default
+	 start time: 1460786418528
+	 final status: UNDEFINED
+	 tracking URL: http://Leis-MacBook-Pro.local:8088/proxy/application_1460785974648_0001/
+	 user: leiyang
+16/04/16 02:00:20 INFO Client: Application report for application_1460785974648_0001 (state: ACCEPTED)
+16/04/16 02:00:21 INFO Client: Application report for application_1460785974648_0001 (state: ACCEPTED)
+16/04/16 02:00:22 INFO Client: Application report for application_1460785974648_0001 (state: ACCEPTED)
+16/04/16 02:00:22 INFO YarnSchedulerBackend$YarnSchedulerEndpoint: ApplicationMaster registered as NettyRpcEndpointRef(null)
+16/04/16 02:00:22 INFO YarnClientSchedulerBackend: Add WebUI Filter. org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter, Map(PROXY_HOSTS -> Leis-MacBook-Pro.local, PROXY_URI_BASES -> http://Leis-MacBook-Pro.local:8088/proxy/application_1460785974648_0001), /proxy/application_1460785974648_0001
+16/04/16 02:00:22 INFO JettyUtils: Adding filter: org.apache.hadoop.yarn.server.webproxy.amfilter.AmIpFilter
+16/04/16 02:00:23 INFO Client: Application report for application_1460785974648_0001 (state: RUNNING)
+16/04/16 02:00:23 INFO Client:
+	 client token: N/A
+	 diagnostics: N/A
+	 ApplicationMaster host: 192.168.0.14
+	 ApplicationMaster RPC port: 0
+	 queue: default
+	 start time: 1460786418528
+	 final status: UNDEFINED
+	 tracking URL: http://Leis-MacBook-Pro.local:8088/proxy/application_1460785974648_0001/
+	 user: leiyang
+16/04/16 02:00:23 INFO YarnClientSchedulerBackend: Application application_1460785974648_0001 has started running.
+16/04/16 02:00:23 INFO Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 55166.
+16/04/16 02:00:23 INFO NettyBlockTransferService: Server created on 55166
+16/04/16 02:00:23 INFO BlockManagerMaster: Trying to register BlockManager
+16/04/16 02:00:23 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.0.14:55166 with 511.5 MB RAM, BlockManagerId(driver, 192.168.0.14, 55166)
+16/04/16 02:00:23 INFO BlockManagerMaster: Registered BlockManager
+16/04/16 02:00:27 INFO YarnClientSchedulerBackend: Registered executor NettyRpcEndpointRef(null) (192.168.0.14:55171) with ID 1
+16/04/16 02:00:27 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.0.14:55172 with 511.5 MB RAM, BlockManagerId(1, 192.168.0.14, 55172)
+16/04/16 02:00:28 INFO YarnClientSchedulerBackend: Registered executor NettyRpcEndpointRef(null) (192.168.0.14:55175) with ID 2
+16/04/16 02:00:28 INFO BlockManagerMasterEndpoint: Registering block manager 192.168.0.14:55176 with 511.5 MB RAM, BlockManagerId(2, 192.168.0.14, 55176)
+16/04/16 02:00:28 INFO YarnClientSchedulerBackend: SchedulerBackend is ready for scheduling beginning after reached minRegisteredResourcesRatio: 0.8
+16/04/16 02:00:29 INFO MemoryStore: Block broadcast_0 stored as values in memory (estimated size 225.2 KB, free 225.2 KB)
+16/04/16 02:00:29 INFO MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 19.3 KB, free 244.6 KB)
+16/04/16 02:00:29 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on 192.168.0.14:55166 (size: 19.3 KB, free: 511.5 MB)
+16/04/16 02:00:29 INFO SparkContext: Created broadcast 0 from textFile at NativeMethodAccessorImpl.java:-2
+16/04/16 02:00:29 INFO MemoryStore: Block broadcast_1 stored as values in memory (estimated size 225.3 KB, free 469.8 KB)
+16/04/16 02:00:29 INFO MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 19.3 KB, free 489.1 KB)
+16/04/16 02:00:29 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on 192.168.0.14:55166 (size: 19.3 KB, free: 511.5 MB)
+16/04/16 02:00:29 INFO SparkContext: Created broadcast 1 from textFile at NativeMethodAccessorImpl.java:-2
+2016-04-16 02:00:29.225691: start PageRank initialization ...
+16/04/16 02:00:29 INFO FileInputFormat: Total input paths to process : 1
+16/04/16 02:00:29 INFO SparkContext: Starting job: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:24
+16/04/16 02:00:29 INFO DAGScheduler: Registering RDD 5 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:22)
+16/04/16 02:00:29 INFO DAGScheduler: Got job 0 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:24) with 2 output partitions
+16/04/16 02:00:29 INFO DAGScheduler: Final stage: ResultStage 1 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:24)
+16/04/16 02:00:29 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 0)
+16/04/16 02:00:29 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 0)
+16/04/16 02:00:29 INFO DAGScheduler: Submitting ShuffleMapStage 0 (PairwiseRDD[5] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:22), which has no missing parents
+16/04/16 02:00:29 INFO MemoryStore: Block broadcast_2 stored as values in memory (estimated size 8.4 KB, free 497.6 KB)
+16/04/16 02:00:29 INFO MemoryStore: Block broadcast_2_piece0 stored as bytes in memory (estimated size 5.4 KB, free 502.9 KB)
+16/04/16 02:00:29 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on 192.168.0.14:55166 (size: 5.4 KB, free: 511.5 MB)
+16/04/16 02:00:29 INFO SparkContext: Created broadcast 2 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:29 INFO DAGScheduler: Submitting 2 missing tasks from ShuffleMapStage 0 (PairwiseRDD[5] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:22)
+16/04/16 02:00:29 INFO YarnScheduler: Adding task set 0.0 with 2 tasks
+16/04/16 02:00:29 INFO TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0, 192.168.0.14, partition 0,RACK_LOCAL, 2143 bytes)
+16/04/16 02:00:29 INFO TaskSetManager: Starting task 1.0 in stage 0.0 (TID 1, 192.168.0.14, partition 1,RACK_LOCAL, 2143 bytes)
+16/04/16 02:00:29 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on 192.168.0.14:55172 (size: 5.4 KB, free: 511.5 MB)
+16/04/16 02:00:29 INFO BlockManagerInfo: Added broadcast_2_piece0 in memory on 192.168.0.14:55176 (size: 5.4 KB, free: 511.5 MB)
+16/04/16 02:00:30 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on 192.168.0.14:55176 (size: 19.3 KB, free: 511.5 MB)
+16/04/16 02:00:30 INFO BlockManagerInfo: Added broadcast_0_piece0 in memory on 192.168.0.14:55172 (size: 19.3 KB, free: 511.5 MB)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 1.0 in stage 0.0 (TID 1) in 1441 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 1486 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:31 INFO DAGScheduler: ShuffleMapStage 0 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:22) finished in 1.488 s
+16/04/16 02:00:31 INFO YarnScheduler: Removed TaskSet 0.0, whose tasks have all completed, from pool
+16/04/16 02:00:31 INFO DAGScheduler: looking for newly runnable stages
+16/04/16 02:00:31 INFO DAGScheduler: running: Set()
+16/04/16 02:00:31 INFO DAGScheduler: waiting: Set(ResultStage 1)
+16/04/16 02:00:31 INFO DAGScheduler: failed: Set()
+16/04/16 02:00:31 INFO DAGScheduler: Submitting ResultStage 1 (PythonRDD[9] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:24), which has no missing parents
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_3 stored as values in memory (estimated size 7.8 KB, free 510.8 KB)
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_3_piece0 stored as bytes in memory (estimated size 4.4 KB, free 515.2 KB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_3_piece0 in memory on 192.168.0.14:55166 (size: 4.4 KB, free: 511.5 MB)
+16/04/16 02:00:31 INFO SparkContext: Created broadcast 3 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:31 INFO DAGScheduler: Submitting 2 missing tasks from ResultStage 1 (PythonRDD[9] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:24)
+16/04/16 02:00:31 INFO YarnScheduler: Adding task set 1.0 with 2 tasks
+16/04/16 02:00:31 INFO TaskSetManager: Starting task 0.0 in stage 1.0 (TID 2, 192.168.0.14, partition 0,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:31 INFO TaskSetManager: Starting task 1.0 in stage 1.0 (TID 3, 192.168.0.14, partition 1,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_3_piece0 in memory on 192.168.0.14:55176 (size: 4.4 KB, free: 511.5 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_3_piece0 in memory on 192.168.0.14:55172 (size: 4.4 KB, free: 511.5 MB)
+16/04/16 02:00:31 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 0 to 192.168.0.14:55175
+16/04/16 02:00:31 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 0 to 192.168.0.14:55171
+16/04/16 02:00:31 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 0 is 159 bytes
+16/04/16 02:00:31 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 0 is 159 bytes
+16/04/16 02:00:31 INFO BlockManagerInfo: Added rdd_8_0 in memory on 192.168.0.14:55176 (size: 217.0 B, free: 511.5 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added rdd_8_1 in memory on 192.168.0.14:55172 (size: 215.0 B, free: 511.5 MB)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 1.0 in stage 1.0 (TID 3) in 113 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 0.0 in stage 1.0 (TID 2) in 115 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:31 INFO YarnScheduler: Removed TaskSet 1.0, whose tasks have all completed, from pool
+16/04/16 02:00:31 INFO DAGScheduler: ResultStage 1 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:24) finished in 0.115 s
+16/04/16 02:00:31 INFO DAGScheduler: Job 0 finished: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:24, took 1.685912 s
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_4 stored as values in memory (estimated size 400.0 B, free 515.6 KB)
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_4_piece0 stored as bytes in memory (estimated size 99.0 B, free 515.7 KB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_4_piece0 in memory on 192.168.0.14:55166 (size: 99.0 B, free: 511.5 MB)
+16/04/16 02:00:31 INFO SparkContext: Created broadcast 4 from broadcast at PythonRDD.scala:430
+2016-04-16 02:00:31.344095: initialization completed, dangling node(s): 1, total nodes: 11
+2016-04-16 02:00:31.344122: running iteration 2 ...
+16/04/16 02:00:31 INFO SparkContext: Starting job: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35
+16/04/16 02:00:31 INFO DAGScheduler: Registering RDD 11 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33)
+16/04/16 02:00:31 INFO DAGScheduler: Got job 1 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35) with 2 output partitions
+16/04/16 02:00:31 INFO DAGScheduler: Final stage: ResultStage 4 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35)
+16/04/16 02:00:31 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 3)
+16/04/16 02:00:31 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 3)
+16/04/16 02:00:31 INFO DAGScheduler: Submitting ShuffleMapStage 3 (PairwiseRDD[11] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33), which has no missing parents
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_5 stored as values in memory (estimated size 11.0 KB, free 526.7 KB)
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_5_piece0 stored as bytes in memory (estimated size 6.3 KB, free 533.0 KB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_5_piece0 in memory on 192.168.0.14:55166 (size: 6.3 KB, free: 511.4 MB)
+16/04/16 02:00:31 INFO SparkContext: Created broadcast 5 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:31 INFO DAGScheduler: Submitting 2 missing tasks from ShuffleMapStage 3 (PairwiseRDD[11] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33)
+16/04/16 02:00:31 INFO YarnScheduler: Adding task set 3.0 with 2 tasks
+16/04/16 02:00:31 INFO TaskSetManager: Starting task 1.0 in stage 3.0 (TID 4, 192.168.0.14, partition 1,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:31 INFO TaskSetManager: Starting task 0.0 in stage 3.0 (TID 5, 192.168.0.14, partition 0,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_5_piece0 in memory on 192.168.0.14:55172 (size: 6.3 KB, free: 511.5 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_5_piece0 in memory on 192.168.0.14:55176 (size: 6.3 KB, free: 511.5 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_4_piece0 in memory on 192.168.0.14:55172 (size: 99.0 B, free: 511.5 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_4_piece0 in memory on 192.168.0.14:55176 (size: 99.0 B, free: 511.5 MB)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 0.0 in stage 3.0 (TID 5) in 56 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 1.0 in stage 3.0 (TID 4) in 57 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:31 INFO YarnScheduler: Removed TaskSet 3.0, whose tasks have all completed, from pool
+16/04/16 02:00:31 INFO DAGScheduler: ShuffleMapStage 3 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33) finished in 0.059 s
+16/04/16 02:00:31 INFO DAGScheduler: looking for newly runnable stages
+16/04/16 02:00:31 INFO DAGScheduler: running: Set()
+16/04/16 02:00:31 INFO DAGScheduler: waiting: Set(ResultStage 4)
+16/04/16 02:00:31 INFO DAGScheduler: failed: Set()
+16/04/16 02:00:31 INFO DAGScheduler: Submitting ResultStage 4 (PythonRDD[15] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35), which has no missing parents
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_6 stored as values in memory (estimated size 7.1 KB, free 540.0 KB)
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_6_piece0 stored as bytes in memory (estimated size 4.1 KB, free 544.1 KB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_6_piece0 in memory on 192.168.0.14:55166 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:31 INFO SparkContext: Created broadcast 6 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:31 INFO DAGScheduler: Submitting 2 missing tasks from ResultStage 4 (PythonRDD[15] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35)
+16/04/16 02:00:31 INFO YarnScheduler: Adding task set 4.0 with 2 tasks
+16/04/16 02:00:31 INFO TaskSetManager: Starting task 0.0 in stage 4.0 (TID 6, 192.168.0.14, partition 0,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:31 INFO TaskSetManager: Starting task 1.0 in stage 4.0 (TID 7, 192.168.0.14, partition 1,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_6_piece0 in memory on 192.168.0.14:55176 (size: 4.1 KB, free: 511.5 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_6_piece0 in memory on 192.168.0.14:55172 (size: 4.1 KB, free: 511.5 MB)
+16/04/16 02:00:31 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 1 to 192.168.0.14:55175
+16/04/16 02:00:31 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 1 is 159 bytes
+16/04/16 02:00:31 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 1 to 192.168.0.14:55171
+16/04/16 02:00:31 INFO BlockManagerInfo: Added rdd_14_0 in memory on 192.168.0.14:55176 (size: 233.0 B, free: 511.5 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added rdd_14_1 in memory on 192.168.0.14:55172 (size: 224.0 B, free: 511.5 MB)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 0.0 in stage 4.0 (TID 6) in 44 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 1.0 in stage 4.0 (TID 7) in 44 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:31 INFO YarnScheduler: Removed TaskSet 4.0, whose tasks have all completed, from pool
+16/04/16 02:00:31 INFO DAGScheduler: ResultStage 4 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35) finished in 0.045 s
+16/04/16 02:00:31 INFO DAGScheduler: Job 1 finished: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35, took 0.126009 s
+2016-04-16 02:00:31.505347: redistributing loss mass: 0.6523
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_7 stored as values in memory (estimated size 400.0 B, free 544.5 KB)
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_7_piece0 stored as bytes in memory (estimated size 99.0 B, free 544.6 KB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_7_piece0 in memory on 192.168.0.14:55166 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:31 INFO SparkContext: Created broadcast 7 from broadcast at PythonRDD.scala:430
+2016-04-16 02:00:31.513289: running iteration 3 ...
+16/04/16 02:00:31 INFO SparkContext: Starting job: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35
+16/04/16 02:00:31 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 0 is 159 bytes
+16/04/16 02:00:31 INFO DAGScheduler: Registering RDD 17 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33)
+16/04/16 02:00:31 INFO DAGScheduler: Got job 2 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35) with 2 output partitions
+16/04/16 02:00:31 INFO DAGScheduler: Final stage: ResultStage 8 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35)
+16/04/16 02:00:31 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 7)
+16/04/16 02:00:31 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 7)
+16/04/16 02:00:31 INFO DAGScheduler: Submitting ShuffleMapStage 7 (PairwiseRDD[17] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33), which has no missing parents
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_8 stored as values in memory (estimated size 10.2 KB, free 554.8 KB)
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_8_piece0 stored as bytes in memory (estimated size 6.0 KB, free 560.8 KB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_8_piece0 in memory on 192.168.0.14:55166 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:31 INFO SparkContext: Created broadcast 8 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:31 INFO DAGScheduler: Submitting 2 missing tasks from ShuffleMapStage 7 (PairwiseRDD[17] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33)
+16/04/16 02:00:31 INFO YarnScheduler: Adding task set 7.0 with 2 tasks
+16/04/16 02:00:31 INFO TaskSetManager: Starting task 0.0 in stage 7.0 (TID 8, 192.168.0.14, partition 0,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:31 INFO TaskSetManager: Starting task 1.0 in stage 7.0 (TID 9, 192.168.0.14, partition 1,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_8_piece0 in memory on 192.168.0.14:55172 (size: 6.0 KB, free: 511.5 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_8_piece0 in memory on 192.168.0.14:55176 (size: 6.0 KB, free: 511.5 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_7_piece0 in memory on 192.168.0.14:55172 (size: 99.0 B, free: 511.5 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_7_piece0 in memory on 192.168.0.14:55176 (size: 99.0 B, free: 511.5 MB)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 0.0 in stage 7.0 (TID 8) in 44 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 1.0 in stage 7.0 (TID 9) in 43 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:31 INFO YarnScheduler: Removed TaskSet 7.0, whose tasks have all completed, from pool
+16/04/16 02:00:31 INFO DAGScheduler: ShuffleMapStage 7 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33) finished in 0.045 s
+16/04/16 02:00:31 INFO DAGScheduler: looking for newly runnable stages
+16/04/16 02:00:31 INFO DAGScheduler: running: Set()
+16/04/16 02:00:31 INFO DAGScheduler: waiting: Set(ResultStage 8)
+16/04/16 02:00:31 INFO DAGScheduler: failed: Set()
+16/04/16 02:00:31 INFO DAGScheduler: Submitting ResultStage 8 (PythonRDD[21] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35), which has no missing parents
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_9 stored as values in memory (estimated size 7.1 KB, free 567.9 KB)
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_9_piece0 stored as bytes in memory (estimated size 4.1 KB, free 572.0 KB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_9_piece0 in memory on 192.168.0.14:55166 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:31 INFO SparkContext: Created broadcast 9 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:31 INFO DAGScheduler: Submitting 2 missing tasks from ResultStage 8 (PythonRDD[21] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35)
+16/04/16 02:00:31 INFO YarnScheduler: Adding task set 8.0 with 2 tasks
+16/04/16 02:00:31 INFO TaskSetManager: Starting task 0.0 in stage 8.0 (TID 10, 192.168.0.14, partition 0,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:31 INFO TaskSetManager: Starting task 1.0 in stage 8.0 (TID 11, 192.168.0.14, partition 1,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_9_piece0 in memory on 192.168.0.14:55172 (size: 4.1 KB, free: 511.5 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_9_piece0 in memory on 192.168.0.14:55176 (size: 4.1 KB, free: 511.5 MB)
+16/04/16 02:00:31 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 2 to 192.168.0.14:55171
+16/04/16 02:00:31 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 2 to 192.168.0.14:55175
+16/04/16 02:00:31 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 2 is 159 bytes
+16/04/16 02:00:31 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 2 is 159 bytes
+16/04/16 02:00:31 INFO BlockManagerInfo: Added rdd_20_0 in memory on 192.168.0.14:55176 (size: 234.0 B, free: 511.5 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added rdd_20_1 in memory on 192.168.0.14:55172 (size: 219.0 B, free: 511.5 MB)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 0.0 in stage 8.0 (TID 10) in 39 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 1.0 in stage 8.0 (TID 11) in 40 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:31 INFO YarnScheduler: Removed TaskSet 8.0, whose tasks have all completed, from pool
+16/04/16 02:00:31 INFO DAGScheduler: ResultStage 8 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35) finished in 0.040 s
+16/04/16 02:00:31 INFO DAGScheduler: Job 2 finished: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35, took 0.111859 s
+2016-04-16 02:00:31.661754: redistributing loss mass: 0.4174
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_10 stored as values in memory (estimated size 400.0 B, free 572.3 KB)
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_10_piece0 stored as bytes in memory (estimated size 99.0 B, free 572.4 KB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_10_piece0 in memory on 192.168.0.14:55166 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:31 INFO SparkContext: Created broadcast 10 from broadcast at PythonRDD.scala:430
+2016-04-16 02:00:31.667365: running iteration 4 ...
+16/04/16 02:00:31 INFO SparkContext: Starting job: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35
+16/04/16 02:00:31 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 0 is 159 bytes
+16/04/16 02:00:31 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 1 is 159 bytes
+16/04/16 02:00:31 INFO DAGScheduler: Registering RDD 23 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33)
+16/04/16 02:00:31 INFO DAGScheduler: Got job 3 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35) with 2 output partitions
+16/04/16 02:00:31 INFO DAGScheduler: Final stage: ResultStage 13 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35)
+16/04/16 02:00:31 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 12)
+16/04/16 02:00:31 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 12)
+16/04/16 02:00:31 INFO DAGScheduler: Submitting ShuffleMapStage 12 (PairwiseRDD[23] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33), which has no missing parents
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_11 stored as values in memory (estimated size 10.2 KB, free 582.7 KB)
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_11_piece0 stored as bytes in memory (estimated size 6.0 KB, free 588.7 KB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_11_piece0 in memory on 192.168.0.14:55166 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:31 INFO SparkContext: Created broadcast 11 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:31 INFO DAGScheduler: Submitting 2 missing tasks from ShuffleMapStage 12 (PairwiseRDD[23] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33)
+16/04/16 02:00:31 INFO YarnScheduler: Adding task set 12.0 with 2 tasks
+16/04/16 02:00:31 INFO TaskSetManager: Starting task 1.0 in stage 12.0 (TID 12, 192.168.0.14, partition 1,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:31 INFO TaskSetManager: Starting task 0.0 in stage 12.0 (TID 13, 192.168.0.14, partition 0,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_11_piece0 in memory on 192.168.0.14:55172 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_11_piece0 in memory on 192.168.0.14:55176 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_10_piece0 in memory on 192.168.0.14:55172 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_10_piece0 in memory on 192.168.0.14:55176 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 1.0 in stage 12.0 (TID 12) in 44 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 0.0 in stage 12.0 (TID 13) in 44 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:31 INFO YarnScheduler: Removed TaskSet 12.0, whose tasks have all completed, from pool
+16/04/16 02:00:31 INFO DAGScheduler: ShuffleMapStage 12 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33) finished in 0.045 s
+16/04/16 02:00:31 INFO DAGScheduler: looking for newly runnable stages
+16/04/16 02:00:31 INFO DAGScheduler: running: Set()
+16/04/16 02:00:31 INFO DAGScheduler: waiting: Set(ResultStage 13)
+16/04/16 02:00:31 INFO DAGScheduler: failed: Set()
+16/04/16 02:00:31 INFO DAGScheduler: Submitting ResultStage 13 (PythonRDD[27] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35), which has no missing parents
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_12 stored as values in memory (estimated size 7.1 KB, free 595.7 KB)
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_12_piece0 stored as bytes in memory (estimated size 4.1 KB, free 599.8 KB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_12_piece0 in memory on 192.168.0.14:55166 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:31 INFO SparkContext: Created broadcast 12 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:31 INFO DAGScheduler: Submitting 2 missing tasks from ResultStage 13 (PythonRDD[27] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35)
+16/04/16 02:00:31 INFO YarnScheduler: Adding task set 13.0 with 2 tasks
+16/04/16 02:00:31 INFO TaskSetManager: Starting task 0.0 in stage 13.0 (TID 14, 192.168.0.14, partition 0,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:31 INFO TaskSetManager: Starting task 1.0 in stage 13.0 (TID 15, 192.168.0.14, partition 1,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_12_piece0 in memory on 192.168.0.14:55172 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_12_piece0 in memory on 192.168.0.14:55176 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:31 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 3 to 192.168.0.14:55175
+16/04/16 02:00:31 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 3 to 192.168.0.14:55171
+16/04/16 02:00:31 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 3 is 159 bytes
+16/04/16 02:00:31 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 3 is 159 bytes
+16/04/16 02:00:31 INFO BlockManagerInfo: Added rdd_26_1 in memory on 192.168.0.14:55176 (size: 221.0 B, free: 511.4 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added rdd_26_0 in memory on 192.168.0.14:55172 (size: 236.0 B, free: 511.4 MB)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 0.0 in stage 13.0 (TID 14) in 42 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 1.0 in stage 13.0 (TID 15) in 43 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:31 INFO YarnScheduler: Removed TaskSet 13.0, whose tasks have all completed, from pool
+16/04/16 02:00:31 INFO DAGScheduler: ResultStage 13 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35) finished in 0.044 s
+16/04/16 02:00:31 INFO DAGScheduler: Job 3 finished: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35, took 0.111386 s
+2016-04-16 02:00:31.813992: redistributing loss mass: 0.7042
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_13 stored as values in memory (estimated size 400.0 B, free 600.2 KB)
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_13_piece0 stored as bytes in memory (estimated size 99.0 B, free 600.3 KB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_13_piece0 in memory on 192.168.0.14:55166 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:31 INFO SparkContext: Created broadcast 13 from broadcast at PythonRDD.scala:430
+2016-04-16 02:00:31.819293: running iteration 5 ...
+16/04/16 02:00:31 INFO SparkContext: Starting job: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35
+16/04/16 02:00:31 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 0 is 159 bytes
+16/04/16 02:00:31 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 1 is 159 bytes
+16/04/16 02:00:31 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 2 is 159 bytes
+16/04/16 02:00:31 INFO DAGScheduler: Registering RDD 29 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33)
+16/04/16 02:00:31 INFO DAGScheduler: Got job 4 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35) with 2 output partitions
+16/04/16 02:00:31 INFO DAGScheduler: Final stage: ResultStage 19 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35)
+16/04/16 02:00:31 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 18)
+16/04/16 02:00:31 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 18)
+16/04/16 02:00:31 INFO DAGScheduler: Submitting ShuffleMapStage 18 (PairwiseRDD[29] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33), which has no missing parents
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_14 stored as values in memory (estimated size 10.2 KB, free 610.6 KB)
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_14_piece0 stored as bytes in memory (estimated size 6.0 KB, free 616.6 KB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_14_piece0 in memory on 192.168.0.14:55166 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:31 INFO SparkContext: Created broadcast 14 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:31 INFO DAGScheduler: Submitting 2 missing tasks from ShuffleMapStage 18 (PairwiseRDD[29] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33)
+16/04/16 02:00:31 INFO YarnScheduler: Adding task set 18.0 with 2 tasks
+16/04/16 02:00:31 INFO TaskSetManager: Starting task 0.0 in stage 18.0 (TID 16, 192.168.0.14, partition 0,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:31 INFO TaskSetManager: Starting task 1.0 in stage 18.0 (TID 17, 192.168.0.14, partition 1,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_14_piece0 in memory on 192.168.0.14:55176 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_14_piece0 in memory on 192.168.0.14:55172 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_13_piece0 in memory on 192.168.0.14:55176 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_13_piece0 in memory on 192.168.0.14:55172 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 0.0 in stage 18.0 (TID 16) in 40 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 1.0 in stage 18.0 (TID 17) in 41 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:31 INFO YarnScheduler: Removed TaskSet 18.0, whose tasks have all completed, from pool
+16/04/16 02:00:31 INFO DAGScheduler: ShuffleMapStage 18 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33) finished in 0.042 s
+16/04/16 02:00:31 INFO DAGScheduler: looking for newly runnable stages
+16/04/16 02:00:31 INFO DAGScheduler: running: Set()
+16/04/16 02:00:31 INFO DAGScheduler: waiting: Set(ResultStage 19)
+16/04/16 02:00:31 INFO DAGScheduler: failed: Set()
+16/04/16 02:00:31 INFO DAGScheduler: Submitting ResultStage 19 (PythonRDD[33] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35), which has no missing parents
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_15 stored as values in memory (estimated size 7.1 KB, free 623.6 KB)
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_15_piece0 stored as bytes in memory (estimated size 4.1 KB, free 627.7 KB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_15_piece0 in memory on 192.168.0.14:55166 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:31 INFO SparkContext: Created broadcast 15 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:31 INFO DAGScheduler: Submitting 2 missing tasks from ResultStage 19 (PythonRDD[33] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35)
+16/04/16 02:00:31 INFO YarnScheduler: Adding task set 19.0 with 2 tasks
+16/04/16 02:00:31 INFO TaskSetManager: Starting task 0.0 in stage 19.0 (TID 18, 192.168.0.14, partition 0,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:31 INFO TaskSetManager: Starting task 1.0 in stage 19.0 (TID 19, 192.168.0.14, partition 1,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_15_piece0 in memory on 192.168.0.14:55172 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_15_piece0 in memory on 192.168.0.14:55176 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:31 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 4 to 192.168.0.14:55171
+16/04/16 02:00:31 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 4 is 159 bytes
+16/04/16 02:00:31 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 4 to 192.168.0.14:55175
+16/04/16 02:00:31 INFO BlockManagerInfo: Added rdd_32_1 in memory on 192.168.0.14:55176 (size: 221.0 B, free: 511.4 MB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added rdd_32_0 in memory on 192.168.0.14:55172 (size: 242.0 B, free: 511.4 MB)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 1.0 in stage 19.0 (TID 19) in 36 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:31 INFO TaskSetManager: Finished task 0.0 in stage 19.0 (TID 18) in 37 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:31 INFO YarnScheduler: Removed TaskSet 19.0, whose tasks have all completed, from pool
+16/04/16 02:00:31 INFO DAGScheduler: ResultStage 19 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35) finished in 0.038 s
+16/04/16 02:00:31 INFO DAGScheduler: Job 4 finished: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35, took 0.099362 s
+2016-04-16 02:00:31.952163: redistributing loss mass: 0.4136
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_16 stored as values in memory (estimated size 400.0 B, free 628.1 KB)
+16/04/16 02:00:31 INFO MemoryStore: Block broadcast_16_piece0 stored as bytes in memory (estimated size 99.0 B, free 628.2 KB)
+16/04/16 02:00:31 INFO BlockManagerInfo: Added broadcast_16_piece0 in memory on 192.168.0.14:55166 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:31 INFO SparkContext: Created broadcast 16 from broadcast at PythonRDD.scala:430
+2016-04-16 02:00:31.956592: running iteration 6 ...
+16/04/16 02:00:31 INFO SparkContext: Starting job: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35
+16/04/16 02:00:31 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 0 is 159 bytes
+16/04/16 02:00:31 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 1 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 2 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 3 is 159 bytes
+16/04/16 02:00:32 INFO DAGScheduler: Registering RDD 35 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33)
+16/04/16 02:00:32 INFO DAGScheduler: Got job 5 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35) with 2 output partitions
+16/04/16 02:00:32 INFO DAGScheduler: Final stage: ResultStage 26 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35)
+16/04/16 02:00:32 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 25)
+16/04/16 02:00:32 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 25)
+16/04/16 02:00:32 INFO DAGScheduler: Submitting ShuffleMapStage 25 (PairwiseRDD[35] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33), which has no missing parents
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_17 stored as values in memory (estimated size 10.2 KB, free 638.4 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_17_piece0 stored as bytes in memory (estimated size 6.0 KB, free 644.4 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_17_piece0 in memory on 192.168.0.14:55166 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 17 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:32 INFO DAGScheduler: Submitting 2 missing tasks from ShuffleMapStage 25 (PairwiseRDD[35] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33)
+16/04/16 02:00:32 INFO YarnScheduler: Adding task set 25.0 with 2 tasks
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 0.0 in stage 25.0 (TID 20, 192.168.0.14, partition 0,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 1.0 in stage 25.0 (TID 21, 192.168.0.14, partition 1,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_17_piece0 in memory on 192.168.0.14:55172 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_17_piece0 in memory on 192.168.0.14:55176 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_16_piece0 in memory on 192.168.0.14:55172 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_16_piece0 in memory on 192.168.0.14:55176 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 1.0 in stage 25.0 (TID 21) in 40 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 0.0 in stage 25.0 (TID 20) in 42 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:32 INFO YarnScheduler: Removed TaskSet 25.0, whose tasks have all completed, from pool
+16/04/16 02:00:32 INFO DAGScheduler: ShuffleMapStage 25 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33) finished in 0.042 s
+16/04/16 02:00:32 INFO DAGScheduler: looking for newly runnable stages
+16/04/16 02:00:32 INFO DAGScheduler: running: Set()
+16/04/16 02:00:32 INFO DAGScheduler: waiting: Set(ResultStage 26)
+16/04/16 02:00:32 INFO DAGScheduler: failed: Set()
+16/04/16 02:00:32 INFO DAGScheduler: Submitting ResultStage 26 (PythonRDD[39] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35), which has no missing parents
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_18 stored as values in memory (estimated size 7.1 KB, free 651.5 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_18_piece0 stored as bytes in memory (estimated size 4.1 KB, free 655.6 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_18_piece0 in memory on 192.168.0.14:55166 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 18 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:32 INFO DAGScheduler: Submitting 2 missing tasks from ResultStage 26 (PythonRDD[39] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35)
+16/04/16 02:00:32 INFO YarnScheduler: Adding task set 26.0 with 2 tasks
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 0.0 in stage 26.0 (TID 22, 192.168.0.14, partition 0,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 1.0 in stage 26.0 (TID 23, 192.168.0.14, partition 1,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_18_piece0 in memory on 192.168.0.14:55172 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_18_piece0 in memory on 192.168.0.14:55176 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 5 to 192.168.0.14:55175
+16/04/16 02:00:32 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 5 to 192.168.0.14:55171
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 5 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 5 is 159 bytes
+16/04/16 02:00:32 INFO BlockManagerInfo: Added rdd_38_1 in memory on 192.168.0.14:55176 (size: 221.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added rdd_38_0 in memory on 192.168.0.14:55172 (size: 236.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 1.0 in stage 26.0 (TID 23) in 41 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 0.0 in stage 26.0 (TID 22) in 41 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:32 INFO YarnScheduler: Removed TaskSet 26.0, whose tasks have all completed, from pool
+16/04/16 02:00:32 INFO DAGScheduler: ResultStage 26 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35) finished in 0.042 s
+16/04/16 02:00:32 INFO DAGScheduler: Job 5 finished: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35, took 0.103968 s
+2016-04-16 02:00:32.104017: redistributing loss mass: 0.4254
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_19 stored as values in memory (estimated size 400.0 B, free 656.0 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_19_piece0 stored as bytes in memory (estimated size 99.0 B, free 656.1 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_19_piece0 in memory on 192.168.0.14:55166 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 19 from broadcast at PythonRDD.scala:430
+2016-04-16 02:00:32.108771: running iteration 7 ...
+16/04/16 02:00:32 INFO SparkContext: Starting job: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 0 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 1 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 2 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 3 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 4 is 159 bytes
+16/04/16 02:00:32 INFO DAGScheduler: Registering RDD 41 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33)
+16/04/16 02:00:32 INFO DAGScheduler: Got job 6 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35) with 2 output partitions
+16/04/16 02:00:32 INFO DAGScheduler: Final stage: ResultStage 34 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35)
+16/04/16 02:00:32 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 33)
+16/04/16 02:00:32 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 33)
+16/04/16 02:00:32 INFO DAGScheduler: Submitting ShuffleMapStage 33 (PairwiseRDD[41] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33), which has no missing parents
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_20 stored as values in memory (estimated size 10.2 KB, free 666.3 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_20_piece0 stored as bytes in memory (estimated size 6.0 KB, free 672.3 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_20_piece0 in memory on 192.168.0.14:55166 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 20 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:32 INFO DAGScheduler: Submitting 2 missing tasks from ShuffleMapStage 33 (PairwiseRDD[41] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33)
+16/04/16 02:00:32 INFO YarnScheduler: Adding task set 33.0 with 2 tasks
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 0.0 in stage 33.0 (TID 24, 192.168.0.14, partition 0,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 1.0 in stage 33.0 (TID 25, 192.168.0.14, partition 1,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_20_piece0 in memory on 192.168.0.14:55172 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_20_piece0 in memory on 192.168.0.14:55176 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_19_piece0 in memory on 192.168.0.14:55172 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_19_piece0 in memory on 192.168.0.14:55176 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 0.0 in stage 33.0 (TID 24) in 40 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 1.0 in stage 33.0 (TID 25) in 40 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:32 INFO YarnScheduler: Removed TaskSet 33.0, whose tasks have all completed, from pool
+16/04/16 02:00:32 INFO DAGScheduler: ShuffleMapStage 33 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33) finished in 0.042 s
+16/04/16 02:00:32 INFO DAGScheduler: looking for newly runnable stages
+16/04/16 02:00:32 INFO DAGScheduler: running: Set()
+16/04/16 02:00:32 INFO DAGScheduler: waiting: Set(ResultStage 34)
+16/04/16 02:00:32 INFO DAGScheduler: failed: Set()
+16/04/16 02:00:32 INFO DAGScheduler: Submitting ResultStage 34 (PythonRDD[45] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35), which has no missing parents
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_21 stored as values in memory (estimated size 7.1 KB, free 679.4 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_21_piece0 stored as bytes in memory (estimated size 4.1 KB, free 683.5 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_21_piece0 in memory on 192.168.0.14:55166 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 21 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:32 INFO DAGScheduler: Submitting 2 missing tasks from ResultStage 34 (PythonRDD[45] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35)
+16/04/16 02:00:32 INFO YarnScheduler: Adding task set 34.0 with 2 tasks
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 0.0 in stage 34.0 (TID 26, 192.168.0.14, partition 0,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 1.0 in stage 34.0 (TID 27, 192.168.0.14, partition 1,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_21_piece0 in memory on 192.168.0.14:55172 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_21_piece0 in memory on 192.168.0.14:55176 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 6 to 192.168.0.14:55171
+16/04/16 02:00:32 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 6 to 192.168.0.14:55175
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 6 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 6 is 159 bytes
+16/04/16 02:00:32 INFO BlockManagerInfo: Added rdd_44_0 in memory on 192.168.0.14:55176 (size: 236.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added rdd_44_1 in memory on 192.168.0.14:55172 (size: 221.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 0.0 in stage 34.0 (TID 26) in 37 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 1.0 in stage 34.0 (TID 27) in 36 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:32 INFO YarnScheduler: Removed TaskSet 34.0, whose tasks have all completed, from pool
+16/04/16 02:00:32 INFO DAGScheduler: ResultStage 34 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35) finished in 0.038 s
+16/04/16 02:00:32 INFO DAGScheduler: Job 6 finished: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35, took 0.100733 s
+2016-04-16 02:00:32.242443: redistributing loss mass: 0.3753
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_22 stored as values in memory (estimated size 400.0 B, free 683.8 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_22_piece0 stored as bytes in memory (estimated size 99.0 B, free 683.9 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_22_piece0 in memory on 192.168.0.14:55166 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 22 from broadcast at PythonRDD.scala:430
+2016-04-16 02:00:32.247745: running iteration 8 ...
+16/04/16 02:00:32 INFO SparkContext: Starting job: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 0 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 1 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 2 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 3 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 4 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 5 is 159 bytes
+16/04/16 02:00:32 INFO DAGScheduler: Registering RDD 47 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33)
+16/04/16 02:00:32 INFO DAGScheduler: Got job 7 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35) with 2 output partitions
+16/04/16 02:00:32 INFO DAGScheduler: Final stage: ResultStage 43 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35)
+16/04/16 02:00:32 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 42)
+16/04/16 02:00:32 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 42)
+16/04/16 02:00:32 INFO DAGScheduler: Submitting ShuffleMapStage 42 (PairwiseRDD[47] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33), which has no missing parents
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_23 stored as values in memory (estimated size 10.2 KB, free 694.2 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_23_piece0 stored as bytes in memory (estimated size 6.0 KB, free 700.2 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_23_piece0 in memory on 192.168.0.14:55166 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 23 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:32 INFO DAGScheduler: Submitting 2 missing tasks from ShuffleMapStage 42 (PairwiseRDD[47] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33)
+16/04/16 02:00:32 INFO YarnScheduler: Adding task set 42.0 with 2 tasks
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 1.0 in stage 42.0 (TID 28, 192.168.0.14, partition 1,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 0.0 in stage 42.0 (TID 29, 192.168.0.14, partition 0,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_23_piece0 in memory on 192.168.0.14:55176 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_23_piece0 in memory on 192.168.0.14:55172 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_22_piece0 in memory on 192.168.0.14:55176 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_22_piece0 in memory on 192.168.0.14:55172 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 0.0 in stage 42.0 (TID 29) in 38 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 1.0 in stage 42.0 (TID 28) in 40 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:32 INFO YarnScheduler: Removed TaskSet 42.0, whose tasks have all completed, from pool
+16/04/16 02:00:32 INFO DAGScheduler: ShuffleMapStage 42 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33) finished in 0.041 s
+16/04/16 02:00:32 INFO DAGScheduler: looking for newly runnable stages
+16/04/16 02:00:32 INFO DAGScheduler: running: Set()
+16/04/16 02:00:32 INFO DAGScheduler: waiting: Set(ResultStage 43)
+16/04/16 02:00:32 INFO DAGScheduler: failed: Set()
+16/04/16 02:00:32 INFO DAGScheduler: Submitting ResultStage 43 (PythonRDD[51] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35), which has no missing parents
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_24 stored as values in memory (estimated size 7.1 KB, free 707.3 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_24_piece0 stored as bytes in memory (estimated size 4.1 KB, free 711.3 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_24_piece0 in memory on 192.168.0.14:55166 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 24 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:32 INFO DAGScheduler: Submitting 2 missing tasks from ResultStage 43 (PythonRDD[51] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35)
+16/04/16 02:00:32 INFO YarnScheduler: Adding task set 43.0 with 2 tasks
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 0.0 in stage 43.0 (TID 30, 192.168.0.14, partition 0,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 1.0 in stage 43.0 (TID 31, 192.168.0.14, partition 1,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_24_piece0 in memory on 192.168.0.14:55176 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_24_piece0 in memory on 192.168.0.14:55172 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 7 to 192.168.0.14:55175
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 7 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 7 to 192.168.0.14:55171
+16/04/16 02:00:32 INFO BlockManagerInfo: Added rdd_50_0 in memory on 192.168.0.14:55176 (size: 236.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added rdd_50_1 in memory on 192.168.0.14:55172 (size: 221.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 1.0 in stage 43.0 (TID 31) in 38 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 0.0 in stage 43.0 (TID 30) in 40 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:32 INFO YarnScheduler: Removed TaskSet 43.0, whose tasks have all completed, from pool
+16/04/16 02:00:32 INFO DAGScheduler: ResultStage 43 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35) finished in 0.041 s
+16/04/16 02:00:32 INFO DAGScheduler: Job 7 finished: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35, took 0.103589 s
+2016-04-16 02:00:32.383121: redistributing loss mass: 0.3812
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_25 stored as values in memory (estimated size 400.0 B, free 711.7 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_25_piece0 stored as bytes in memory (estimated size 99.0 B, free 711.8 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_25_piece0 in memory on 192.168.0.14:55166 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 25 from broadcast at PythonRDD.scala:430
+2016-04-16 02:00:32.387507: running iteration 9 ...
+16/04/16 02:00:32 INFO SparkContext: Starting job: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 0 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 1 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 2 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 3 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 4 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 5 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 6 is 159 bytes
+16/04/16 02:00:32 INFO DAGScheduler: Registering RDD 53 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33)
+16/04/16 02:00:32 INFO DAGScheduler: Got job 8 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35) with 2 output partitions
+16/04/16 02:00:32 INFO DAGScheduler: Final stage: ResultStage 53 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35)
+16/04/16 02:00:32 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 52)
+16/04/16 02:00:32 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 52)
+16/04/16 02:00:32 INFO DAGScheduler: Submitting ShuffleMapStage 52 (PairwiseRDD[53] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33), which has no missing parents
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_26 stored as values in memory (estimated size 10.2 KB, free 722.1 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_26_piece0 stored as bytes in memory (estimated size 6.0 KB, free 728.1 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_26_piece0 in memory on 192.168.0.14:55166 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 26 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:32 INFO DAGScheduler: Submitting 2 missing tasks from ShuffleMapStage 52 (PairwiseRDD[53] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33)
+16/04/16 02:00:32 INFO YarnScheduler: Adding task set 52.0 with 2 tasks
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 1.0 in stage 52.0 (TID 32, 192.168.0.14, partition 1,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 0.0 in stage 52.0 (TID 33, 192.168.0.14, partition 0,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_26_piece0 in memory on 192.168.0.14:55172 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_26_piece0 in memory on 192.168.0.14:55176 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_25_piece0 in memory on 192.168.0.14:55172 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_25_piece0 in memory on 192.168.0.14:55176 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 0.0 in stage 52.0 (TID 33) in 38 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 1.0 in stage 52.0 (TID 32) in 38 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:32 INFO YarnScheduler: Removed TaskSet 52.0, whose tasks have all completed, from pool
+16/04/16 02:00:32 INFO DAGScheduler: ShuffleMapStage 52 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33) finished in 0.039 s
+16/04/16 02:00:32 INFO DAGScheduler: looking for newly runnable stages
+16/04/16 02:00:32 INFO DAGScheduler: running: Set()
+16/04/16 02:00:32 INFO DAGScheduler: waiting: Set(ResultStage 53)
+16/04/16 02:00:32 INFO DAGScheduler: failed: Set()
+16/04/16 02:00:32 INFO DAGScheduler: Submitting ResultStage 53 (PythonRDD[57] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35), which has no missing parents
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_27 stored as values in memory (estimated size 7.1 KB, free 735.1 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_27_piece0 stored as bytes in memory (estimated size 4.1 KB, free 739.2 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_27_piece0 in memory on 192.168.0.14:55166 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 27 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:32 INFO DAGScheduler: Submitting 2 missing tasks from ResultStage 53 (PythonRDD[57] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35)
+16/04/16 02:00:32 INFO YarnScheduler: Adding task set 53.0 with 2 tasks
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 0.0 in stage 53.0 (TID 34, 192.168.0.14, partition 0,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 1.0 in stage 53.0 (TID 35, 192.168.0.14, partition 1,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_27_piece0 in memory on 192.168.0.14:55176 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_27_piece0 in memory on 192.168.0.14:55172 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 8 to 192.168.0.14:55175
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 8 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 8 to 192.168.0.14:55171
+16/04/16 02:00:32 INFO BlockManagerInfo: Added rdd_56_1 in memory on 192.168.0.14:55176 (size: 221.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added rdd_56_0 in memory on 192.168.0.14:55172 (size: 236.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 0.0 in stage 53.0 (TID 34) in 38 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 1.0 in stage 53.0 (TID 35) in 37 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:32 INFO YarnScheduler: Removed TaskSet 53.0, whose tasks have all completed, from pool
+16/04/16 02:00:32 INFO DAGScheduler: ResultStage 53 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35) finished in 0.038 s
+16/04/16 02:00:32 INFO DAGScheduler: Job 8 finished: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35, took 0.100237 s
+2016-04-16 02:00:32.519505: redistributing loss mass: 0.3659
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_28 stored as values in memory (estimated size 400.0 B, free 739.6 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_28_piece0 stored as bytes in memory (estimated size 99.0 B, free 739.7 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_28_piece0 in memory on 192.168.0.14:55166 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 28 from broadcast at PythonRDD.scala:430
+2016-04-16 02:00:32.523490: running iteration 10 ...
+16/04/16 02:00:32 INFO SparkContext: Starting job: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 0 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 1 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 2 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 3 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 4 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 5 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 6 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 7 is 159 bytes
+16/04/16 02:00:32 INFO DAGScheduler: Registering RDD 59 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33)
+16/04/16 02:00:32 INFO DAGScheduler: Got job 9 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35) with 2 output partitions
+16/04/16 02:00:32 INFO DAGScheduler: Final stage: ResultStage 64 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35)
+16/04/16 02:00:32 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 63)
+16/04/16 02:00:32 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 63)
+16/04/16 02:00:32 INFO DAGScheduler: Submitting ShuffleMapStage 63 (PairwiseRDD[59] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33), which has no missing parents
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_29 stored as values in memory (estimated size 10.2 KB, free 749.9 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_29_piece0 stored as bytes in memory (estimated size 6.0 KB, free 755.9 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_29_piece0 in memory on 192.168.0.14:55166 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 29 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:32 INFO DAGScheduler: Submitting 2 missing tasks from ShuffleMapStage 63 (PairwiseRDD[59] at reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33)
+16/04/16 02:00:32 INFO YarnScheduler: Adding task set 63.0 with 2 tasks
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 0.0 in stage 63.0 (TID 36, 192.168.0.14, partition 0,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 1.0 in stage 63.0 (TID 37, 192.168.0.14, partition 1,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_29_piece0 in memory on 192.168.0.14:55176 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_29_piece0 in memory on 192.168.0.14:55172 (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_28_piece0 in memory on 192.168.0.14:55176 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_28_piece0 in memory on 192.168.0.14:55172 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 1.0 in stage 63.0 (TID 37) in 35 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 0.0 in stage 63.0 (TID 36) in 37 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:32 INFO YarnScheduler: Removed TaskSet 63.0, whose tasks have all completed, from pool
+16/04/16 02:00:32 INFO DAGScheduler: ShuffleMapStage 63 (reduceByKey at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:33) finished in 0.038 s
+16/04/16 02:00:32 INFO DAGScheduler: looking for newly runnable stages
+16/04/16 02:00:32 INFO DAGScheduler: running: Set()
+16/04/16 02:00:32 INFO DAGScheduler: waiting: Set(ResultStage 64)
+16/04/16 02:00:32 INFO DAGScheduler: failed: Set()
+16/04/16 02:00:32 INFO DAGScheduler: Submitting ResultStage 64 (PythonRDD[63] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35), which has no missing parents
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_30 stored as values in memory (estimated size 7.1 KB, free 763.0 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_30_piece0 stored as bytes in memory (estimated size 4.1 KB, free 767.1 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_30_piece0 in memory on 192.168.0.14:55166 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 30 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:32 INFO DAGScheduler: Submitting 2 missing tasks from ResultStage 64 (PythonRDD[63] at count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35)
+16/04/16 02:00:32 INFO YarnScheduler: Adding task set 64.0 with 2 tasks
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 0.0 in stage 64.0 (TID 38, 192.168.0.14, partition 0,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 1.0 in stage 64.0 (TID 39, 192.168.0.14, partition 1,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_15_piece0 on 192.168.0.14:55166 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_30_piece0 in memory on 192.168.0.14:55176 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_30_piece0 in memory on 192.168.0.14:55172 (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_15_piece0 on 192.168.0.14:55176 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_15_piece0 on 192.168.0.14:55172 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_27_piece0 on 192.168.0.14:55166 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_27_piece0 on 192.168.0.14:55176 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 9 to 192.168.0.14:55175
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 9 is 159 bytes
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_27_piece0 on 192.168.0.14:55172 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 9 to 192.168.0.14:55171
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_26_piece0 on 192.168.0.14:55166 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_26_piece0 on 192.168.0.14:55176 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_26_piece0 on 192.168.0.14:55172 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added rdd_62_0 in memory on 192.168.0.14:55176 (size: 238.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added rdd_62_1 in memory on 192.168.0.14:55172 (size: 221.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_24_piece0 on 192.168.0.14:55166 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_24_piece0 on 192.168.0.14:55176 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_24_piece0 on 192.168.0.14:55172 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 0.0 in stage 64.0 (TID 38) in 47 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 1.0 in stage 64.0 (TID 39) in 47 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:32 INFO YarnScheduler: Removed TaskSet 64.0, whose tasks have all completed, from pool
+16/04/16 02:00:32 INFO DAGScheduler: ResultStage 64 (count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35) finished in 0.048 s
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_23_piece0 on 192.168.0.14:55166 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO DAGScheduler: Job 9 finished: count at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:35, took 0.147673 s
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_23_piece0 on 192.168.0.14:55176 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_23_piece0 on 192.168.0.14:55172 in memory (size: 6.0 KB, free: 511.4 MB)
+2016-04-16 02:00:32.710812: redistributing loss mass: 0.3660
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_21_piece0 on 192.168.0.14:55166 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_31 stored as values in memory (estimated size 400.0 B, free 697.5 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_31_piece0 stored as bytes in memory (estimated size 99.0 B, free 690.5 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_21_piece0 on 192.168.0.14:55176 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_31_piece0 in memory on 192.168.0.14:55166 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_21_piece0 on 192.168.0.14:55172 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 31 from broadcast at PythonRDD.scala:430
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_20_piece0 on 192.168.0.14:55166 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_20_piece0 on 192.168.0.14:55176 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_20_piece0 on 192.168.0.14:55172 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_18_piece0 on 192.168.0.14:55166 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_18_piece0 on 192.168.0.14:55176 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_18_piece0 on 192.168.0.14:55172 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Starting job: aggregate at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:40
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 0 is 159 bytes
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_17_piece0 on 192.168.0.14:55166 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 1 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 2 is 159 bytes
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_17_piece0 on 192.168.0.14:55172 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 3 is 159 bytes
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_17_piece0 on 192.168.0.14:55176 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 4 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 5 is 159 bytes
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_14_piece0 on 192.168.0.14:55166 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 6 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 7 is 159 bytes
+16/04/16 02:00:32 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 8 is 159 bytes
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_14_piece0 on 192.168.0.14:55176 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_14_piece0 on 192.168.0.14:55172 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO DAGScheduler: Got job 10 (aggregate at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:40) with 2 output partitions
+16/04/16 02:00:32 INFO DAGScheduler: Final stage: ResultStage 75 (aggregate at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:40)
+16/04/16 02:00:32 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 74)
+16/04/16 02:00:32 INFO DAGScheduler: Missing parents: List()
+16/04/16 02:00:32 INFO DAGScheduler: Submitting ResultStage 75 (PythonRDD[64] at aggregate at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:40), which has no missing parents
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_12_piece0 on 192.168.0.14:55166 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_32 stored as values in memory (estimated size 7.9 KB, free 627.4 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_32_piece0 stored as bytes in memory (estimated size 4.7 KB, free 632.0 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_12_piece0 on 192.168.0.14:55176 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_32_piece0 in memory on 192.168.0.14:55166 (size: 4.7 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_12_piece0 on 192.168.0.14:55172 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 32 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:32 INFO DAGScheduler: Submitting 2 missing tasks from ResultStage 75 (PythonRDD[64] at aggregate at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:40)
+16/04/16 02:00:32 INFO YarnScheduler: Adding task set 75.0 with 2 tasks
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 1.0 in stage 75.0 (TID 40, 192.168.0.14, partition 1,PROCESS_LOCAL, 1894 bytes)
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 0.0 in stage 75.0 (TID 41, 192.168.0.14, partition 0,PROCESS_LOCAL, 1894 bytes)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_11_piece0 on 192.168.0.14:55166 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_11_piece0 on 192.168.0.14:55176 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_11_piece0 on 192.168.0.14:55172 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_9_piece0 on 192.168.0.14:55166 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_9_piece0 on 192.168.0.14:55176 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_9_piece0 on 192.168.0.14:55172 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_32_piece0 in memory on 192.168.0.14:55176 (size: 4.7 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_32_piece0 in memory on 192.168.0.14:55172 (size: 4.7 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_8_piece0 on 192.168.0.14:55166 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_8_piece0 on 192.168.0.14:55176 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_8_piece0 on 192.168.0.14:55172 in memory (size: 6.0 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_6_piece0 on 192.168.0.14:55166 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_6_piece0 on 192.168.0.14:55176 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_6_piece0 on 192.168.0.14:55172 in memory (size: 4.1 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_31_piece0 in memory on 192.168.0.14:55176 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_31_piece0 in memory on 192.168.0.14:55172 (size: 99.0 B, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_5_piece0 on 192.168.0.14:55166 in memory (size: 6.3 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_5_piece0 on 192.168.0.14:55176 in memory (size: 6.3 KB, free: 511.5 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_5_piece0 on 192.168.0.14:55172 in memory (size: 6.3 KB, free: 511.5 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_3_piece0 on 192.168.0.14:55166 in memory (size: 4.4 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 0.0 in stage 75.0 (TID 41) in 41 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 1.0 in stage 75.0 (TID 40) in 42 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:32 INFO YarnScheduler: Removed TaskSet 75.0, whose tasks have all completed, from pool
+16/04/16 02:00:32 INFO DAGScheduler: ResultStage 75 (aggregate at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:40) finished in 0.042 s
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_3_piece0 on 192.168.0.14:55176 in memory (size: 4.4 KB, free: 511.5 MB)
+16/04/16 02:00:32 INFO DAGScheduler: Job 10 finished: aggregate at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:40, took 0.065384 s
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_3_piece0 on 192.168.0.14:55172 in memory (size: 4.4 KB, free: 511.5 MB)
+2016-04-16 02:00:32.796303: normalized weight of the graph: 1.0000
+2016-04-16 02:00:32.796374: PageRanking completed in 0.06 minutes.
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_2_piece0 on 192.168.0.14:55166 in memory (size: 5.4 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_2_piece0 on 192.168.0.14:55176 in memory (size: 5.4 KB, free: 511.5 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Removed broadcast_2_piece0 on 192.168.0.14:55172 in memory (size: 5.4 KB, free: 511.5 MB)
+16/04/16 02:00:32 INFO SparkContext: Starting job: sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:44
+16/04/16 02:00:32 INFO DAGScheduler: Got job 11 (sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:44) with 2 output partitions
+16/04/16 02:00:32 INFO DAGScheduler: Final stage: ResultStage 86 (sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:44)
+16/04/16 02:00:32 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 85)
+16/04/16 02:00:32 INFO DAGScheduler: Missing parents: List()
+16/04/16 02:00:32 INFO DAGScheduler: Submitting ResultStage 86 (PythonRDD[65] at sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:44), which has no missing parents
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_33 stored as values in memory (estimated size 9.0 KB, free 542.9 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_33_piece0 stored as bytes in memory (estimated size 5.2 KB, free 548.1 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_33_piece0 in memory on 192.168.0.14:55166 (size: 5.2 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 33 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:32 INFO DAGScheduler: Submitting 2 missing tasks from ResultStage 86 (PythonRDD[65] at sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:44)
+16/04/16 02:00:32 INFO YarnScheduler: Adding task set 86.0 with 2 tasks
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 1.0 in stage 86.0 (TID 42, 192.168.0.14, partition 1,PROCESS_LOCAL, 1894 bytes)
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 0.0 in stage 86.0 (TID 43, 192.168.0.14, partition 0,PROCESS_LOCAL, 1894 bytes)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_33_piece0 in memory on 192.168.0.14:55172 (size: 5.2 KB, free: 511.5 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_33_piece0 in memory on 192.168.0.14:55176 (size: 5.2 KB, free: 511.5 MB)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 0.0 in stage 86.0 (TID 43) in 22 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 1.0 in stage 86.0 (TID 42) in 23 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:32 INFO YarnScheduler: Removed TaskSet 86.0, whose tasks have all completed, from pool
+16/04/16 02:00:32 INFO DAGScheduler: ResultStage 86 (sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:44) finished in 0.023 s
+16/04/16 02:00:32 INFO DAGScheduler: Job 11 finished: sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:44, took 0.035922 s
+16/04/16 02:00:32 INFO SparkContext: Starting job: sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:44
+16/04/16 02:00:32 INFO DAGScheduler: Got job 12 (sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:44) with 2 output partitions
+16/04/16 02:00:32 INFO DAGScheduler: Final stage: ResultStage 97 (sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:44)
+16/04/16 02:00:32 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 96)
+16/04/16 02:00:32 INFO DAGScheduler: Missing parents: List()
+16/04/16 02:00:32 INFO DAGScheduler: Submitting ResultStage 97 (PythonRDD[66] at sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:44), which has no missing parents
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_34 stored as values in memory (estimated size 8.7 KB, free 556.8 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_34_piece0 stored as bytes in memory (estimated size 5.2 KB, free 562.0 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_34_piece0 in memory on 192.168.0.14:55166 (size: 5.2 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 34 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:32 INFO DAGScheduler: Submitting 2 missing tasks from ResultStage 97 (PythonRDD[66] at sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:44)
+16/04/16 02:00:32 INFO YarnScheduler: Adding task set 97.0 with 2 tasks
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 0.0 in stage 97.0 (TID 44, 192.168.0.14, partition 0,PROCESS_LOCAL, 1894 bytes)
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 1.0 in stage 97.0 (TID 45, 192.168.0.14, partition 1,PROCESS_LOCAL, 1894 bytes)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_34_piece0 in memory on 192.168.0.14:55176 (size: 5.2 KB, free: 511.5 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_34_piece0 in memory on 192.168.0.14:55172 (size: 5.2 KB, free: 511.5 MB)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 0.0 in stage 97.0 (TID 44) in 22 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 1.0 in stage 97.0 (TID 45) in 21 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:32 INFO YarnScheduler: Removed TaskSet 97.0, whose tasks have all completed, from pool
+16/04/16 02:00:32 INFO DAGScheduler: ResultStage 97 (sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:44) finished in 0.022 s
+16/04/16 02:00:32 INFO DAGScheduler: Job 12 finished: sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:44, took 0.033955 s
+16/04/16 02:00:32 INFO SparkContext: Starting job: runJob at PythonRDD.scala:393
+16/04/16 02:00:32 INFO DAGScheduler: Registering RDD 68 (sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:44)
+16/04/16 02:00:32 INFO DAGScheduler: Got job 13 (runJob at PythonRDD.scala:393) with 1 output partitions
+16/04/16 02:00:32 INFO DAGScheduler: Final stage: ResultStage 109 (runJob at PythonRDD.scala:393)
+16/04/16 02:00:32 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 108)
+16/04/16 02:00:32 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 108)
+16/04/16 02:00:32 INFO DAGScheduler: Submitting ShuffleMapStage 108 (PairwiseRDD[68] at sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:44), which has no missing parents
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_35 stored as values in memory (estimated size 9.6 KB, free 571.6 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_35_piece0 stored as bytes in memory (estimated size 5.8 KB, free 577.4 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_35_piece0 in memory on 192.168.0.14:55166 (size: 5.8 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 35 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:32 INFO DAGScheduler: Submitting 2 missing tasks from ShuffleMapStage 108 (PairwiseRDD[68] at sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:44)
+16/04/16 02:00:32 INFO YarnScheduler: Adding task set 108.0 with 2 tasks
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 1.0 in stage 108.0 (TID 46, 192.168.0.14, partition 1,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 0.0 in stage 108.0 (TID 47, 192.168.0.14, partition 0,PROCESS_LOCAL, 1883 bytes)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_35_piece0 in memory on 192.168.0.14:55172 (size: 5.8 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_35_piece0 in memory on 192.168.0.14:55176 (size: 5.8 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 0.0 in stage 108.0 (TID 47) in 23 ms on 192.168.0.14 (1/2)
+16/04/16 02:00:32 INFO TaskSetManager: Finished task 1.0 in stage 108.0 (TID 46) in 62 ms on 192.168.0.14 (2/2)
+16/04/16 02:00:32 INFO YarnScheduler: Removed TaskSet 108.0, whose tasks have all completed, from pool
+16/04/16 02:00:32 INFO DAGScheduler: ShuffleMapStage 108 (sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:44) finished in 0.062 s
+16/04/16 02:00:32 INFO DAGScheduler: looking for newly runnable stages
+16/04/16 02:00:32 INFO DAGScheduler: running: Set()
+16/04/16 02:00:32 INFO DAGScheduler: waiting: Set(ResultStage 109)
+16/04/16 02:00:32 INFO DAGScheduler: failed: Set()
+16/04/16 02:00:32 INFO DAGScheduler: Submitting ResultStage 109 (PythonRDD[71] at RDD at PythonRDD.scala:43), which has no missing parents
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_36 stored as values in memory (estimated size 5.9 KB, free 583.3 KB)
+16/04/16 02:00:32 INFO MemoryStore: Block broadcast_36_piece0 stored as bytes in memory (estimated size 3.6 KB, free 587.0 KB)
+16/04/16 02:00:32 INFO BlockManagerInfo: Added broadcast_36_piece0 in memory on 192.168.0.14:55166 (size: 3.6 KB, free: 511.4 MB)
+16/04/16 02:00:32 INFO SparkContext: Created broadcast 36 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:32 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 109 (PythonRDD[71] at RDD at PythonRDD.scala:43)
+16/04/16 02:00:32 INFO YarnScheduler: Adding task set 109.0 with 1 tasks
+16/04/16 02:00:32 INFO TaskSetManager: Starting task 0.0 in stage 109.0 (TID 48, 192.168.0.14, partition 0,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_36_piece0 in memory on 192.168.0.14:55176 (size: 3.6 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 10 to 192.168.0.14:55175
+16/04/16 02:00:33 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 10 is 159 bytes
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 0.0 in stage 109.0 (TID 48) in 67 ms on 192.168.0.14 (1/1)
+16/04/16 02:00:33 INFO YarnScheduler: Removed TaskSet 109.0, whose tasks have all completed, from pool
+16/04/16 02:00:33 INFO DAGScheduler: ResultStage 109 (runJob at PythonRDD.scala:393) finished in 0.067 s
+16/04/16 02:00:33 INFO DAGScheduler: Job 13 finished: runJob at PythonRDD.scala:393, took 0.152774 s
+16/04/16 02:00:33 INFO SparkContext: Starting job: runJob at PythonRDD.scala:393
+16/04/16 02:00:33 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 0 is 159 bytes
+16/04/16 02:00:33 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 1 is 159 bytes
+16/04/16 02:00:33 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 2 is 159 bytes
+16/04/16 02:00:33 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 3 is 159 bytes
+16/04/16 02:00:33 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 4 is 159 bytes
+16/04/16 02:00:33 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 5 is 159 bytes
+16/04/16 02:00:33 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 6 is 159 bytes
+16/04/16 02:00:33 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 7 is 159 bytes
+16/04/16 02:00:33 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 8 is 159 bytes
+16/04/16 02:00:33 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 9 is 159 bytes
+16/04/16 02:00:33 INFO DAGScheduler: Got job 14 (runJob at PythonRDD.scala:393) with 1 output partitions
+16/04/16 02:00:33 INFO DAGScheduler: Final stage: ResultStage 121 (runJob at PythonRDD.scala:393)
+16/04/16 02:00:33 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 120)
+16/04/16 02:00:33 INFO DAGScheduler: Missing parents: List()
+16/04/16 02:00:33 INFO DAGScheduler: Submitting ResultStage 121 (PythonRDD[72] at RDD at PythonRDD.scala:43), which has no missing parents
+16/04/16 02:00:33 INFO MemoryStore: Block broadcast_37 stored as values in memory (estimated size 5.9 KB, free 592.9 KB)
+16/04/16 02:00:33 INFO MemoryStore: Block broadcast_37_piece0 stored as bytes in memory (estimated size 3.6 KB, free 596.5 KB)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_37_piece0 in memory on 192.168.0.14:55166 (size: 3.6 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO SparkContext: Created broadcast 37 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:33 INFO DAGScheduler: Submitting 1 missing tasks from ResultStage 121 (PythonRDD[72] at RDD at PythonRDD.scala:43)
+16/04/16 02:00:33 INFO YarnScheduler: Adding task set 121.0 with 1 tasks
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 0.0 in stage 121.0 (TID 49, 192.168.0.14, partition 1,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_37_piece0 in memory on 192.168.0.14:55176 (size: 3.6 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 0.0 in stage 121.0 (TID 49) in 18 ms on 192.168.0.14 (1/1)
+16/04/16 02:00:33 INFO YarnScheduler: Removed TaskSet 121.0, whose tasks have all completed, from pool
+16/04/16 02:00:33 INFO DAGScheduler: ResultStage 121 (runJob at PythonRDD.scala:393) finished in 0.018 s
+16/04/16 02:00:33 INFO DAGScheduler: Job 14 finished: runJob at PythonRDD.scala:393, took 0.035054 s
+16/04/16 02:00:33 INFO FileInputFormat: Total input paths to process : 1
+16/04/16 02:00:33 INFO SparkContext: Starting job: sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:47
+16/04/16 02:00:33 INFO DAGScheduler: Registering RDD 78 (join at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:45)
+16/04/16 02:00:33 INFO DAGScheduler: Got job 15 (sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:47) with 4 output partitions
+16/04/16 02:00:33 INFO DAGScheduler: Final stage: ResultStage 123 (sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:47)
+16/04/16 02:00:33 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 122)
+16/04/16 02:00:33 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 122)
+16/04/16 02:00:33 INFO DAGScheduler: Submitting ShuffleMapStage 122 (PairwiseRDD[78] at join at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:45), which has no missing parents
+16/04/16 02:00:33 INFO MemoryStore: Block broadcast_38 stored as values in memory (estimated size 11.4 KB, free 607.9 KB)
+16/04/16 02:00:33 INFO MemoryStore: Block broadcast_38_piece0 stored as bytes in memory (estimated size 6.3 KB, free 614.2 KB)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_38_piece0 in memory on 192.168.0.14:55166 (size: 6.3 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO SparkContext: Created broadcast 38 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:33 INFO DAGScheduler: Submitting 4 missing tasks from ShuffleMapStage 122 (PairwiseRDD[78] at join at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:45)
+16/04/16 02:00:33 INFO YarnScheduler: Adding task set 122.0 with 4 tasks
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 2.0 in stage 122.0 (TID 50, 192.168.0.14, partition 2,PROCESS_LOCAL, 2255 bytes)
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 3.0 in stage 122.0 (TID 51, 192.168.0.14, partition 3,PROCESS_LOCAL, 2302 bytes)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_38_piece0 in memory on 192.168.0.14:55176 (size: 6.3 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_38_piece0 in memory on 192.168.0.14:55172 (size: 6.3 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 0.0 in stage 122.0 (TID 52, 192.168.0.14, partition 0,RACK_LOCAL, 2248 bytes)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 2.0 in stage 122.0 (TID 50) in 48 ms on 192.168.0.14 (1/4)
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 1.0 in stage 122.0 (TID 53, 192.168.0.14, partition 1,RACK_LOCAL, 2248 bytes)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 3.0 in stage 122.0 (TID 51) in 48 ms on 192.168.0.14 (2/4)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on 192.168.0.14:55172 (size: 19.3 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_1_piece0 in memory on 192.168.0.14:55176 (size: 19.3 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 0.0 in stage 122.0 (TID 52) in 94 ms on 192.168.0.14 (3/4)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 1.0 in stage 122.0 (TID 53) in 94 ms on 192.168.0.14 (4/4)
+16/04/16 02:00:33 INFO YarnScheduler: Removed TaskSet 122.0, whose tasks have all completed, from pool
+16/04/16 02:00:33 INFO DAGScheduler: ShuffleMapStage 122 (join at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:45) finished in 0.143 s
+16/04/16 02:00:33 INFO DAGScheduler: looking for newly runnable stages
+16/04/16 02:00:33 INFO DAGScheduler: running: Set()
+16/04/16 02:00:33 INFO DAGScheduler: waiting: Set(ResultStage 123)
+16/04/16 02:00:33 INFO DAGScheduler: failed: Set()
+16/04/16 02:00:33 INFO DAGScheduler: Submitting ResultStage 123 (PythonRDD[81] at sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:47), which has no missing parents
+16/04/16 02:00:33 INFO MemoryStore: Block broadcast_39 stored as values in memory (estimated size 9.4 KB, free 623.5 KB)
+16/04/16 02:00:33 INFO MemoryStore: Block broadcast_39_piece0 stored as bytes in memory (estimated size 5.4 KB, free 628.9 KB)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_39_piece0 in memory on 192.168.0.14:55166 (size: 5.4 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO SparkContext: Created broadcast 39 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:33 INFO DAGScheduler: Submitting 4 missing tasks from ResultStage 123 (PythonRDD[81] at sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:47)
+16/04/16 02:00:33 INFO YarnScheduler: Adding task set 123.0 with 4 tasks
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 0.0 in stage 123.0 (TID 54, 192.168.0.14, partition 0,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 1.0 in stage 123.0 (TID 55, 192.168.0.14, partition 1,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_39_piece0 in memory on 192.168.0.14:55176 (size: 5.4 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_39_piece0 in memory on 192.168.0.14:55172 (size: 5.4 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 11 to 192.168.0.14:55175
+16/04/16 02:00:33 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 11 is 178 bytes
+16/04/16 02:00:33 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 11 to 192.168.0.14:55171
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 2.0 in stage 123.0 (TID 56, 192.168.0.14, partition 2,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 0.0 in stage 123.0 (TID 54) in 22 ms on 192.168.0.14 (1/4)
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 3.0 in stage 123.0 (TID 57, 192.168.0.14, partition 3,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 1.0 in stage 123.0 (TID 55) in 23 ms on 192.168.0.14 (2/4)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 3.0 in stage 123.0 (TID 57) in 15 ms on 192.168.0.14 (3/4)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 2.0 in stage 123.0 (TID 56) in 17 ms on 192.168.0.14 (4/4)
+16/04/16 02:00:33 INFO YarnScheduler: Removed TaskSet 123.0, whose tasks have all completed, from pool
+16/04/16 02:00:33 INFO DAGScheduler: ResultStage 123 (sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:47) finished in 0.040 s
+16/04/16 02:00:33 INFO DAGScheduler: Job 15 finished: sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:47, took 0.202969 s
+16/04/16 02:00:33 INFO SparkContext: Starting job: sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:47
+16/04/16 02:00:33 INFO DAGScheduler: Got job 16 (sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:47) with 4 output partitions
+16/04/16 02:00:33 INFO DAGScheduler: Final stage: ResultStage 125 (sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:47)
+16/04/16 02:00:33 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 124)
+16/04/16 02:00:33 INFO DAGScheduler: Missing parents: List()
+16/04/16 02:00:33 INFO DAGScheduler: Submitting ResultStage 125 (PythonRDD[82] at sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:47), which has no missing parents
+16/04/16 02:00:33 INFO MemoryStore: Block broadcast_40 stored as values in memory (estimated size 9.2 KB, free 638.1 KB)
+16/04/16 02:00:33 INFO MemoryStore: Block broadcast_40_piece0 stored as bytes in memory (estimated size 5.4 KB, free 643.5 KB)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_40_piece0 in memory on 192.168.0.14:55166 (size: 5.4 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO SparkContext: Created broadcast 40 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:33 INFO DAGScheduler: Submitting 4 missing tasks from ResultStage 125 (PythonRDD[82] at sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:47)
+16/04/16 02:00:33 INFO YarnScheduler: Adding task set 125.0 with 4 tasks
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 0.0 in stage 125.0 (TID 58, 192.168.0.14, partition 0,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 1.0 in stage 125.0 (TID 59, 192.168.0.14, partition 1,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_40_piece0 in memory on 192.168.0.14:55176 (size: 5.4 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_40_piece0 in memory on 192.168.0.14:55172 (size: 5.4 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 2.0 in stage 125.0 (TID 60, 192.168.0.14, partition 2,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 3.0 in stage 125.0 (TID 61, 192.168.0.14, partition 3,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 0.0 in stage 125.0 (TID 58) in 25 ms on 192.168.0.14 (1/4)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 1.0 in stage 125.0 (TID 59) in 26 ms on 192.168.0.14 (2/4)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 3.0 in stage 125.0 (TID 61) in 15 ms on 192.168.0.14 (3/4)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 2.0 in stage 125.0 (TID 60) in 17 ms on 192.168.0.14 (4/4)
+16/04/16 02:00:33 INFO YarnScheduler: Removed TaskSet 125.0, whose tasks have all completed, from pool
+16/04/16 02:00:33 INFO DAGScheduler: ResultStage 125 (sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:47) finished in 0.041 s
+16/04/16 02:00:33 INFO DAGScheduler: Job 16 finished: sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:47, took 0.048879 s
+16/04/16 02:00:33 INFO deprecation: mapred.tip.id is deprecated. Instead, use mapreduce.task.id
+16/04/16 02:00:33 INFO deprecation: mapred.task.id is deprecated. Instead, use mapreduce.task.attempt.id
+16/04/16 02:00:33 INFO deprecation: mapred.task.is.map is deprecated. Instead, use mapreduce.task.ismap
+16/04/16 02:00:33 INFO deprecation: mapred.task.partition is deprecated. Instead, use mapreduce.task.partition
+16/04/16 02:00:33 INFO deprecation: mapred.job.id is deprecated. Instead, use mapreduce.job.id
+16/04/16 02:00:33 INFO SparkContext: Starting job: saveAsTextFile at NativeMethodAccessorImpl.java:-2
+16/04/16 02:00:33 INFO DAGScheduler: Registering RDD 84 (sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:47)
+16/04/16 02:00:33 INFO DAGScheduler: Got job 17 (saveAsTextFile at NativeMethodAccessorImpl.java:-2) with 4 output partitions
+16/04/16 02:00:33 INFO DAGScheduler: Final stage: ResultStage 128 (saveAsTextFile at NativeMethodAccessorImpl.java:-2)
+16/04/16 02:00:33 INFO DAGScheduler: Parents of final stage: List(ShuffleMapStage 127)
+16/04/16 02:00:33 INFO DAGScheduler: Missing parents: List(ShuffleMapStage 127)
+16/04/16 02:00:33 INFO DAGScheduler: Submitting ShuffleMapStage 127 (PairwiseRDD[84] at sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:47), which has no missing parents
+16/04/16 02:00:33 INFO MemoryStore: Block broadcast_41 stored as values in memory (estimated size 10.2 KB, free 653.6 KB)
+16/04/16 02:00:33 INFO MemoryStore: Block broadcast_41_piece0 stored as bytes in memory (estimated size 6.1 KB, free 659.7 KB)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_41_piece0 in memory on 192.168.0.14:55166 (size: 6.1 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO SparkContext: Created broadcast 41 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:33 INFO DAGScheduler: Submitting 4 missing tasks from ShuffleMapStage 127 (PairwiseRDD[84] at sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:47)
+16/04/16 02:00:33 INFO YarnScheduler: Adding task set 127.0 with 4 tasks
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 0.0 in stage 127.0 (TID 62, 192.168.0.14, partition 0,NODE_LOCAL, 1883 bytes)
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 1.0 in stage 127.0 (TID 63, 192.168.0.14, partition 1,NODE_LOCAL, 1883 bytes)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_41_piece0 in memory on 192.168.0.14:55176 (size: 6.1 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_41_piece0 in memory on 192.168.0.14:55172 (size: 6.1 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 2.0 in stage 127.0 (TID 64, 192.168.0.14, partition 2,NODE_LOCAL, 1883 bytes)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 0.0 in stage 127.0 (TID 62) in 26 ms on 192.168.0.14 (1/4)
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 3.0 in stage 127.0 (TID 65, 192.168.0.14, partition 3,NODE_LOCAL, 1883 bytes)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 1.0 in stage 127.0 (TID 63) in 25 ms on 192.168.0.14 (2/4)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 2.0 in stage 127.0 (TID 64) in 19 ms on 192.168.0.14 (3/4)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 3.0 in stage 127.0 (TID 65) in 20 ms on 192.168.0.14 (4/4)
+16/04/16 02:00:33 INFO YarnScheduler: Removed TaskSet 127.0, whose tasks have all completed, from pool
+16/04/16 02:00:33 INFO DAGScheduler: ShuffleMapStage 127 (sortBy at /Users/leiyang/GitHub/MIDS/W261/HW13-Questions/PageRankDriver.py:47) finished in 0.047 s
+16/04/16 02:00:33 INFO DAGScheduler: looking for newly runnable stages
+16/04/16 02:00:33 INFO DAGScheduler: running: Set()
+16/04/16 02:00:33 INFO DAGScheduler: waiting: Set(ResultStage 128)
+16/04/16 02:00:33 INFO DAGScheduler: failed: Set()
+16/04/16 02:00:33 INFO DAGScheduler: Submitting ResultStage 128 (MapPartitionsRDD[89] at saveAsTextFile at NativeMethodAccessorImpl.java:-2), which has no missing parents
+16/04/16 02:00:33 INFO MemoryStore: Block broadcast_42 stored as values in memory (estimated size 68.4 KB, free 728.1 KB)
+16/04/16 02:00:33 INFO MemoryStore: Block broadcast_42_piece0 stored as bytes in memory (estimated size 24.8 KB, free 752.9 KB)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_42_piece0 in memory on 192.168.0.14:55166 (size: 24.8 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO SparkContext: Created broadcast 42 from broadcast at DAGScheduler.scala:1006
+16/04/16 02:00:33 INFO DAGScheduler: Submitting 4 missing tasks from ResultStage 128 (MapPartitionsRDD[89] at saveAsTextFile at NativeMethodAccessorImpl.java:-2)
+16/04/16 02:00:33 INFO YarnScheduler: Adding task set 128.0 with 4 tasks
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 0.0 in stage 128.0 (TID 66, 192.168.0.14, partition 0,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 1.0 in stage 128.0 (TID 67, 192.168.0.14, partition 1,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_42_piece0 in memory on 192.168.0.14:55176 (size: 24.8 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO BlockManagerInfo: Added broadcast_42_piece0 in memory on 192.168.0.14:55172 (size: 24.8 KB, free: 511.4 MB)
+16/04/16 02:00:33 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 12 to 192.168.0.14:55175
+16/04/16 02:00:33 INFO MapOutputTrackerMaster: Size of output statuses for shuffle 12 is 173 bytes
+16/04/16 02:00:33 INFO MapOutputTrackerMasterEndpoint: Asked to send map output locations for shuffle 12 to 192.168.0.14:55171
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 2.0 in stage 128.0 (TID 68, 192.168.0.14, partition 2,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:33 INFO TaskSetManager: Starting task 3.0 in stage 128.0 (TID 69, 192.168.0.14, partition 3,NODE_LOCAL, 1894 bytes)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 0.0 in stage 128.0 (TID 66) in 96 ms on 192.168.0.14 (1/4)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 1.0 in stage 128.0 (TID 67) in 96 ms on 192.168.0.14 (2/4)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 3.0 in stage 128.0 (TID 69) in 54 ms on 192.168.0.14 (3/4)
+16/04/16 02:00:33 INFO TaskSetManager: Finished task 2.0 in stage 128.0 (TID 68) in 60 ms on 192.168.0.14 (4/4)
+16/04/16 02:00:33 INFO YarnScheduler: Removed TaskSet 128.0, whose tasks have all completed, from pool
+16/04/16 02:00:33 INFO DAGScheduler: ResultStage 128 (saveAsTextFile at NativeMethodAccessorImpl.java:-2) finished in 0.152 s
+16/04/16 02:00:33 INFO DAGScheduler: Job 17 finished: saveAsTextFile at NativeMethodAccessorImpl.java:-2, took 0.236704 s
+2016-04-16 02:00:33.760260: results saved, job completed!
+16/04/16 02:00:33 INFO SparkContext: Invoking stop() from shutdown hook
+16/04/16 02:00:33 INFO SparkUI: Stopped Spark web UI at http://192.168.0.14:4040
+16/04/16 02:00:33 INFO YarnClientSchedulerBackend: Shutting down all executors
+16/04/16 02:00:33 INFO YarnClientSchedulerBackend: Interrupting monitor thread
+16/04/16 02:00:33 INFO YarnClientSchedulerBackend: Asking each executor to shut down
+16/04/16 02:00:33 INFO YarnClientSchedulerBackend: Stopped
+16/04/16 02:00:33 INFO MapOutputTrackerMasterEndpoint: MapOutputTrackerMasterEndpoint stopped!
+16/04/16 02:00:33 INFO MemoryStore: MemoryStore cleared
+16/04/16 02:00:33 INFO BlockManager: BlockManager stopped
+16/04/16 02:00:33 INFO BlockManagerMaster: BlockManagerMaster stopped
+16/04/16 02:00:33 INFO OutputCommitCoordinator$OutputCommitCoordinatorEndpoint: OutputCommitCoordinator stopped!
+16/04/16 02:00:33 INFO SparkContext: Successfully stopped SparkContext
+16/04/16 02:00:33 INFO ShutdownHookManager: Shutdown hook called
+16/04/16 02:00:33 INFO ShutdownHookManager: Deleting directory /private/var/folders/tx/5ldq67q511q8wqwqkvptnxd00000gn/T/spark-2929f794-ce8b-4450-8641-75d288649cc8/pyspark-28efeae5-6947-4f98-a9b6-83a6e18f84e9
+16/04/16 02:00:33 INFO ShutdownHookManager: Deleting directory /private/var/folders/tx/5ldq67q511q8wqwqkvptnxd00000gn/T/spark-2929f794-ce8b-4450-8641-75d288649cc8
+16/04/16 02:00:33 INFO RemoteActorRefProvider$RemotingTerminator: Shutting down remote daemon.
+16/04/16 02:00:33 INFO RemoteActorRefProvider$RemotingTerminator: Remote daemon shut down; proceeding with flushing remote transports.
+Leis-MacBook-Pro:HW13-Questions leiyang$

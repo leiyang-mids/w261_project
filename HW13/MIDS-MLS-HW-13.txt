@@ -1,0 +1,240 @@
+===========================================================================
+===MIDS UC Berkeley, Machine Learning at Scale DATSCI W261 ASSIGNMENT #13===
+-----------------------
+V1.0 Final 4/14/2016  HW13
+-----------------------
+SPECIAL INSTURCTIONS: This can be a BIG group homework:
+
+ --- Group 2: (Wednesday 4:00PM-5:30PM)
+ --- Group 3: (Wednesday 6:30PM-8:00PM)
+ --- Group 4: (Tuesday 4PM-5:30PM)
+ 
+Submission deadline: Friday Week 14, 8AM (4/22/2016)
+
+=== IMPORTANT ===
+If possible try to complete HW13 using Zeppelin notebooks.
+
+Use Zeppelin viewer to share your notebooks
+https://www.zeppelinhub.com/viewer
+
+Here is a sample working Zeppelin notebook viewer link :
+
+https://www.zeppelinhub.com/viewer/notebooks/aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL21lYWJoaXNoZWtrdW1hci96ZXBwZWxpbl9ub3RlYm9va3MvbWFzdGVyLzJCSFZDRzJBRS9ub3RlLmpzb24
+
+This weeks homework is a BIG group exercise. 
+
+Please submit your homeworks (one per team) going forward via this form (and not thru the ISVC):
+
+https://docs.google.com/forms/d/1ZOr9RnIe_A06AcZDB6K1mJN4vrLeSmS2PD6Xm3eOiis/viewform?usp=send_form
+
+HW13 will need a cluster of computers. Please divide and conquer the workload!
+
+
+====================================================
+===HW 13.1: Spark implementation of basic PageRank===
+
+Write a basic Spark implementation of the iterative PageRank algorithm
+that takes sparse adjacency lists as input.
+Make sure that your implementation utilizes teleportation (1-damping/the number of nodes in the network), 
+and further, distributes the mass of dangling nodes with each iteration
+so that the output of each iteration is correctly normalized (sums to 1).
+[NOTE: The PageRank algorithm assumes that a random surfer (walker), starting from a random web page,
+chooses the next page to which it will move by clicking at random, with probability d,
+one of the hyperlinks in the current page. This probability is represented by a so-called
+‘damping factor’ d, where d ∈ (0, 1). Otherwise, with probability (1 − d), the surfer
+jumps to any web page in the network. If a page is a dangling end, meaning it has no
+outgoing hyperlinks, the random surfer selects an arbitrary web page from a uniform
+distribution and “teleports” to that page]
+
+In your Spark solution, please use broadcast variables and caching to make sure your code is as efficient as possible.
+
+
+As you build your code, use the test data
+
+s3://ucb-mids-mls-networks/PageRank-test.txt
+Or under the Data Subfolder for HW7 on Dropbox with the same file name. 
+(On Dropbox https://www.dropbox.com/sh/2c0k5adwz36lkcw/AAAAKsjQfF9uHfv-X9mCqr9wa?dl=0)
+
+with teleportation parameter set to 0.15 (1-d, where d, the damping factor is set to 0.85), and crosscheck
+your work with the true result, displayed in the first image
+in the Wikipedia article:
+
+https://en.wikipedia.org/wiki/PageRank
+
+and here for reference are the corresponding PageRank probabilities:
+
+A,0.033
+B,0.384
+C,0.343
+D,0.039
+E,0.081
+F,0.039
+G,0.016
+H,0.016
+I,0.016
+J,0.016
+K,0.016
+
+Run this experiment locally first. Report the local configuration that you used and how long in minutes and seconds it takes to complete your job.
+
+Repeat this experiment on AWS. Report the AWS cluster configuration that you used and how long in minutes and seconds it takes to complete your job. (in your notebook, cat the cluster config file)
+
+
+===================================================================
+===HW 13.2: Applying PageRank to the Wikipedia hyperlinks network===
+
+Run your Spark PageRank implementation on the Wikipedia dataset for 10 iterations,
+and display the top 100 ranked nodes (with alpha = 0.85).
+
+Run your PageRank implementation on the Wikipedia dataset for 50 iterations,
+and display the top 100 ranked nodes (with teleportation factor of 0.15). 
+Plot the pagerank values for the top 100 pages resulting from the 50 iterations run. Then plot the pagerank values for the same 100 pages that resulted from the 10 iterations run.  Comment on your findings.  Have the top 100 ranked pages changed? Have the pagerank values changed? Explain.
+
+Report the AWS cluster configuration that you used and how long in minutes and seconds it takes to complete your job.
+
+NOTE: ====  English Wikipedia hyperlink network.data ====
+The dataset is available via Dropbox at:
+
+https://www.dropbox.com/sh/2c0k5adwz36lkcw/AAAAKsjQfF9uHfv-X9mCqr9wa?dl=0
+
+on S3 at  s3://ucb-mids-mls-networks/wikipedia/
+-- s3://ucb-mids-mls-networks/wikipedia/all-pages-indexed-out.txt # Graph
+-- s3://ucb-mids-mls-networks/wikipedia/indices.txt               # Page titles and page Ids
+
+The dataset is built from the Sept. 2015 XML snapshot of English Wikipedia.
+For this directed network, a link between articles: 
+
+A -> B
+
+is defined by the existence of a hyperlink in A pointing to B.
+This network also exists in the indexed format:
+
+Data: s3://ucb-mids-mls-networks/wikipedia/all-pages-indexed-out.txt
+Data: s3://ucb-mids-mls-networks/wikipedia/all-pages-indexed-in.txt
+Data: s3://ucb-mids-mls-networks/wikipedia/indices.txt
+
+but has an index with more detailed data:
+
+(article name) \t (index) \t (in degree) \t (out degree)
+
+In the dictionary, target nodes are keys, link weights are values .
+Here, a weight indicates the number of time a page links to another.
+However, for the sake of this assignment, treat this an unweighted network,
+and set all weights to 1 upon data input.
+
+
+===================================================================
+===HW 13.3: Spark GraphX versus your implementation of PageRank ===
+
+Run the Spark  GraphX PageRank implementation on the Wikipedia dataset for 10 iterations,
+and display the top 100 ranked nodes (with alpha = 0.85).
+
+Run your PageRank implementation on the Wikipedia dataset for 50 iterations,
+and display the top 100 ranked nodes (with teleportation factor of 0.15). 
+Have the top 100 ranked pages changed? Comment on your findings. Plot both 100 curves.
+
+Report the AWS cluster configuration that you used and how long in minutes and seconds it takes to complete this job.
+
+Put the runtime results of HW13.2 and HW13.3 in a tabular format (with rows corresponding to implemention and columns corresponding to experiment setup (10 iterations, 50 iterations)). Discuss the run times and explaing the differences. 
+
+Plot the pagerank values for the top 100 pages resulting from the 50 iterations run (using GraphX). Then plot the pagerank values for the same 100 pages that resulted from the 50 iterations run of your homegrown pagerank implemnentation.  Comment on your findings.  Have the top 100 ranked pages changed? Have the pagerank values changed? Explain.
+
+
+===================================================================
+===HW 13.4: Criteo Phase 2 baseline ===
+
+
+SPECIAL NOTE:
+Please share your findings as they become available with class via the Google Group. You will get brownie points for this.  Once results are shared please use them and build on them.
+
+The Criteo data for this challenge is located in the following S3/Dropbox buckets:
+
+On Dropbox see:
+     https://www.dropbox.com/sh/dnevke9vsk6yj3p/AABoP-Kv2SRxuK8j3TtJsSv5a?dl=0
+
+Raw Data:  (Training, Validation and Test data)
+https://console.aws.amazon.com/s3/home?region=us-west-1#&bucket=criteo-dataset&prefix=rawdata/
+
+Hashed Data: Training, Validation and Test data in hash encoded (10,000 buckets) and sparse representation
+https://console.aws.amazon.com/s3/home?region=us-west-1#&bucket=criteo-dataset&prefix=processeddata/
+
+
+Using the training dataset, validation dataset and testing dataset in the Criteo bucket perform the following experiment:
+
+-- write spark code (borrow from Phase 1 of this project) to train a logistic regression model with the following hyperparamters:
+
+-- Number of buckets for hashing: 1,000
+-- Logistic Regression: no regularization term
+-- Logistic Regression: step size = 10
+
+Report the AWS cluster configuration that you used and how long in minutes and seconds it takes to complete this job.
+
+Report in tabular form the AUC value (https://en.wikipedia.org/wiki/Receiver_operating_characteristic) for the Training, Validation, and Testing datasets.
+Report in tabular form  the logLossTest for the Training, Validation, and Testing datasets.
+
+Dont forget to put a caption on your tables (above each table).
+
+
+===================================================================
+===HW 13.5: Criteo Phase 2 hyperparameter tuning  ===
+SPECIAL NOTE:
+Please share your findings as they become available with class via the Google Group. You will get brownie points for this.  Once results are shared please used them and build on them.
+
+NOTE:  please do  HW 13.5 in groups of 3 
+
+Using the training dataset, validation dataset and testing dataset in the Criteo bucket perform the following experiments:
+
+-- write spark code (borrow from Phase 1 of this project) to train a logistic regression model with various hyperparamters. Do a gridsearch of the hyperparameter space and determine optimal settings using the validation set.
+
+-- Number of buckets for hashing: 1,000, 10,000, .... explore different values  here
+-- Logistic Regression: regularization term: [1e-6, 1e-3]  explore other  values here also
+-- Logistic Regression: step size: explore different step sizes. Focus on a stepsize of 1 initially. 
+
+Report the AWS cluster configuration that you used and how long in minutes and seconds it takes to complete this job.
+
+Report in tabular form and using heatmaps the AUC values (https://en.wikipedia.org/wiki/Receiver_operating_characteristic) for the Training, Validation, and Testing datasets.
+Report in tabular form and using heatmaps  the logLossTest for the Training, Validation, and Testing datasets.
+
+Dont forget to put a caption on your tables (above the table) and on your heatmap figures (put caption below figures) detailing the experiment associated with each table or figure (data, algorithm used, parameters and settings explored.
+
+Discuss the optimal setting to solve this problem  in terms of the following:
+-- Features
+-- Learning algortihm
+-- Spark cluster
+
+Justiy your recommendations based on your experimental results and cross reference with table numbers and figure numbers. Also highlight key results with annotations, both textual and line and box based, on your tables and graphs.
+
+
+
+===================================================================
+=== HW13.6 Heritage Healthcare Prize (OPTIONAL)
+
+The slides for Week 13 Live session contain background information for the HHH competition to predict the number of days a patient will spend in hospital.  Please review the sldies. All the data, RCode, documentation, and slides for HHH problem are located at: 
+
+https://www.dropbox.com/sh/upt0j2q44ncrn1m/AAApdpXNYaEFy8KbMoE90-KSa?dl=0 
+
+In particular have a look at the following R Code:
+
+https://www.dropbox.com/s/jltk9z7jkc1o856/mainDriver.R?dl=0
+
+This code runs and will produce a baseline submission file for HHH. 
+
+Challenge: 
+
+Rewrite this code in Spark (all steps) and produce a submission file. Report your experimental setup and experimental times.
+
+Improve the predictive quality of your system through activities such as:
+
+-- new features
+-- feature transformations
+-- data sampling/deletion
+-- third party data
+-- learning algorithms
+-- hyperparameter tuning
+-- etc.
+
+
+State your assumptions (Training data, validation data, held out test data). Report your experimental setup and experimental times, and evaluation metrics versus the baseline submission code provided above and discuss.
+
+==================END HW ==================
+============================================

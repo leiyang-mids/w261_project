@@ -1,0 +1,179 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#Data"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Writing textrank.txt\n"
+     ]
+    }
+   ],
+   "source": [
+    "%%writefile textrank.txt\n",
+    "3: BC−HurricaineGilbert, 09−11 339\n",
+    "4: BC−Hurricaine Gilbert, 0348\n",
+    "5: Hurricaine Gilbert heads toward Dominican Coast\n",
+    "6: By Ruddy Gonzalez\n",
+    "7: Associated Press Writer\n",
+    "8: Santo Domingo, Dominican Republic (AP)\n",
+    "9: Hurricaine Gilbert Swept towrd the Dominican Republic Sunday, and the Civil Defense alerted its heavily populated south coast to prepare for high winds, heavy rains, and high seas.\n",
+    "10: The storm was approaching from the southeast with sustained winds of 75 mph gusting to 92 mph.\n",
+    "11: \"There is no need for alarm,\" Civil Defense Director Eugenio Cabral said in a television alert shortly after midnight Saturday.\n",
+    "12: Cabral said residents of the province of Barahona should closely follow Gilbert’s movement.\n",
+    "13: An estimated 100,000 people live in the province, including 70,000 in the city of Barahona, about 125 miles west of Santo Domingo.\n",
+    "14: Tropical storm Gilbert formed in the eastern Carribean and strenghtened into a hurricaine Saturday night.\n",
+    "15: The National Hurricaine Center in Miami reported its position at 2 a.m. Sunday at latitude 16.1 north, longitude 67.5 west, about 140 miles south of Ponce, Puerto Rico, and 200 miles southeast of Santo Domingo.\n",
+    "16: The National Weather Service in San Juan, Puerto Rico, said Gilbert was moving westard at 15 mph with a \"broad area of cloudiness and heavy weather\" rotating around the center of the storm.\n",
+    "17: The weather service issued a flash flood watch for Puerto Rico and the Virgin Islands until at least 6 p.m. Sunday.\n",
+    "18: Strong winds associated with the Gilbert brought coastal flooding, strong southeast winds, and up to 12 feet to Puerto Rico’s south coast.\n",
+    "19: There were no reports on casualties.\n",
+    "20: San Juan, on the north coast, had heavy rains and gusts Saturday, but they subsided during the night.\n",
+    "21: On Saturday, Hurricane Florence was downgraded to a tropical storm, and its remnants pushed inland from the U.S. Gulf Coast.\n",
+    "22: Residents returned home, happy to find little damage from 90 mph winds and sheets of rain.\n",
+    "23: Florence, the sixth named storm of the 1988 Atlantic storm season, was the second hurricane.\n",
+    "24: The first, Debby, reached minimal hurricane strength briefly before hitting the Mexican coast last month."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#Set enviroment variable for PySpark"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Welcome to\n",
+      "      ____              __\n",
+      "     / __/__  ___ _____/ /__\n",
+      "    _\\ \\/ _ \\/ _ `/ __/  '_/\n",
+      "   /__ / .__/\\_,_/_/ /_/\\_\\   version 1.3.0\n",
+      "      /_/\n",
+      "\n",
+      "Using Python version 2.7.10 (default, May 28 2015 17:04:42)\n",
+      "SparkContext available as sc, HiveContext available as sqlCtx.\n"
+     ]
+    }
+   ],
+   "source": [
+    "import os\n",
+    "import sys\n",
+    "spark_home = os.environ['SPARK_HOME'] = '/Users/liang/Downloads/spark-1.3.0-bin-hadoop2.4/'\n",
+    "spark_home = os.environ['SPARK_HOME'] = '/Users/jshanahan/Dropbox/Lectures-UC-Berkeley-ML-Class-2015/spark-1.5.0-bin-hadoop2.6/'\n",
+    "if not spark_home:\n",
+    "    raise ValueError('SPARK_HOME enviroment variable is not set')\n",
+    "sys.path.insert(0,os.path.join(spark_home,'python'))\n",
+    "sys.path.insert(0,os.path.join(spark_home,'python/lib/py4j-0.8.2.1-src.zip'))\n",
+    "execfile(os.path.join(spark_home,'python/pyspark/shell.py'))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#Text Rank Algo"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {
+    "collapsed": false
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[(u'19', 0.23286450789357083), (u'18', 1.3101198610073745), (u'8', 0.3597458157428781), (u'3', 0.15), (u'6', 0.15), (u'9', 1.6621648426556026), (u'4', 0.3910419617637807), (u'7', 0.15), (u'11', 0.6701184724682888), (u'24', 0.655934562135146), (u'10', 1.378954687951134), (u'13', 1.0000606932676237), (u'12', 0.839961809498709), (u'20', 1.1108549804269938), (u'5', 0.5583873090105679), (u'15', 1.388140218659445), (u'14', 1.3506522859181915), (u'21', 1.3034037101082727), (u'22', 0.8728040835480523), (u'17', 1.1616119338531525), (u'23', 0.8686459446416938), (u'16', 1.8845323194495136)]\n"
+     ]
+    }
+   ],
+   "source": [
+    "from math import log\n",
+    "\n",
+    "def computeContribs(sentences, rank):\n",
+    "    sumOfWeights = sum([s[1] for s in sentences])\n",
+    "    for sentence in sentences:\n",
+    "        yield (sentence[0], rank * sentence[1] / sumOfWeights)\n",
+    "# each record is (node, List of All Neighbors)        \n",
+    "def parseSentences(line):\n",
+    "    fields = line.split(':')\n",
+    "    return(fields[0], fields[1].replace(',','').split())\n",
+    "\n",
+    "def generateLink(sentence1,sentence2):\n",
+    "    w = len(set(sentence1[1]) & set(sentence2[1]))/(log(len(sentence1[1]))+log(len(sentence2[1])))\n",
+    "    return(sentence1[0],(sentence2[0],w))\n",
+    "\n",
+    "\n",
+    "text = sc.textFile(\"./textrank.txt\").map(parseSentences)\n",
+    "links = text.cartesian(text).filter(lambda(s1,s2): s1[0]!=s2[0]) \\\n",
+    "            .map(lambda(s1,s2):generateLink(s1,s2)) \\\n",
+    "            .groupByKey() \\\n",
+    "            .filter(lambda (Idx,links): sum([s[1] for s in links])>0) \\\n",
+    "            .cache()\n",
+    "ranks = links.map(lambda (url, neighbors): (url, 1.0))\n",
+    "for iteration in xrange(5):\n",
+    "    #Emit scores to all neighbor nodes \n",
+    "    contribs = links.join(ranks).flatMap(\n",
+    "        lambda (sentence, (sentences, rank)): computeContribs(sentences, rank))\n",
+    "    #sum up \n",
+    "    ranks = contribs.reduceByKey(lambda x,y: x+y).mapValues(lambda rank: rank * 0.85 + 0.15)\n",
+    "print ranks.collect()\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 2",
+   "language": "python",
+   "name": "python2"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 2
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython2",
+   "version": "2.7.10"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 0
+}
