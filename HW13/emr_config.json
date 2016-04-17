@@ -1,0 +1,10 @@
+[
+  {
+    "Classification": "spark",
+    "Properties": {
+      "maximizeResourceAllocation": "true",
+      "yarn.scheduler.maximum-allocation-mb": "8888",
+      "yarn.nodemanager.resource.memory-mb": "8888"
+    }
+  }
+]

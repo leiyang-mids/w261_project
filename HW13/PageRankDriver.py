@@ -1,18 +1,17 @@
 from operator import add
 from pyspark import SparkContext
+from subprocess import call
 
 execfile('PageRank.py')
 
 # load original graph file
 sc = SparkContext()
-graph_file = sc.textFile('hdfs://localhost:9000/user/leiyang/PageRank-test.txt')
-index_file = sc.textFile('hdfs://localhost:9000/user/leiyang/toy_index.txt')
 
-#graph_file = sc.textFile('s3://ucb-mids-mls-networks/wikipedia/all-pages-indexed-out.txt')
-#index_file = sc.textFile('s3://ucb-mids-mls-networks/wikipedia/indices.txt')
+#graph_file = sc.textFile('hdfs:///user/leiyang/PageRank-test.txt')
+#index_file = sc.textFile('hdfs:///user/leiyang/toy_index.txt')
 
-#graph_file = sc.textFile('hdfs://54.164.109.6:9000/user/leiyang/all-pages-indexed-out.txt')
-#index_file = sc.textFile('hdfs://54.164.109.6:9000/user/leiyang/indices.txt')
+graph_file = sc.textFile('hdfs:///user/leiyang/all-pages-indexed-out.txt')
+index_file = sc.textFile('hdfs:///user/leiyang/indices.txt')
 
 # initialize variables
 nDangling = sc.accumulator(0)
@@ -22,18 +21,19 @@ alpha = 1 - damping
 nTop, nIter = 200, 10
 start = time()
 print '%s: start PageRank initialization ...' %(logTime())
-graph = graph_file.flatMap(initialize).reduceByKey(accumulateMass).map(getDangling).cache()
+graph = graph_file.flatMap(initialize).reduceByKey(accumulateMass).map(getDangling) #.cache()
 # get graph size
 G = graph.count()
 # broadcast dangling mass for redistribution
 p_dangling = sc.broadcast(1.0*nDangling.value/G)
 graph = graph.map(redistributeMass)
+
 print '%s: initialization completed, dangling node(s): %d, total nodes: %d' %(logTime(), nDangling.value, G)
 # run page rank
 for i in range(nIter-1):
     print '%s: running iteration %d ...' %(logTime(), i+2)
     lossMass.value = 0.0
-    graph = graph.flatMap(distributeMass).reduceByKey(accumulateMass).cache() #checkpoint()?
+    graph = graph.flatMap(distributeMass).reduceByKey(accumulateMass) #.cache() #checkpoint()?
     # need to call an action here in order to have loss mass
     graph.count()
     print '%s: redistributing loss mass: %.4f' %(logTime(), lossMass.value)
@@ -47,5 +47,7 @@ print '%s: PageRanking completed in %.2f minutes.' %(logTime(), (time()-start)/6
 topPages = graph.map(lambda n:(n[0],n[1]['p']/G)).sortBy(lambda n: n[1], ascending=False).take(nTop)
 rankList = index_file.map(getIndex).join(sc.parallelize(topPages)).map(lambda l: l[1])
 # save final rank list
-rankList.sortBy(lambda n: n[1], ascending=False).saveAsTextFile('pageRank')
+call(['hdfs', 'dfs', '-rm', '-r', '/home/hadoop/lei/pageRank'])
+rankList.sortBy(lambda n: n[1], ascending=False).saveAsTextFile('/home/hadoop/lei/pageRank')
 print '%s: results saved, job completed!' %logTime()
+print rankList.collect()
