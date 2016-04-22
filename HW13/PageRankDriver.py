@@ -10,8 +10,8 @@ sc = SparkContext()
 #graph_file = sc.textFile('hdfs:///user/leiyang/PageRank-test.txt')
 #index_file = sc.textFile('hdfs:///user/leiyang/toy_index.txt')
 
-graph_file = sc.textFile('hdfs:///user/leiyang/all-pages-indexed-out.txt')
-index_file = sc.textFile('hdfs:///user/leiyang/indices.txt')
+graph_file = sc.textFile('hdfs:///user/leiyang/all-pages-indexed-out.txt', 80)
+index_file = sc.textFile('hdfs:///user/leiyang/indices.txt', 16)
 
 # initialize variables
 nDangling = sc.accumulator(0)

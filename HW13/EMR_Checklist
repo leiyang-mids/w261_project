@@ -35,9 +35,9 @@
 --py-files PageRank.py \
 --executor-memory '4600m' \
 --executor-cores 2 \
---driver-memory '2g' \
+--driver-memory '4600m' \
 --num-executors 11 \
-PageRankDriver.py
+PageRankDriver.py > wiki_50_log
 
 --files all-pages-indexed-out.txt \
 --files indices.txt \
@@ -114,10 +114,10 @@ runners:
 
 
 ================== copy local file ==================
-scp -i ~/w205.pem PageRank.py hadoop@ec2-54-83-177-44.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem PageRankDriver.py hadoop@ec2-54-83-177-44.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem PageRank-test.txt hadoop@ec2-54-83-177-44.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem toy_index.txt hadoop@ec2-54-83-177-44.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRank.py hadoop@ec2-54-175-145-253.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRankDriver.py hadoop@ec2-54-175-145-253.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRank-test.txt hadoop@ec2-54-175-145-253.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem toy_index.txt hadoop@ec2-54-175-145-253.compute-1.amazonaws.com:~/lei/
 ================== copy local file ==================
 
 
