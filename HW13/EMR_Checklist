@@ -1,6 +1,7 @@
 1. install emacs: sudo yum install emacs
 2. change spark log to warn: $ sudo emacs /usr/lib/spark/conf/log4j.properties
 3. TODO LATER: change replication number to 1 for HDFS in hdfs-site.xml
+*. install sbt: sudo yum install -y https://dl.bintray.com/sbt/rpm/sbt-0.13.7.rpm
 4. make dir:
  - hdfs dfs -mkdir /user/leiyang
  - mkdir lei
@@ -38,6 +39,12 @@
 --driver-memory '4600m' \
 --num-executors 11 \
 PageRankDriver.py > wiki_10_log
+
+$ /usr/bin/spark-submit --master yarn  --deploy-mode client  --name LeiPageRankWiki  --executor-memory '4600m'  --executor-cores 2  --driver-memory '4600m'   --num-executors 11 \
+  target/scala-2.10/pagerank-project_2.10-1.0.jar 10
+
+--class "SimpleApp" \
+
 
 --files all-pages-indexed-out.txt \
 --files indices.txt \
@@ -114,10 +121,12 @@ runners:
 
 
 ================== copy local file ==================
-scp -i ~/w205.pem PageRank.py hadoop@ec2-54-175-145-253.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem PageRankDriver.py hadoop@ec2-54-175-145-253.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem PageRank-test.txt hadoop@ec2-54-175-145-253.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem toy_index.txt hadoop@ec2-54-175-145-253.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRank.py hadoop@ec2-54-85-137-225.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRankDriver.py hadoop@ec2-54-85-137-225.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRank-test.txt hadoop@ec2-54-85-137-225.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem toy_index.txt hadoop@ec2-54-85-137-225.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem simple.sbt hadoop@ec2-54-85-137-225.compute-1.amazonaws.com:~/lei/project/
+scp -i ~/w205.pem PageRankDriver_GraphX.scala hadoop@ec2-54-85-137-225.compute-1.amazonaws.com:~/lei/project/src/main/scala/
 ================== copy local file ==================
 
 
