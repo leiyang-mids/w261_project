@@ -10,4 +10,5 @@ libraryDependencies ++= Seq(
 "org.apache.spark" %% "spark-graphx" % "1.6.1" % "provided"
 )
 
-//http://www.scala-sbt.org/0.13.1/docs/Getting-Started/Library-Dependencies.html
+// Reference
+// http://www.scala-sbt.org/0.13.1/docs/Getting-Started/Library-Dependencies.html
