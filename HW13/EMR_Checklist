@@ -40,10 +40,19 @@
 --num-executors 11 \
 PageRankDriver.py > wiki_10_log
 
-$ /usr/bin/spark-submit --master yarn  --deploy-mode client  --name LeiPageRankWiki  --executor-memory '4600m'  --executor-cores 2  --driver-memory '4600m'   --num-executors 11 \
-  target/scala-2.10/pagerank-project_2.10-1.0.jar 10
+$ /usr/bin/spark-submit --class "SimpleApp" --master yarn  --deploy-mode client  --name LeiPageRankWiki  --executor-memory '4600m'  --executor-cores 2  --driver-memory '4600m'   --num-executors 11  target/scala-2.10/pagerank-project_2.10-1.0.jar 10
 
---class "SimpleApp" \
+# Submitting a Java application to Standalone cluster mode
+$ /usr/bin/spark-submit \
+--master yarn \
+--deploy-mode client \
+--class PageRank \
+--name "Example Program" \
+--total-executor-cores 300 \
+--executor-memory 10g \
+target/scala-2.10/pagerank-project_2.10-1.0.jar \
+10
+
 
 
 --files all-pages-indexed-out.txt \

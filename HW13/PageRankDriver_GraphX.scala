@@ -5,7 +5,7 @@ import org.apache.spark.graphx._
 import org.apache.spark.graphx.lib._
 
 
-object SimpleApp {
+object PageRank {
   def main(args: Array[String]) {
 
     val conf = new SparkConf().setAppName("PageRank Application")
@@ -16,9 +16,6 @@ object SimpleApp {
         // Create an RDD for the edges and vertices
         val links = sc.textFile("hdfs:///user/leiyang/all-pages-indexed-out.txt", 80).flatMap(getLinks);
         val pages = sc.textFile("hdfs:///user/leiyang/indices.txt", 16).map(getPages);
-
-        //val links = sc.textFile("/Users/leiyang/GitHub/mids/w261_project/HW13/PageRank-test.txt").flatMap(getLinks2);
-        //val pages = sc.textFile("/Users/leiyang/GitHub/mids/w261_project/HW13/toy_index.txt").map(getPages2);
 
         // Build the initial Graph
         val graph = Graph(pages, links);

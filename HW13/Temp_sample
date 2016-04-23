@@ -1,0 +1,76 @@
+73	{'14417532': 1}
+299	{'4214575': 1}
+2552	{'15043376': 1, '13430968': 1, '13451035': 1, '7263397': 1, '13001625': 1, '13443575': 1, '13451269': 1, '13432316': 1, '11623371': 1, '15028971': 1, '13425865': 1, '15042703': 1, '5051368': 1, '9854998': 2, '13442976': 1, '13315025': 1, '2992307': 1, '1054486': 1, '1322325': 1, '13450983': 1}
+2570	{'983991': 1}
+2616	{'9045350': 1}
+2711	{'752887': 1}
+2818	{'3534183': 1}
+2847	{'3797918': 1}
+2892	{'2893': 1}
+2921	{'5158607': 1, '6007184': 1, '14773825': 1, '11777840': 2, '9285165': 1, '6420484': 1, '14670682': 1, '7316613': 1, '7125893': 1, '14965920': 1, '14229952': 1, '9447742': 2, '1425342': 1, '11390944': 2, '5141': 1, '14928135': 2, '13636570': 3, '14687433': 1, '15105458': 1, '11656072': 1, '6420027': 1, '10898196': 1, '6416278': 1, '11497740': 2}
+3165	{'7352374': 1}
+3306	{'9002430': 1}
+3683	{'12394205': 1}
+3865	{'677882': 1, '5348236': 1, '3868': 2, '3354266': 1, '9655336': 1, '1218598': 1, '3861': 2, '11950526': 1, '11457951': 1, '9731855': 1, '3977737': 1, '840036': 1, '8401581': 1, '1614968': 3, '7653909': 1, '3440693': 1, '3440694': 4, '6507723': 1, '4368317': 1, '13727203': 1, '1793966': 1, '14227632': 1, '6848410': 1, '4487113': 1, '5952350': 1, '6229891': 2, '11243032': 8, '1070634': 1, '3870': 1, '861366': 3, '12837116': 1, '12867472': 2, '11243035': 1, '10500074': 1, '5952616': 1}
+4016	{'14758366': 1}
+4078	{'12473070': 1}
+4084	{'1239703': 1}
+4093	{'13079602': 1}
+4104	{'14749047': 1}
+4935	{'4378841': 1}
+5175	{'14112408': 1, '12744717': 1, '8409098': 1, '15113675': 1, '5114960': 1, '14490488': 1, '8504508': 1, '1197317': 1, '1182188': 1, '4198751': 1, '4719196': 1, '9472215': 1, '4204755': 1, '14466139': 1, '11285108': 1, '11683114': 1, '9306355': 1, '7369423': 1, '1947337': 1, '8077159': 3}
+5378	{'12838673': 1}
+
+
+zoonotic bacteria	15191778	1	0
+zoonotic disease	15191779	7	0
+zoonotic diseases	15191780	7	0
+zoonotic pathogen	15191781	1	0
+zoonotic vector	15191782	1	0
+zoonotic	15191783	86	0
+zooology	15191784	1	0
+zoophagia	15191785	1	0
+zoophagous	15191786	1	0
+zoopharmacognosy	15191787	7	0
+zoophile	15191788	3	0
+zoophiles	15191789	1	0
+zoophilia and health	15191790	1	0
+zoophilia	15191791	74	0
+zoophilic pornography	15191792	1	0
+zoophilic	15191793	6	0
+zoophillia	15191794	2	0
+zoophily	15191795	5	0
+zoophobia	15191796	4	0
+
+
+[error] bad symbolic reference. A signature in package.class refers to type compileTimeOnly
+[error] in package scala.annotation which is not available.
+[error] It may be completely missing from the current classpath, or the version on
+[error] the classpath might be incompatible with the version used when compiling package.class.
+[error] /home/hadoop/lei/project/src/main/scala/PageRankDriver_GraphX.scala:34: Reference to method augmentString in object Predef should not have survived past type checking,
+[error] it should have been processed and eliminated during expansion of an enclosing macro.
+[error]       for {n <-  elem(1).stripPrefix("{").split(",")
+[error]                      ^
+[error] /home/hadoop/lei/project/src/main/scala/PageRankDriver_GraphX.scala:36: Reference to method augmentString in object Predef should not have survived past type checking,
+[error] it should have been processed and eliminated during expansion of an enclosing macro.
+[error]       }yield Edge(elem(0).toLong, n.split(":")(0).trim().stripPrefix("'").stripSuffix("'").toLong, "")
+[error]                       ^
+[error] /home/hadoop/lei/project/src/main/scala/PageRankDriver_GraphX.scala:36: Reference to method augmentString in object Predef should not have survived past type checking,
+[error] it should have been processed and eliminated during expansion of an enclosing macro.
+[error]       }yield Edge(elem(0).toLong, n.split(":")(0).trim().stripPrefix("'").stripSuffix("'").toLong, "")
+[error]                                                                                      ^
+[error] /home/hadoop/lei/project/src/main/scala/PageRankDriver_GraphX.scala:36: Reference to method augmentString in object Predef should not have survived past type checking,
+[error] it should have been processed and eliminated during expansion of an enclosing macro.
+[error]       }yield Edge(elem(0).toLong, n.split(":")(0).trim().stripPrefix("'").stripSuffix("'").toLong, "")
+[error]                                                                     ^
+[error] /home/hadoop/lei/project/src/main/scala/PageRankDriver_GraphX.scala:36: Reference to method augmentString in object Predef should not have survived past type checking,
+[error] it should have been processed and eliminated during expansion of an enclosing macro.
+[error]       }yield Edge(elem(0).toLong, n.split(":")(0).trim().stripPrefix("'").stripSuffix("'").toLong, "")
+[error]                                                       ^
+[error] /home/hadoop/lei/project/src/main/scala/PageRankDriver_GraphX.scala:41: Reference to method augmentString in object Predef should not have survived past type checking,
+[error] it should have been processed and eliminated during expansion of an enclosing macro.
+[error]       (elem(1).toLong, (elem(0), ""))
+[error]            ^
+[error] 7 errors found
+[error] (compile:compile) Compilation failed
+[error] Total time: 11 s, completed Apr 23, 2016 5:33:46 AM
