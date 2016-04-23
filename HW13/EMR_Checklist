@@ -37,7 +37,7 @@
 --executor-cores 2 \
 --driver-memory '4600m' \
 --num-executors 11 \
-PageRankDriver.py > wiki_50_log
+PageRankDriver.py > wiki_10_log
 
 --files all-pages-indexed-out.txt \
 --files indices.txt \
