@@ -6,7 +6,7 @@ execfile('CriteoHelper.py')
 
 # define parameters
 print '%s: start logistic regression job ...' %(logTime())
-numBucketsCTR = 1000
+numBucketsCTR = 5000
 lrStep = 10
 start = time()
 sc = SparkContext()
@@ -16,7 +16,6 @@ print '%s: preparing data ...' %(logTime())
 rawTrainData = sc.textFile('s3://criteo-dataset/rawdata/train/part*', 180).map(lambda x: x.replace('\t', ','))
 rawValidationData = sc.textFile('s3://criteo-dataset/rawdata/validation/part*', 180).map(lambda x: x.replace('\t', ','))
 rawTestData = sc.textFile('s3://criteo-dataset/rawdata/test/part*', 180).map(lambda x: x.replace('\t', ','))
-
 
 # data encoding
 hashTrainData = rawTrainData.map(lambda p: parseHashPoint(p, numBucketsCTR))
@@ -37,11 +36,10 @@ logLossTest = evaluateResults(model, hashTestData)
 logLossTrain = evaluateResults(model, hashTrainData)
 
 # get AUC
-aucVal, aucTrain, aucTest = 0, 0, 0
-#print '%s: evaluating AUC ...' %(logTime())
-#aucVal = getAUC(hashValidationData, model)
-#aucTrain = getAUC(hashTrainData, model)
-#aucTest = getAUC(hashTestData, model)
+print '%s: evaluating AUC ...' %(logTime())
+aucTrain = getAUCfromRdd(hashTrainData, model)
+aucVal = getAUCfromRdd(hashValidationData, model)
+aucTest = getAUCfromRdd(hashTestData, model)
 print '\n%s: job completes in %.2f minutes!' %(logTime(), (time()-start)/60.0)
 
 # show results

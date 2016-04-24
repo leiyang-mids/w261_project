@@ -54,6 +54,18 @@ $ /usr/bin/spark-submit \
 target/scala-2.10/pagerank-project_2.10-1.0.jar \
 10 > wiki_10_log_GraphX
 
+# Submitting a Python application to Yarn client mode ============= m1.large
+/usr/bin/spark-submit \
+--master yarn \
+--deploy-mode client \
+--name LeiCriteoJob \
+--py-files CriteoHelper.py \
+--num-executors 3 \
+--executor-memory '4600m' \
+--executor-cores 2 \
+--driver-memory '4600m' \
+Criteo_Driver_1.py > Criteo_log1
+
 
 # >>> time /home/hadoop/spark/bin/spark-submit \
 --master yarn-cluster \
@@ -127,8 +139,11 @@ runners:
 
 
 ================== copy local file ==================
-scp -i ~/w205.pem CriteoHelper.py hadoop@ec2-54-172-67-224.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem Criteo_Driver_1.py hadoop@ec2-54-172-67-224.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem CriteoHelper.py hadoop@ec2-54-84-173-248.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem CriteoHelper2.py hadoop@ec2-54-84-173-248.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem Criteo_Driver_1.py hadoop@ec2-54-84-173-248.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem Criteo_Driver_2.py hadoop@ec2-54-84-173-248.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem s3test.py hadoop@ec2-54-84-173-248.compute-1.amazonaws.com:~/lei/
 ================== copy local file ==================
 
 

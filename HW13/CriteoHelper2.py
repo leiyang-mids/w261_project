@@ -2,6 +2,7 @@
 from pyspark.mllib.classification import LogisticRegressionWithSGD
 from pyspark.mllib.regression import LabeledPoint
 from pyspark.mllib.linalg import SparseVector 
+from pyspark import SparkContext
 from collections import defaultdict
 from datetime import datetime
 from sklearn import metrics
@@ -113,23 +114,7 @@ def logTime(): return str(datetime.now())
 def getFP(index): yield max(index)
 def getTP(label): yield sum(label)
 
-# calculate AUC
-def getAUC(rddData, lrModel):
-    labelsAndScores = rddData.map(lambda lp: (lp.label, getP(lp.features, lrModel.weights, lrModel.intercept)))
-    labelsAndWeights = labelsAndScores.collect()
-    labelsAndWeights.sort(key=lambda (k, v): v, reverse=True)
-    labelsByWeight = np.array([k for (k, v) in labelsAndWeights])
-
-    length = labelsByWeight.size
-    truePositives = labelsByWeight.cumsum()
-    numPositive = truePositives[-1]
-    falsePositives = np.arange(1.0, length + 1, 1.) - truePositives
-
-    truePositiveRate = truePositives / numPositive
-    falsePositiveRate = falsePositives / (length - numPositive)
-        
-    return metrics.auc(falsePositiveRate, truePositiveRate)
-
+# calculate AUC score
 def getAUCfromRdd(rddData, lrModel):
     labelsAndScores = rddData.map(lambda lp: (lp.label, getP(lp.features, lrModel.weights, lrModel.intercept)))
     if labelsAndScores.getNumPartitions() < 100:   
@@ -146,3 +131,19 @@ def getAUCfromRdd(rddData, lrModel):
     truePositiveRate = truePositives / numPositive
     falsePositiveRate = falsePositives / (length - numPositive)
     return metrics.auc(falsePositiveRate, truePositiveRate)
+
+def encodeData(numBuckets):
+    sc = SparkContext()
+    rawTrainData = sc.textFile('s3://criteo-dataset/rawdata/train/part*', 180).map(lambda x: x.replace('\t', ','))
+    rawValidationData = sc.textFile('s3://criteo-dataset/rawdata/validation/part*', 180).map(lambda x: x.replace('\t', ','))
+    rawTestData = sc.textFile('s3://criteo-dataset/rawdata/test/part*', 180).map(lambda x: x.replace('\t', ','))
+
+    # data encoding
+    hashTrainData = rawTrainData.map(lambda p: parseHashPoint(p, numBuckets))
+    hashTrainData.cache()
+    hashValidationData = rawValidationData.map(lambda p: parseHashPoint(p, numBuckets))
+    hashValidationData.cache()
+    hashTestData = rawTestData.map(lambda p: parseHashPoint(p, numBuckets))
+    hashTestData.cache()
+    
+    return hashTrainData, hashValidationData, hashTestData
