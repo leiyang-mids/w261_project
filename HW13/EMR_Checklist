@@ -6,17 +6,20 @@
  - mkdir lei
  - cd lei
 5. move wiki data to hdfs:
- - aws s3 cp s3://ucb-mids-mls-networks/wikipedia/all-pages-indexed-out.txt ./
- - aws s3 cp s3://ucb-mids-mls-networks/wikipedia/indices.txt ./
+ - aws s3 cp s3://ucb-mids-mls-networks/wikipedia/all-pages-indexed-out.txt /.
+ - aws s3 cp s3://ucb-mids-mls-networks/wikipedia/indices.txt /.
  - hdfs dfs -put all-pages-indexed-out.txt /user/leiyang/
  - hdfs dfs -put indices.txt /user/leiyang/
  - hdfs dfs -put toy_index.txt /user/leiyang/
  - hdfs dfs -put PageRank-test.txt /user/leiyang/
+ - wget https://www.dropbox.com/sh/2c0k5adwz36lkcw/AAAD7I_6kQlJtDpXZPhCfVH-a/wikipedia/all-pages-indexed-out.txt?dl=0
+ - wget https://www.dropbox.com/sh/2c0k5adwz36lkcw/AADSYhyRXbgebRDy6ALl6O1ca/wikipedia/indices.txt?dl=0
  - rm all-pages-indexed-out.txt
  - rm indices.
 
 6. run unit test:
 
+# Submitting a Python application to Yarn client model ============= m1.large
  $ /usr/bin/spark-submit \
 --master yarn \
 --deploy-mode client \
@@ -29,7 +32,7 @@
 PageRankDriver.py > wiki_10_log
 
 
-# Submitting a Java application to Standalone cluster mode ============= m1.xlarge
+# Submitting a Java application to Yarn client mode ============= m1.xlarge
 $ /usr/bin/spark-submit \
 --master yarn \
 --deploy-mode client \
@@ -42,7 +45,7 @@ target/scala-2.10/pagerank-project_2.10-1.0.jar \
 10 > wiki_10_log_GraphX
 
 
-# Submitting a Java application to Standalone cluster mode ============= m1.large
+# Submitting a Java application to Yarn client mode ============= m1.large
 $ /usr/bin/spark-submit \
 --master yarn \
 --deploy-mode client \
@@ -127,12 +130,12 @@ runners:
 
 
 ================== copy local file ==================
-scp -i ~/w205.pem PageRank.py hadoop@ec2-52-90-220-3.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem PageRankDriver.py hadoop@ec2-52-90-220-3.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem PageRank-test.txt hadoop@ec2-52-90-220-3.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem toy_index.txt hadoop@ec2-52-90-220-3.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem simple.sbt hadoop@ec2-52-90-220-3.compute-1.amazonaws.com:~/lei/project/
-scp -i ~/w205.pem PageRankDriver_GraphX.scala hadoop@ec2-52-90-220-3.compute-1.amazonaws.com:~/lei/project/src/main/scala/
+scp -i ~/w205.pem PageRank.py hadoop@ec2-54-172-77-207.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRankDriver.py hadoop@ec2-54-172-77-207.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem PageRank-test.txt hadoop@ec2-54-172-77-207.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem toy_index.txt hadoop@ec2-54-172-77-207.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem simple.sbt hadoop@ec2-54-172-77-207.compute-1.amazonaws.com:~/lei/project/
+scp -i ~/w205.pem PageRankDriver_GraphX.scala hadoop@ec2-54-172-77-207.compute-1.amazonaws.com:~/lei/project/src/main/scala/
 ================== copy local file ==================
 
 

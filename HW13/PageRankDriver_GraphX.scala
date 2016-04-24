@@ -8,19 +8,20 @@ import org.apache.spark.graphx.lib._
 object WikiPageRank {
   def main(args: Array[String]) {
 
+    val t0 = System.nanoTime()
     val conf = new SparkConf().setAppName("WikiPageRank")
     val sc = new SparkContext(conf)
     var nIter = args(0).toInt
 
     // Create an RDD for the edges and vertices
-    val t0 = System.nanoTime()
     val links = sc.textFile("hdfs:///user/leiyang/all-pages-indexed-out.txt", 80).flatMap(getLinks);
     val pages = sc.textFile("hdfs:///user/leiyang/indices.txt", 16).map(getPages);
 
     // Build the initial Graph
     val graph = Graph(pages, links);
     // Run pageRank
-    val rank = PageRank.run(graph, numIter=nIter).vertices.cache()
+    val rank = PageRank.run(graph, numIter=nIter).vertices
+    rank.cache()
     // Normalize the rank score
     val total = rank.map(l=>l._2).sum()
     val tops = rank.sortBy(l=>l._2, ascending=false).take(200).map(l => (l._1, l._2/total))
@@ -40,6 +41,6 @@ object WikiPageRank {
 
   def getPages(line: String): (VertexId, (String, String)) = {
       val elem = line.split("\t")
-      (elem(1).toLong, (elem(0), ""))
+      return (elem(1).toLong, (elem(0), ""))
   }
 }

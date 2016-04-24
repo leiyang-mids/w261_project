@@ -1,0 +1,183 @@
+1. install emacs: sudo yum install emacs
+2. change spark log to warn: $ sudo emacs /usr/lib/spark/conf/log4j.properties
+3. Install sbt: sudo yum install -y https://dl.bintray.com/sbt/rpm/sbt-0.13.7.rpm
+4. make dir:
+ - hdfs dfs -mkdir /user/leiyang/Criteo/
+ - mkdir lei
+ - cd lei
+5. move wiki data to hdfs:
+ - aws s3 cp s3://criteo-dataset/rawdata/test test --recursive --include "part*"
+ - aws s3 cp s3://criteo-dataset/rawdata/train train --recursive --include "part*"
+ - hdfs dfs -put rawTrain /user/leiyang/Criteo/
+ - hdfs dfs -put rawTest /user/leiyang/Criteo/
+ - hdfs dfs -put rawValidation /user/leiyang/Criteo/
+  - rm all-pages-indexed-out.txt
+ - rm indices.
+
+6. run unit test:
+
+ $ /usr/bin/spark-submit \
+--master yarn \
+--deploy-mode client \
+--name LeiPageRankToy \
+--py-files PageRank.py \
+--executor-memory '4600m' \
+--executor-cores 2 \
+--driver-memory '4600m' \
+--num-executors 11 \
+PageRankDriver.py > wiki_10_log
+
+
+# Submitting a Java application to Standalone cluster mode ============= m1.xlarge
+$ /usr/bin/spark-submit \
+--master yarn \
+--deploy-mode client \
+--class WikiPageRank \
+--name "WikiPageRank" \
+--executor-memory '11000m' \
+--num-executors 11 \
+--driver-memory '11000m' \
+target/scala-2.10/pagerank-project_2.10-1.0.jar \
+10 > wiki_10_log_GraphX
+
+
+# Submitting a Java application to Standalone cluster mode ============= m1.large
+$ /usr/bin/spark-submit \
+--master yarn \
+--deploy-mode client \
+--class WikiPageRank \
+--name "WikiPageRank" \
+--executor-memory '4600m' \
+--num-executors 11 \
+--driver-memory '4600m' \
+target/scala-2.10/pagerank-project_2.10-1.0.jar \
+10 > wiki_10_log_GraphX
+
+
+# >>> time /home/hadoop/spark/bin/spark-submit \
+--master yarn-cluster \
+./code/page_rank.py s3n://ucb-mids-mls-networks/PageRank-test.txt s3n://ucb-mids-mls-group-e/hw13/13_1_1 0.85 100
+
+~/Downloads/spark*/bin/spark-submit \
+--master yarn \
+--deploy-mode 'client' \
+--name 'LeiPageRankWiki' \
+--py-files PageRank.py \
+PageRankDriver.py
+
+7. change PageRankDriver.py
+ - switch files to wikipedia
+ - adjust iteration number
+8. run 10 iteration job under ~/hadoop/lei/
+$ ./etc/spark/bin/spark-submit \
+--master yarn \
+--deploy-mode 'client' \
+--name 'LeiPageRankWiki' \
+--py-files PageRank.py \
+--executor-memory '512m' \
+--driver-memory '512m' \
+PageRankDriver.py
+ - cat pageRank/part* > results_wiki_10
+ - aws s3 cp results_wiki_10 s3://w261.data/HW13/results_wiki_10 --region 'us-west-2'
+9. run 50 iteration job under ~/hadoop/lei/
+$ ./etc/spark/bin/spark-submit \
+--master yarn \
+--deploy-mode 'client' \
+--name 'LeiPageRankWiki' \
+--py-files PageRank.py \
+--executor-memory '512m' \
+--driver-memory '512m' \
+PageRankDriver.py
+ - hdfs dfs -cat /user/leiyang/join/p* > results_wiki_50
+ - aws s3 cp results_wiki_50 s3://w261.data/HW9/results_wiki_50 --region 'us-west-2'
+
+================== screen notes ==================
+ctrl+a --> send command to screen
+ctrl+a+n --> switch between screens
+ctrl+a+c --> add new screen
+ctrl+a+d --> detach to screen
+screen -r --> reattach to screen
+ctrl+a+H --> terminate screen session
+screen -X -S [session # you want to kill] quit --> kill the screen session
+================== screen notes ==================
+
+================== log4j.properties ==================
+./etc/spark/conf/log4j.properties
+
+# Set everything to be logged to the console
+log4j.rootCategory=WARN, console
+log4j.appender.console=org.apache.log4j.ConsoleAppender
+log4j.appender.console.target=System.err
+log4j.appender.console.layout=org.apache.log4j.PatternLayout
+================== log4j.properties ==================
+
+================== restart yarn on EMR after config change ==================
+sudo /sbin/stop hadoop-yarn-resourcemanager
+sudo /sbin/start hadoop-yarn-resourcemanager
+================== restart yarn on EMR after config change ==================
+
+================== mrjob.conf content ==================
+runners:
+  hadoop:
+    hadoop_home: /usr/lib/hadoop/
+    strict_protocols: True
+    no_output: True
+================== mrjob.conf content ==================
+
+
+================== copy local file ==================
+scp -i ~/w205.pem CriteoHelper.py hadoop@ec2-54-172-77-207.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem Criteo_Driver_1.py hadoop@ec2-54-172-77-207.compute-1.amazonaws.com:~/lei/
+================== copy local file ==================
+
+
+- to kill a mapreduce job from yarn: $yarn application -kill application_1460815549694_0002
+
+=================== location of hdfs-site.xml ========================
+
+./etc/hadoop/conf.empty/hdfs-site.xml
+NOTE: python PageRankIter.py PageRank-test.txt -r 'hadoop' --i 1 --output-dir 's3://w261.data/HW9/test'
+
+=================== location of hdfs-site.xml ========================
+
+=================== open channel ========================
+ssh -i w205.pem -N -L 50070:ec2-54-152-233-112.compute-1.amazonaws.com:50070 hadoop@ec2-54-152-233-112.compute-1.amazonaws.com
+ssh -i w205.pem -N -L 8890:ec2-54-152-233-112.compute-1.amazonaws.com:8890 hadoop@ec2-54-152-233-112.compute-1.amazonaws.com
+=================== open channel ========================
+
+=================== start job history server - not necessary ========================
+NOTE: job history server is already started with EMR, just log on is ok, no need to manually start
+
+sudo find / -name "mr-jobhistory-daemon.sh" --> /usr/lib/hadoop-mapreduce/sbin/mr-jobhistory-daemon.sh
+sudo find / -name "mapred-site.xml" -->
+/etc/hadoop/conf.empty/mapred-site.xml
+/var/aws/emr/bigtop-deploy/puppet/modules/hadoop/templates/mapred-site.xml
+/var/aws/emr/bigtop-deploy/puppet/modules/ignite_hadoop/templates/mapred-site.xml
+
+/usr/lib/hadoop-mapreduce/sbin/mr-jobhistory-daemon.sh --config /etc/hadoop/conf.empty/ start historyserver
+
+
+NOTE: local real one - /usr/local/Cellar/hadoop/2.7.1/libexec/sbin/mr-jobhistory-daemon.sh
+
+/etc/hadoop/conf.empty/mapred-site.xml
+     /usr/local/Cellar/hadoop/2*/sbin/mr-jobhistory-daemon.sh --config /usr/local/Cellar/hadoop/2*/libexec/etc/hadoop/ start historyserver
+sudo /usr/lib/hadoop-mapreduce/sbin/mr-jobhistory-daemon.sh --config /etc/hadoop/conf.empty/ start historyserver
+=================== start job history server - not necessary ========================
+
+================== misc notes ==================
+Note:
+Bid cheaper price!
+Wait for startup to finish
+Use 205 security group to open ports
+Set port tunnel
+Install mrjob with sudo pip install mrjob
+Install emacs with sudo yum install emacs
+Set .mrjob.conf for Hadoop home --> may copy from s3
+Copy s3 data to local to avoid traffic, using AWS s3 cp command.
+possible to mount my own EBS data drive
+Move over py files to local --> may also copy from s3
+================== misc notes ==================
+
+================== S3 notes ==================
+hdfs dfs -cat /user/leiyang/join/p* > results_wiki_10
+aws s3 cp results_wiki_10 s3://w261.data/HW9/results_wiki_10 --region 'us-west-2'
