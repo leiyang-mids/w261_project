@@ -25,7 +25,7 @@ iStep = 1
 # grid search
 for nBucket in numBucketsCTR:
     # data preparaion    
-    dTrain, dVlidation, dTest = encodeData(nBucket)
+    dTrain, dValidation, dTest = encodeData(nBucket)
     for stp in lrStep:
         for reg in regParams:
             # build model

@@ -15,7 +15,7 @@ Test:	 0.5044	 0.0000
 14 minutes encode and build LR model
 4 minutes get log loss
 
-====== 20 m1.large ======
+====== 15 m1.large ======
 17 minutes encode and build LR model
 6.5 minutes get log loss
 6 minutes get AUC
