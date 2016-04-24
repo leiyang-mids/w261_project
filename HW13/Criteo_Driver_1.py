@@ -13,12 +13,9 @@ sc = SparkContext()
 
 # data preparaion
 print '%s: preparing data ...' %(logTime())
-#rawTrainData = sc.textFile('hdfs:///user/leiyang/criteo/rawTrain', 2).map(lambda x: x.replace('\t', ','))
-#rawValidationData = sc.textFile('hdfs:///user/leiyang/criteo/rawValidation', 2).map(lambda x: x.replace('\t', ','))
-#rawTestData = sc.textFile('hdfs:///user/leiyang/criteo/rawTest', 2).map(lambda x: x.replace('\t', ','))
-rawTrainData = sc.textFile('s3://criteo-dataset/rawdata/train/part*', 80).map(lambda x: x.replace('\t', ','))
-rawValidationData = sc.textFile('s3://criteo-dataset/rawdata/validation/part*', 80).map(lambda x: x.replace('\t', ','))
-rawTestData = sc.textFile('s3://criteo-dataset/rawdata/test/part*', 80).map(lambda x: x.replace('\t', ','))
+rawTrainData = sc.textFile('s3://criteo-dataset/rawdata/train/part*', 180).map(lambda x: x.replace('\t', ','))
+rawValidationData = sc.textFile('s3://criteo-dataset/rawdata/validation/part*', 180).map(lambda x: x.replace('\t', ','))
+rawTestData = sc.textFile('s3://criteo-dataset/rawdata/test/part*', 180).map(lambda x: x.replace('\t', ','))
 
 
 # data encoding
@@ -40,10 +37,11 @@ logLossTest = evaluateResults(model, hashTestData)
 logLossTrain = evaluateResults(model, hashTrainData)
 
 # get AUC
-print '%s: evaluating AUC ...' %(logTime())
-aucVal = getAUC(hashValidationData, model)
-aucTrain = getAUC(hashTrainData, model)
-aucTest = getAUC(hashTestData, model)
+aucVal, aucTrain, aucTest = 0, 0, 0
+#print '%s: evaluating AUC ...' %(logTime())
+#aucVal = getAUC(hashValidationData, model)
+#aucTrain = getAUC(hashTrainData, model)
+#aucTest = getAUC(hashTestData, model)
 print '\n%s: job completes in %.2f minutes!' %(logTime(), (time()-start)/60.0)
 
 # show results

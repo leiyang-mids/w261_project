@@ -1,6 +1,7 @@
 
 from collections import defaultdict
-from pyspark.mllib.linalg import SparseVector 
+from pyspark.mllib.linalg import SparseVector
+from pyspark.mllib.regression import LabeledPoint
 from pyspark.mllib.classification import LogisticRegressionWithSGD
 from sklearn import metrics
 from datetime import datetime
@@ -49,11 +50,11 @@ def parseHashPoint(point, numBuckets):
     Returns:
         LabeledPoint: A LabeledPoint with a label (0.0 or 1.0) and a SparseVector of hashed
             features.
-    """    
-    elem = point.strip().split(',')    
+    """
+    elem = point.strip().split(',')
     rawFea = [(i, elem[i+1]) for i in range(len(elem) - 1)]
-    index = np.sort(hashFunction(numBuckets, rawFea, False).keys())    
-    return LabeledPoint(elem[0], SparseVector(numBuckets, index, [1]*len(index)))   
+    index = np.sort(hashFunction(numBuckets, rawFea, False).keys())
+    return LabeledPoint(elem[0], SparseVector(numBuckets, index, [1]*len(index)))
 
 # Logistic Regression Modeling & Evaluation
 def getP(x, w, intercept):
@@ -92,7 +93,7 @@ def computeLogLoss(p, y):
     Returns:
         float: The log loss value.
     """
-    epsilon = 10e-12    
+    epsilon = 10e-12
     return -log(p+epsilon) if y==1 else -log(1-p+epsilon)
 
 def evaluateResults(lrModel, data):
@@ -104,7 +105,7 @@ def evaluateResults(lrModel, data):
 
     Returns:
         float: Log loss for the data.
-    """    
+    """
     return data.map(lambda p: computeLogLoss(getP(p.features, lrModel.weights, lrModel.intercept), p.label)).mean()
 
 
@@ -122,7 +123,7 @@ def getAUC(rddData, lrModel):
 
     truePositiveRate = truePositives / numPositive
     falsePositiveRate = falsePositives / (length - numPositive)
-        
+
     return metrics.auc(falsePositiveRate, truePositiveRate)
 
 def logTime():

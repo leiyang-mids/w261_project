@@ -42,7 +42,7 @@ $ /usr/bin/spark-submit \
 --num-executors 11 \
 --driver-memory '11000m' \
 target/scala-2.10/pagerank-project_2.10-1.0.jar \
-10 > wiki_10_log_GraphX
+50 > wiki_50_log_GraphX
 
 
 # Submitting a Java application to Yarn client mode ============= m1.large

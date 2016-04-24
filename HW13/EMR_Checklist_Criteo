@@ -1,4 +1,5 @@
 1. install emacs: sudo yum install emacs
+*. install sklearn: sudo pip install sklearn (takes a while)
 2. change spark log to warn: $ sudo emacs /usr/lib/spark/conf/log4j.properties
 3. Install sbt: sudo yum install -y https://dl.bintray.com/sbt/rpm/sbt-0.13.7.rpm
 4. make dir:
@@ -126,8 +127,8 @@ runners:
 
 
 ================== copy local file ==================
-scp -i ~/w205.pem CriteoHelper.py hadoop@ec2-54-172-77-207.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem Criteo_Driver_1.py hadoop@ec2-54-172-77-207.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem CriteoHelper.py hadoop@ec2-54-172-67-224.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem Criteo_Driver_1.py hadoop@ec2-54-172-67-224.compute-1.amazonaws.com:~/lei/
 ================== copy local file ==================
 
 
