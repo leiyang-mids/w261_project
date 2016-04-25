@@ -1,6 +1,7 @@
 
 from time import time, gmtime, strftime
 from subprocess import call
+from pyspark import SparkContext
 
 execfile('CriteoHelper2.py')
 
@@ -17,15 +18,14 @@ print '%s: total steps: %d' %(logTime(), nSteps)
 
 # initialize 
 start = time()
-bestModel = None
-bestLogLoss = 1e10
-bestAUC = 0
+bestModel, bestLogLoss, bestAUC = None, 1e10, 0
+sc = SparkContext()
 
 iStep = 1
 # grid search
 for nBucket in numBucketsCTR:
     # data preparaion    
-    dTrain, dValidation, dTest = encodeData(nBucket)
+    dTrain, dValidation, dTest = encodeData(sc, nBucket)
     for stp in lrStep:
         for reg in regParams:
             # build model
@@ -42,9 +42,7 @@ for nBucket in numBucketsCTR:
             # compare model
             print '%s: step %d/%d completed, logLoss-%.4f, AUC-%.4f' %(logTime(), iStep, nSteps, logLossVa, aucVal)            
             if logLossVa < bestLogLoss:
-                bestLogLoss = logLossVa
-                bestModel = model
-                bestAUC = aucVal
+                bestLogLoss, bestModel, bestAUC = logLossVa, model, aucVal                
             # save all results to s3, in case job crashes - aws s3 cp toy_index.txt s3://w261.data/HW13/toy.txt
             logName = 's3://w261.data/HW13/criteo_search_log_' + strftime("%d%b%Y_%H%M%S", gmtime())
             call(['aws', 's3', 'cp', '/home/hadoop/lei/criteo_search_log.txt', logName, '--region', 'us-west-2'])

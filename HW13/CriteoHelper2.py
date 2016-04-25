@@ -2,7 +2,6 @@
 from pyspark.mllib.classification import LogisticRegressionWithSGD
 from pyspark.mllib.regression import LabeledPoint
 from pyspark.mllib.linalg import SparseVector 
-from pyspark import SparkContext
 from collections import defaultdict
 from datetime import datetime
 from sklearn import metrics
@@ -132,8 +131,7 @@ def getAUCfromRdd(rddData, lrModel):
     falsePositiveRate = falsePositives / (length - numPositive)
     return metrics.auc(falsePositiveRate, truePositiveRate)
 
-def encodeData(numBuckets):
-    sc = SparkContext()
+def encodeData(sc, numBuckets):
     rawTrainData = sc.textFile('s3://criteo-dataset/rawdata/train/part*', 180).map(lambda x: x.replace('\t', ','))
     rawValidationData = sc.textFile('s3://criteo-dataset/rawdata/validation/part*', 180).map(lambda x: x.replace('\t', ','))
     rawTestData = sc.textFile('s3://criteo-dataset/rawdata/test/part*', 180).map(lambda x: x.replace('\t', ','))
