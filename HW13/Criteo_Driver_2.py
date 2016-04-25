@@ -47,7 +47,7 @@ for nBucket in numBucketsCTR:
                 bestAUC = aucVal
             # save all results to s3, in case job crashes - aws s3 cp toy_index.txt s3://w261.data/HW13/toy.txt
             logName = 's3://w261.data/HW13/criteo_search_log_' + strftime("%d%b%Y_%H%M%S", gmtime())
-            call(['aws', 's3', 'cp', '/home/hadoop/lei/criteo_search_log', logName, '--region', 'us-west-2'])
+            call(['aws', 's3', 'cp', '/home/hadoop/lei/criteo_search_log.txt', logName, '--region', 'us-west-2'])
             iStep += 1
 
 # use best model to evaluate 

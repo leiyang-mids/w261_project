@@ -67,10 +67,19 @@ target/scala-2.10/pagerank-project_2.10-1.0.jar \
 Criteo_Driver_1.py > Criteo_log1
 
 
-# >>> time /home/hadoop/spark/bin/spark-submit \
---master yarn-cluster \
-./code/page_rank.py s3n://ucb-mids-mls-networks/PageRank-test.txt s3n://ucb-mids-mls-group-e/hw13/13_1_1 0.85 100
+# Submitting a Python application to Yarn client mode ============= m3.xlarge
+$ /usr/bin/spark-submit \
+--master yarn \
+--deploy-mode client \
+--name LeiCriteoJob \
+--py-files CriteoHelper2.py \
+--num-executors 20 \
+--executor-memory '10280m' \
+--executor-cores 4 \
+--driver-memory '10280m' \
+Criteo_Driver_2.py > criteo_search_log.txt
 
+# 
 ~/Downloads/spark*/bin/spark-submit \
 --master yarn \
 --deploy-mode 'client' \
@@ -112,6 +121,7 @@ ctrl+a+d --> detach to screen
 screen -r --> reattach to screen
 ctrl+a+H --> terminate screen session
 screen -X -S [session # you want to kill] quit --> kill the screen session
+screen -X -S [session # you want to kill] kill
 ================== screen notes ==================
 
 ================== log4j.properties ==================
@@ -139,14 +149,13 @@ runners:
 
 
 ================== copy local file ==================
-scp -i ~/w205.pem CriteoHelper.py hadoop@ec2-54-84-173-248.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem CriteoHelper2.py hadoop@ec2-54-84-173-248.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem Criteo_Driver_1.py hadoop@ec2-54-84-173-248.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem Criteo_Driver_2.py hadoop@ec2-54-84-173-248.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem s3test.py hadoop@ec2-54-84-173-248.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem CriteoHelper2.py hadoop@ec2-52-201-254-140.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem Criteo_Driver_2.py hadoop@ec2-52-201-254-140.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem s3test.py hadoop@ec2-52-201-254-140.compute-1.amazonaws.com:~/lei/
 ================== copy local file ==================
 
-
+scp -i ~/w205.pem CriteoHelper.py hadoop@ec2-52-201-254-140.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem Criteo_Driver_1.py hadoop@ec2-52-201-254-140.compute-1.amazonaws.com:~/lei/
 - to kill a mapreduce job from yarn: $yarn application -kill application_1460815549694_0002
 
 =================== location of hdfs-site.xml ========================
