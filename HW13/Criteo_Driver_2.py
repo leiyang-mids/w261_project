@@ -7,8 +7,8 @@ execfile('CriteoHelper2.py')
 
 # define parameter space
 print '%s: start logistic regression job ...' %(logTime())
-numBucketsCTR = [1000, 5000, 10000, 20000]
-lrStep = [20, 10, 5, 1]
+numBucketsCTR = [20000] #[10000] #[1000, 5000, 10000, 20000, 40000]
+lrStep = [20, 10, 5, 1] #[5, 1]
 regParams = [1e-7, 1e-5, 1e-3, 1e-1]
 nSteps = len(numBucketsCTR)*len(lrStep)*len(regParams)
 print '%s: bucket sizes: %s' %(logTime(), str(numBucketsCTR))

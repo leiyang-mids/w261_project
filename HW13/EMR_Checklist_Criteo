@@ -79,7 +79,7 @@ $ /usr/bin/spark-submit \
 --driver-memory '10280m' \
 Criteo_Driver_2.py > criteo_search_log.txt
 
-# 
+#
 ~/Downloads/spark*/bin/spark-submit \
 --master yarn \
 --deploy-mode 'client' \
@@ -149,13 +149,13 @@ runners:
 
 
 ================== copy local file ==================
-scp -i ~/w205.pem CriteoHelper2.py hadoop@ec2-52-201-254-140.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem Criteo_Driver_2.py hadoop@ec2-52-201-254-140.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem s3test.py hadoop@ec2-52-201-254-140.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem CriteoHelper2.py hadoop@ec2-54-87-244-232.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem Criteo_Driver_2.py hadoop@ec2-54-87-244-232.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem s3test.py hadoop@ec2-54-87-244-232.compute-1.amazonaws.com:~/lei/
 ================== copy local file ==================
 
-scp -i ~/w205.pem CriteoHelper.py hadoop@ec2-52-201-254-140.compute-1.amazonaws.com:~/lei/
-scp -i ~/w205.pem Criteo_Driver_1.py hadoop@ec2-52-201-254-140.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem CriteoHelper.py hadoop@ec2-54-87-244-232.compute-1.amazonaws.com:~/lei/
+scp -i ~/w205.pem Criteo_Driver_1.py hadoop@ec2-54-87-244-232.compute-1.amazonaws.com:~/lei/
 - to kill a mapreduce job from yarn: $yarn application -kill application_1460815549694_0002
 
 =================== location of hdfs-site.xml ========================
