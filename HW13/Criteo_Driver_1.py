@@ -1,8 +1,7 @@
 
-from time import time
-from pyspark import SparkContext
+from time import time, gmtime, strftime
 
-execfile('CriteoHelper.py')
+execfile('CriteoHelper2.py')
 
 # define parameters
 print '%s: start logistic regression job ...' %(logTime())
@@ -13,33 +12,23 @@ sc = SparkContext()
 
 # data preparaion
 print '%s: preparing data ...' %(logTime())
-rawTrainData = sc.textFile('s3://criteo-dataset/rawdata/train/part*', 180).map(lambda x: x.replace('\t', ','))
-rawValidationData = sc.textFile('s3://criteo-dataset/rawdata/validation/part*', 180).map(lambda x: x.replace('\t', ','))
-rawTestData = sc.textFile('s3://criteo-dataset/rawdata/test/part*', 180).map(lambda x: x.replace('\t', ','))
-
-# data encoding
-hashTrainData = rawTrainData.map(lambda p: parseHashPoint(p, numBucketsCTR))
-hashTrainData.cache()
-hashValidationData = rawValidationData.map(lambda p: parseHashPoint(p, numBucketsCTR))
-hashValidationData.cache()
-hashTestData = rawTestData.map(lambda p: parseHashPoint(p, numBucketsCTR))
-hashTestData.cache()
+dTrain, dVlidation, dTest = encodeData(numBucketsCTR)
 
 # build model
 print '%s: building logistic regression model ...' %(logTime())
-model = LogisticRegressionWithSGD.train(hashTrainData, iterations=500, step=lrStep, regType=None, intercept=True)
+model = LogisticRegressionWithSGD.train(dTrain, iterations=500, step=lrStep, regType=None, intercept=True)
 
 # get log loss
 print '%s: evaluating log loss ...' %(logTime())
-logLossVa = evaluateResults(model, hashValidationData)
-logLossTest = evaluateResults(model, hashTestData)
-logLossTrain = evaluateResults(model, hashTrainData)
+logLossVa = evaluateResults(model, dValidation)
+logLossTest = evaluateResults(model, dTest)
+logLossTrain = evaluateResults(model, dTrain)
 
 # get AUC
 print '%s: evaluating AUC ...' %(logTime())
-aucTrain = getAUCfromRdd(hashTrainData, model)
-aucVal = getAUCfromRdd(hashValidationData, model)
-aucTest = getAUCfromRdd(hashTestData, model)
+aucTrain = getAUCfromRdd(dTrain, model)
+aucVal = getAUCfromRdd(dValidation, model)
+aucTest = getAUCfromRdd(dTest, model)
 print '\n%s: job completes in %.2f minutes!' %(logTime(), (time()-start)/60.0)
 
 # show results
