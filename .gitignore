@@ -4,3 +4,7 @@
 *.t
 
 HW09/indices.txt
+
+CorrelationOne/access.log
+
+CorrelationOne/contentDiscovery.db
