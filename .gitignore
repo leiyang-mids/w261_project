@@ -8,3 +8,7 @@ HW09/indices.txt
 CorrelationOne/access.log
 
 CorrelationOne/contentDiscovery.db
+
+CorrelationOne/data/contentDiscovery.db
+
+CorrelationOne/data/access.log
