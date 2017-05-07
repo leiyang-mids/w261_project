@@ -12,3 +12,5 @@ CorrelationOne/contentDiscovery.db
 CorrelationOne/data/contentDiscovery.db
 
 CorrelationOne/data/access.log
+
+*.json
